@@ -8,17 +8,6 @@ variable "pm_user" {
   type        = string
 }
 
-variable "pm_api_token_id" {
-  description = "Proxmox API token ID (e.g. root@pam!app-id)"
-  type        = string
-}
-
-variable "pm_api_token_secret" {
-  description = "Proxmox API key"
-  type        = string
-  sensitive   = true
-}
-
 variable "pm_node" {
   description = "Proxmox node to deploy to"
   type        = string
