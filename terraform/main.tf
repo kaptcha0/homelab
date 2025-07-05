@@ -75,7 +75,6 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   initialization {
     user_account {
       username = var.pm_user
-      password = local.vm_default_pw
       keys     = [file(var.ssh_public_key)]
     }
 
@@ -147,7 +146,6 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   initialization {
     user_account {
       username = var.pm_user
-      password = local.vm_default_pw
       keys     = [file(var.ssh_public_key)]
     }
 
