@@ -65,10 +65,6 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   }
 
   network_device {
-    bridge = var.pm_bridge
-  }
-
-  network_device {
     bridge = var.vm_bridge
   }
 
@@ -76,16 +72,6 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
     user_account {
       username = var.pm_user
       keys     = [file(var.ssh_public_key)]
-    }
-
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-      }
-
-      ipv6 {
-        address = "dhcp"
-      }
     }
 
     ip_config {
