@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_network_linux_bridge" "name" {
+resource "proxmox_virtual_environment_network_linux_bridge" "vm_network" {
   node_name = var.pm_node
   name      = var.vm_bridge
 
