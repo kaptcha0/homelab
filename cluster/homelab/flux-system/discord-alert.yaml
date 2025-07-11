@@ -1,0 +1,31 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: discord
+  namespace: flux-system
+spec:
+  type: discord
+  secretRef:
+    name: discord-webhook-secret
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord-info-alert
+  namespace: flux-system
+spec:
+  eventMetadata:
+    cluster: "homelab"
+  providerRef:
+    name: discord
+  eventSources:
+    - kind: GitRepository
+      name: '*'
+    - kind: Kustomization
+      name: '*'
+    - kind: HelmChart
+      name: '*'
+    - kind: HelmRelease
+      name: '*'
+    - kind: ImageUpdateAutomation
+      name: '*'
