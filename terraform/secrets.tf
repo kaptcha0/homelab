@@ -1,3 +1,3 @@
 data "sops_file" "pm_api" {
-  source_file = "../secrets/terraform.enc.yaml"
+  source_file = "../secrets/terraform-secrets.yaml"
 }
