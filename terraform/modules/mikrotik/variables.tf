@@ -3,7 +3,7 @@ variable "default_comment" {
   type        = string
 }
 
-variable "pm_api_token" {
-  description = "Proxmox API token in the format 'id=secret'"
+variable "mikrotik_password" {
+  description = "Mikrotik API Password"
   type        = string
 }
