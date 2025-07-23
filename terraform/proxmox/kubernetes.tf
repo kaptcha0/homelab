@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "k3s_server" {
   count       = local.k3s_server_count
   name        = "k3s-server-${count.index}"
-  description = "managed by terraform"
+  description = var.default_comment
   tags        = ["k3s", "k3s-server", "terraform"]
 
   node_name = local.pm_node
@@ -51,7 +51,8 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   }
 
   network_device {
-    bridge = local.vm_bridge
+    bridge  = local.vm_bridge
+    vlan_id = module.shared.services_vlan.id
   }
 
   initialization {
@@ -62,18 +63,18 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
 
     ip_config {
       ipv4 {
-        address = "10.10.10.${10 + count.index}/24"
-        gateway = "10.10.10.1"
+        address = "dhcp"
       }
     }
   }
 
+  depends_on = [ proxmox_virtual_environment_container.tailscale_container ]
 }
 
 resource "proxmox_virtual_environment_vm" "k3s_agent" {
   count       = local.k3s_agent_count
   name        = "k3s-agent-${count.index}"
-  description = "managed by terraform"
+  description = var.default_comment
   tags        = ["k3s", "k3s-agent", "terraform"]
 
   node_name = local.pm_node
@@ -112,7 +113,8 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   }
 
   network_device {
-    bridge = local.vm_bridge
+    bridge  = local.vm_bridge
+    vlan_id = module.shared.services_vlan.id
   }
 
   initialization {
@@ -123,10 +125,10 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
 
     ip_config {
       ipv4 {
-        address = "10.10.10.${50 + count.index}/24"
-        gateway = "10.10.10.1"
+        address = "dhcp"
       }
     }
   }
 
+  depends_on = [ proxmox_virtual_environment_vm.k3s_server ]
 }

@@ -19,18 +19,4 @@ locals {
     dns_servers = ["1.1.1.1", "8.8.8.8", "10.63.0.1"]
     domain      = "home"
   }
-
-  services = {
-    disabled = {
-      "api"     = 8728
-      "api-ssl" = 8729
-      "ftp"     = 21
-      "telnet"  = 23
-      "www"     = 80
-    }
-
-    enabled = {
-      "winbox" = 8291
-    }
-  }
 }

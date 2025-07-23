@@ -23,7 +23,7 @@ resource "routeros_ip_pool" "lan_pool" {
   comment = var.default_comment
 }
 
-resource "routeros_ip_dns" "dns-server" {
+resource "routeros_ip_dns" "dns_server" {
   allow_remote_requests = true
   servers = local.dhcp_config.dns_servers
 }

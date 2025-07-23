@@ -1,0 +1,45 @@
+---
+- name: Setup Flux
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: Load .env variables into facts
+      set_fact:
+        env_vars: "{{ lookup('file', '../host_vars/.env').splitlines() | map('regex_replace', '^(.*)=(.*)$', '\\1: \\2') | list | from_yaml }}"
+
+    - name: Install Flux CLI
+      shell: |
+        curl -s https://fluxcd.io/install.sh | sudo bash
+      register: flux_install
+
+    - name: Verify Flux installation
+      command: flux --version
+      register: flux_version
+
+    - name: Print Flux version
+      debug:
+        msg: "Flux version installed: {{ flux_version.stdout }}"
+    
+    - name: Bootstrap flux
+      shell: |
+        flux bootstrap github \
+          --owner={{ env_vars.GITHUB_USER }} \
+          --repository=homelab \
+          --branch=main \
+          --path=./clusters/homelab \
+          --personal
+      register: flux_bootstrap
+      environment: 
+        GITHUB_TOKEN: "{{ env_vars.GITHUB_TOKEN }}"
+
+    - name: Verify Flux bootstrap
+      command: flux get kustomizations
+      register: flux_kustomizations
+    
+    - name: Load SOPS age key
+      command: kubectl create secret generic sops-age -n flux-system --from-file=age.agekey=../../cluster/homelab/secrets/age.agekey
+
+    - name: Sync Flux configuration
+      command: flux reconcile kustomization flux-system --with-source
+      register: flux_reconcile
