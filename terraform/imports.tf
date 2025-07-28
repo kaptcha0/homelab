@@ -45,3 +45,8 @@ import {
   to = module.proxmox.proxmox_virtual_environment_vm.routeros
   id = "pve/1500"
 }
+
+import {
+  to = module.proxmox.proxmox_virtual_environment_vm.truenas
+  id = "pve/301"
+}

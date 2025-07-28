@@ -6,4 +6,5 @@ variable "default_comment" {
 variable "mikrotik_password" {
   description = "Mikrotik API Password"
   type        = string
+  sensitive   = true
 }
