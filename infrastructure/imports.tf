@@ -12,7 +12,22 @@ import {
 ## Proxmox imports
 
 import {
-  to = module.mikrotik.proxmox_virtual_environment_vm.routeros
+  to = module.networking.proxmox_virtual_environment_network_linux_bridge.wan
+  id = "pve:vmbr0"
+}
+
+import {
+  to = module.networking.proxmox_virtual_environment_network_linux_bridge.lan
+  id = "pve:vmbr1"
+}
+
+import {
+  to = module.networking.proxmox_virtual_environment_network_linux_bridge.mgmt
+  id = "pve:vmbr2"
+}
+
+import {
+  to = module.networking.proxmox_virtual_environment_vm.routeros
   id = "pve/1500"
 }
 

@@ -1,7 +1,7 @@
 resource "routeros_ip_dns" "dns_server" {
-  for_each = local.all_vlans
+  for_each              = local.all_vlans
   allow_remote_requests = true
-  servers = each.value.dns_servers
+  servers               = each.value.dns_servers
 }
 
 resource "routeros_ip_dns_record" "router" {
@@ -12,7 +12,7 @@ resource "routeros_ip_dns_record" "router" {
   type    = "A"
   comment = "Router IP for ${each.value.comment} ${var.default_comment}"
 
-  depends_on = [ routeros_ip_dns.dns_server ]
+  depends_on = [routeros_ip_dns.dns_server]
 }
 
 resource "routeros_ip_dns_record" "static_domains" {

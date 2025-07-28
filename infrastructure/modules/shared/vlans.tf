@@ -4,7 +4,7 @@ output "untagged_vlan" {
     comment  = "Default VLAN for untagged traffic"
     priority = "0"
     gateway  = "10.67.0.1"
-    domain = "local.home"
+    domain   = "local.home"
 
     pools       = ["10.67.0.10-10.67.0.100"]
     dns_servers = ["10.67.0.1"]
@@ -73,7 +73,7 @@ output "storage_vlan" {
       network = "10.67.20.0"
       mask    = "24"
     }
-    
+
     static_leases = {}
 
   }
@@ -94,9 +94,9 @@ output "dmz_vlan" {
       network = "10.67.30.0"
       mask    = "24"
     }
-     
+
     static_leases = {}
- }
+  }
 }
 
 output "remote_vlan" {
@@ -114,9 +114,9 @@ output "remote_vlan" {
       network = "10.67.40.0"
       mask    = "24"
     }
-     
+
     static_leases = {}
- }
+  }
 }
 
 output "isolated_vlan" {
@@ -134,32 +134,7 @@ output "isolated_vlan" {
       network = "10.67.50.0"
       mask    = "24"
     }
-     
+
     static_leases = {}
- }
-}
-
-output "management_vlan" {
-  value = {
-    id       = "99"
-    comment  = "Management VLAN"
-    priority = "0"
-    gateway  = "10.67.99.1"
-    domain   = "mgmt.home"
-
-    pools       = ["10.67.99.10-10.67.99.100"]
-    dns_servers = ["10.67.99.1"]
-
-    cidr = {
-      network = "10.67.99.0"
-      mask    = "24"
-    }
-
-    static_leases = {
-      "10.67.99.2" = {
-        mac       = "00:05:1b:2a:4e:43"
-        name      = "pve"
-      }
-    }
   }
 }

@@ -1,5 +1,5 @@
 provider "routeros" {
-  hosturl = var.mikrotik_host_url
+  hosturl  = var.mikrotik_host_url
   username = var.mikrotik_user
   password = data.sops_file.secrets.data["routeros_api_password"]
   insecure = true
