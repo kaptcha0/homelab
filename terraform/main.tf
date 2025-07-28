@@ -30,6 +30,9 @@ module "proxmox" {
 
 module "mikrotik" {
   source            = "./mikrotik/"
+
   mikrotik_password = data.sops_file.secrets.data["routeros_api_password"]
   default_comment   = local.default_comment
+
+  depends_on = [ module.proxmox ]
 }

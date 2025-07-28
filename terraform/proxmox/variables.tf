@@ -1,5 +1,5 @@
 variable "default_comment" {
-  description = "Default comment to append to firewall rules."
+  description = "Default comment."
   type        = string
 }
 
