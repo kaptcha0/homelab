@@ -53,6 +53,8 @@ output "services_vlan" {
       network = "10.67.10.0"
       mask    = "24"
     }
+
+    static_leases = {}
   }
 }
 
@@ -71,6 +73,9 @@ output "storage_vlan" {
       network = "10.67.20.0"
       mask    = "24"
     }
+    
+    static_leases = {}
+
   }
 }
 
@@ -89,7 +94,9 @@ output "dmz_vlan" {
       network = "10.67.30.0"
       mask    = "24"
     }
-  }
+     
+    static_leases = {}
+ }
 }
 
 output "remote_vlan" {
@@ -107,7 +114,9 @@ output "remote_vlan" {
       network = "10.67.40.0"
       mask    = "24"
     }
-  }
+     
+    static_leases = {}
+ }
 }
 
 output "isolated_vlan" {
@@ -125,7 +134,9 @@ output "isolated_vlan" {
       network = "10.67.50.0"
       mask    = "24"
     }
-  }
+     
+    static_leases = {}
+ }
 }
 
 output "management_vlan" {

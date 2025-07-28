@@ -1,23 +1,27 @@
+resource "routeros_ip_dns" "dns_server" {
+  for_each = local.all_vlans
+  allow_remote_requests = true
+  servers = each.value.dns_servers
+}
+
 resource "routeros_ip_dns_record" "router" {
-  name    = "router.home"
-  address = "10.67.0.1"
+  for_each = local.all_vlans
+
+  name    = "router.${each.value.domain}"
+  address = each.value.gateway
   type    = "A"
+  comment = "Router IP for ${each.value.comment} ${var.default_comment}"
+
+  depends_on = [ routeros_ip_dns.dns_server ]
 }
 
-resource "routeros_ip_dns_record" "pve" {
-  name    = "pve.home"
-  address = "10.67.0.3"
-  type    = "A"
-}
+resource "routeros_ip_dns_record" "static_domains" {
+  for_each = local.dhcp_leases
 
-resource "routeros_ip_dns_record" "wifi_ap" {
-  name    = "wifi_ap.home"
-  address = "10.67.0.2"
+  name    = "${each.value.name}.${local.all_vlans[each.value.vlan].domain}"
+  address = each.key
   type    = "A"
-}
+  comment = "Static lease for ${each.value.name} in VLAN ${each.value.vlan} ${var.default_comment}"
 
-resource "routeros_ip_dns_record" "kaptcha" {
-  name    = "kaptcha.home"
-  address = "10.67.0.100"
-  type    = "A"
+  depends_on = [routeros_ip_dns.dns_server]
 }

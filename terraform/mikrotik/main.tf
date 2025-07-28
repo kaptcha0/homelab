@@ -25,3 +25,7 @@ module "firewall_rules" {
 
   interfaces = local.interfaces
 }
+
+module "shared" {
+  source = "../shared"
+}

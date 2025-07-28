@@ -1,3 +1,4 @@
+## RouterOS imports
 import {
   to = module.mikrotik.routeros_system_certificate.local-root-ca-cert
   id = "*2"
@@ -36,4 +37,11 @@ import {
 import {
   to = module.mikrotik.routeros_interface_list_member.lan_bridge
   id = "*1"
+}
+
+## Proxmox imports
+
+import {
+  to = module.proxmox.proxmox_virtual_environment_vm.routeros
+  id = "pve/1500"
 }

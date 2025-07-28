@@ -11,7 +11,7 @@ locals {
 
 
   pm_user    = "terraform"
-  pm_api_url = "https://pve.zebroid-sole.ts.net:8006/api2/json"
+  pm_api_url = "https://10.67.0.3:8006/api2/json"
   pm_api_token = var.pm_api_token
   pm_node    = "pve"
   pm_bridge  = "vmbr0"

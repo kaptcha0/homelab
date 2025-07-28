@@ -14,9 +14,30 @@ locals {
     subnet  = "10.67.0.0/24"
   }
 
-  dhcp_config = {
-    dhcp_range  = ["10.67.0.10-10.67.0.100"]
-    dns_servers = ["1.1.1.1", "8.8.8.8", "10.63.0.1"]
-    domain      = "home"
+  vlans = {
+    untagged = {
+      0 = module.shared.untagged_vlan,
+    }
+    tagged = {
+      10 = module.shared.services_vlan,
+      20 = module.shared.storage_vlan,
+      30 = module.shared.dmz_vlan,
+      40 = module.shared.remote_vlan,
+      50 = module.shared.isolated_vlan,
+      99 = module.shared.management_vlan
+    }
   }
+
+  all_vlans = merge(local.vlans.untagged, local.vlans.tagged)
+
+  dhcp_leases = merge([
+    for vlan_id, config in local.all_vlans : {
+      for ip, lease in config.static_leases :
+      ip => {
+        mac  = lease.mac
+        name = lease.name
+        vlan = vlan_id
+      }
+    }
+  ]...)
 }

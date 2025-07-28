@@ -4,6 +4,11 @@ terraform {
       source  = "carlpett/sops"
       version = "1.2.0"
     }
+    
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.78.2"
+    }
 
     routeros = {
       source = "terraform-routeros/routeros"

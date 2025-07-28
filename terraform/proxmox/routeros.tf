@@ -2,6 +2,7 @@ resource "proxmox_virtual_environment_vm" "routeros" {
   name        = "routeros"
   description = "RouterOS VM ${var.default_comment}"
   tags        = ["routeros", "mikrotik", "terraform"]
+  reboot      = true
 
   node_name = local.pm_node
   vm_id     = 1500
