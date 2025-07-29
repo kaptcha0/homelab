@@ -5,7 +5,3 @@ output "wan_bridge" {
 output "lan_bridge" {
   value = proxmox_virtual_environment_network_linux_bridge.lan.name
 }
-
-output "mgmt_bridge" {
-  value = proxmox_virtual_environment_network_linux_bridge.mgmt.name
-}

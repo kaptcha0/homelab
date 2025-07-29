@@ -42,8 +42,8 @@ resource "proxmox_virtual_environment_vm" "routeros" {
     bridge = proxmox_virtual_environment_network_linux_bridge.lan.name
   }
 
-  network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.mgmt.name
+  hostpci {
+    device = proxmox_virtual_environment_hardware_mapping_pci.wireless.name
   }
 }
 

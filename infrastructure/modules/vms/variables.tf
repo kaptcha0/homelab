@@ -13,8 +13,3 @@ variable "lan_bridge" {
   description = "The LAN bridge to use for the Proxmox VMs."
   type        = string
 }
-
-variable "mgmt_bridge" {
-  description = "The management bridge to use for the Proxmox VMs."
-  type        = string
-}

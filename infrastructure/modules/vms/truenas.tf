@@ -67,7 +67,7 @@ resource "proxmox_virtual_environment_vm" "truenas" {
   }
 
   network_device {
-    bridge  = var.mgmt_bridge
-    vlan_id = module.shared.storage_vlan.id
+    bridge  = var.lan_bridge
+    vlan_id = module.shared.management_vlan.id
   }
 }

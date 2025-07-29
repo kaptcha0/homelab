@@ -21,12 +21,9 @@ resource "proxmox_virtual_environment_network_linux_bridge" "lan" {
   ]
 }
 
-resource "proxmox_virtual_environment_network_linux_bridge" "mgmt" {
+resource "proxmox_virtual_environment_network_linux_vlan" "mgmt_vlan" {
   node_name = local.pm_node
-  name      = "vmbr2"
-  comment   = "WIFI Management ${var.default_comment}"
+  name      = "${proxmox_virtual_environment_network_linux_bridge.lan.name}.${module.shared.management_vlan.id}"
 
-  address = "10.99.0.1/24"
-
-  ports = [ "wlp3s0" ]
+  comment = "Management VLAN ${var.default_comment}"
 }

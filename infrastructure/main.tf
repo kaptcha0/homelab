@@ -33,9 +33,8 @@ module "vms" {
   k3s_password    = data.sops_file.secrets.data["k3s_password"]
 
   lan_bridge  = module.infra.lan_bridge
-  mgmt_bridge = module.infra.mgmt_bridge
 
-  depends_on = [ module.routeros ]
+  depends_on = [module.routeros]
 }
 
 
@@ -43,5 +42,5 @@ module "routeros" {
   source = "./modules/routeros"
 
   default_comment = local.default_comment
-  depends_on      = [ module.infra ]
+  depends_on      = [module.infra]
 }

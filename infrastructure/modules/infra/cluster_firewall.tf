@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_cluster_firewall_security_group" "isolatio
   name    = "isolation"
   comment = var.default_comment
 
-  rules {
+  rule {
     type    = "in"
     action  = "ACCEPT"
     comment = "Allow all access to the cluster"
@@ -25,18 +25,18 @@ resource "proxmox_virtual_environment_cluster_firewall_security_group" "isolatio
 }
 
 resource "proxmox_virtual_environment_firewall_rules" "input" {
-  rules {
+  rule {
     security_group = proxmox_virtual_environment_cluster_firewall_security_group.isolation.name
   }
 
-  rules {
+  rule {
     type    = "in"
     action  = "DROP"
     comment = "Drop everything on LAN"
     iface   = proxmox_virtual_environment_linux_bridge.lan.name
   }
 
-  rules {
+  rule {
     type    = "in"
     action  = "DROP"
     comment = "Drop everything on WAN"

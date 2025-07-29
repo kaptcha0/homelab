@@ -23,6 +23,7 @@ locals {
       30 = module.shared.dmz_vlan,
       40 = module.shared.remote_vlan,
       50 = module.shared.isolated_vlan,
+      99 = module.shared.management_vlan,
     }
   }
 
