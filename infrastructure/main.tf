@@ -42,5 +42,4 @@ module "routeros" {
   source = "./modules/routeros"
 
   default_comment = local.default_comment
-  depends_on      = [module.infra]
 }

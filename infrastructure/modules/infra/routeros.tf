@@ -6,8 +6,10 @@ resource "proxmox_virtual_environment_vm" "routeros" {
   node_name = local.pm_node
   vm_id     = 1500
 
+  stop_on_destroy = true
+
   agent {
-    enabled = true
+    enabled = false
   }
 
   startup {
@@ -23,6 +25,7 @@ resource "proxmox_virtual_environment_vm" "routeros" {
 
   memory {
     dedicated = 256
+    floating  = 256
   }
 
   disk {
@@ -42,8 +45,8 @@ resource "proxmox_virtual_environment_vm" "routeros" {
     bridge = proxmox_virtual_environment_network_linux_bridge.lan.name
   }
 
-  hostpci {
-    device = proxmox_virtual_environment_hardware_mapping_pci.wireless.name
+  network_device {
+    bridge  = proxmox_virtual_environment_network_linux_bridge.mgmt.name
   }
 }
 
@@ -53,6 +56,6 @@ resource "proxmox_virtual_environment_file" "routeros_img" {
   content_type = "import"
 
   source_file {
-    path = "${path.root}/files/routeros-7.19.3.qcow2"
+    path = "${path.root}/files/chr-7.19.3.qcow2"
   }
 }

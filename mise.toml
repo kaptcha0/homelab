@@ -1,0 +1,4 @@
+[tools]
+terraform = "latest"
+ansible = "latest"
+pipx = "latest"

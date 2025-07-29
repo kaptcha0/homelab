@@ -2,8 +2,8 @@
 resource "routeros_ip_dhcp_server" "lan_dhcp" {
   for_each = local.all_vlans
 
-  interface    = local.interfaces.lan_bridge
-  name         = "lan_dhcp_vlan_${each.value.id}"
+  interface    = routeros_interface_vlan.vlans[each.key].name
+  name         = "dhcp${each.value.id}"
   address_pool = routeros_ip_pool.lan_pool[each.key].name
   lease_time   = "30m"
 
@@ -24,7 +24,7 @@ resource "routeros_ip_dhcp_server_network" "lan_network" {
 resource "routeros_ip_pool" "lan_pool" {
   for_each = local.all_vlans
 
-  name   = "lan_pool_vlan_${each.value.id}"
+  name   = "pool${each.value.id}"
   ranges = each.value.pools
 
   comment = var.default_comment

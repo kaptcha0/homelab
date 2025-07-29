@@ -8,6 +8,6 @@ resource "routeros_ip_address" "ips" {
 }
 
 resource "routeros_ip_dhcp_client" "wan" {
-  interface = "ether1"
+  interface = local.interfaces.wan
   comment   = var.default_comment
 }

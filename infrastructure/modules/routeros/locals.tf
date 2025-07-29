@@ -2,11 +2,7 @@ locals {
   pm_node    = module.shared.proxmox_config.pm_node
   vm_storage = module.shared.proxmox_config.vm_storage
 
-  interfaces = {
-    wan        = "ether1"
-    lan        = "ether2"
-    lan_bridge = "lan-bridge"
-  }
+  interfaces = module.shared.routeros_config.interfaces
 
   network_config = {
     gateway = "10.67.0.1"
@@ -14,8 +10,9 @@ locals {
   }
 
   vlans = {
-    untagged = {
-      0 = module.shared.untagged_vlan,
+    autotagged = {
+      1   = merge(module.shared.untagged_vlan, { untagged_interface = local.interfaces.lan }),
+      99  = merge(module.shared.management_vlan, { untagged_interface = local.interfaces.mgmt })
     }
     tagged = {
       10 = module.shared.services_vlan,
@@ -23,11 +20,10 @@ locals {
       30 = module.shared.dmz_vlan,
       40 = module.shared.remote_vlan,
       50 = module.shared.isolated_vlan,
-      99 = module.shared.management_vlan,
     }
   }
 
-  all_vlans = merge(local.vlans.untagged, local.vlans.tagged)
+  all_vlans = merge(local.vlans.autotagged, local.vlans.tagged)
 
   dhcp_leases = merge([
     for vlan_id, config in local.all_vlans : {

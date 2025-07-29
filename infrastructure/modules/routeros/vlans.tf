@@ -1,18 +1,27 @@
-resource "routeros_interface_bridge_vlan" "lan_bridge_tagged" {
-  bridge   = local.interfaces.lan_bridge
-  vlan_ids = [for vlan in local.vlans.tagged : vlan.id]
-  tagged   = [local.interfaces.lan, local.interfaces.lan_bridge]
+resource "routeros_interface_bridge_vlan" "lan_bridge_autotagged_vlans" {
+  for_each = local.vlans.autotagged
 
-  comment = "Tagged VLANs on LAN bridge ${var.default_comment}"
+  bridge   = routeros_interface_bridge.lan_bridge.name
+  vlan_ids = [each.value.id]
+  tagged   = [routeros_interface_bridge.lan_bridge.name]
+  untagged = [each.value.untagged_interface]
+
+  comment = "Autotagged VLAN on LAN bridge ${var.default_comment}"
+
+  depends_on = [
+    routeros_interface_vlan.vlans
+  ]
 }
 
-resource "routeros_interface_bridge_vlan" "lan_bridge_untagged" {
-  bridge   = local.interfaces.lan_bridge
-  vlan_ids = [for vlan in local.vlans.untagged : vlan.id]
-  tagged   = [local.interfaces.lan_bridge]
-  untagged = [local.interfaces.lan]
+resource "routeros_interface_bridge_vlan" "lan_bridge_tagged" {
+  for_each = local.vlans.tagged
+  bridge   = routeros_interface_bridge.lan_bridge.name
+  vlan_ids = [each.value.id]
+  tagged   = [routeros_interface_bridge.lan_bridge.name, local.interfaces.lan]
 
-  comment = "Untagged VLANs on LAN bridge ${var.default_comment}"
+  comment = "Tagged VLAN on LAN bridge ${var.default_comment}"
+
+  depends_on = [ routeros_interface_vlan.vlans ]
 }
 
 resource "routeros_interface_vlan" "vlans" {
@@ -20,6 +29,6 @@ resource "routeros_interface_vlan" "vlans" {
 
   name      = "vlan${each.key}"
   vlan_id   = each.key
-  interface = local.interfaces.lan_bridge
+  interface = routeros_interface_bridge.lan_bridge.name
   comment   = var.default_comment
 }

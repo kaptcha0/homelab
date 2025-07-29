@@ -1,14 +1,14 @@
 output "untagged_vlan" {
   value = {
-    id       = 100
+    id       = 1
     comment  = "Default VLAN for untagged traffic"
     priority = 0
     gateway  = "10.67.0.1"
     domain   = "local.home"
 
-    pools       = ["10.67.0.10-10.67.0.100"]
+    pools       = ["10.67.0.100-10.67.0.200"]
     dns_servers = ["10.67.0.1"]
-
+    
     cidr = {
       network = "10.67.0.0"
       mask    = 24
@@ -20,17 +20,17 @@ output "untagged_vlan" {
         name = "wifi_ap"
       }
 
-      "10.67.0.100" = {
+      "10.67.0.10" = {
         mac  = "70:66:55:FD:25:1B"
         name = "kaptcha"
       }
 
-      "10.67.0.101" = {
+      "10.67.0.201" = {
         mac  = "CC:75:E2:50:5F:78"
         name = "stb"
       }
 
-      "10.67.0.200" = {
+      "10.67.0.202" = {
         mac  = "50:57:9c:47:40:56"
         name = "printer"
       }
@@ -46,9 +46,9 @@ output "services_vlan" {
     gateway  = "10.67.10.1"
     domain   = "srv.home"
 
-    pools       = ["10.67.10.10-10.67.10.100"]
+    pools       = ["10.67.10.100-10.67.10.200"]
     dns_servers = ["10.67.10.1"]
-
+    
     cidr = {
       network = "10.67.10.0"
       mask    = 24
@@ -66,9 +66,9 @@ output "storage_vlan" {
     gateway  = "10.67.20.1"
     domain   = "strg.home"
 
-    pools       = ["10.67.20.10-10.67.20.100"]
+    pools       = ["10.67.20.100-10.67.20.200"]
     dns_servers = ["10.67.20.1"]
-
+    
     cidr = {
       network = "10.67.20.0"
       mask    = 24
@@ -87,9 +87,9 @@ output "dmz_vlan" {
     gateway  = "10.67.30.1"
     domain   = "dmz.home"
 
-    pools       = ["10.67.30.10-10.67.30.100"]
+    pools       = ["10.67.30.100-10.67.30.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-
+    
     cidr = {
       network = "10.67.30.0"
       mask    = 24
@@ -107,9 +107,9 @@ output "remote_vlan" {
     gateway  = "10.67.40.1"
     domain   = "remote.home"
 
-    pools       = ["10.67.40.10-10.67.40.100"]
+    pools       = ["10.67.40.100-10.67.40.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-
+   
     cidr = {
       network = "10.67.40.0"
       mask    = 24
@@ -127,9 +127,9 @@ output "isolated_vlan" {
     gateway  = "10.67.50.1"
     domain   = "iso.home"
 
-    pools       = ["10.67.50.10-10.67.50.100"]
+    pools       = ["10.67.50.100-10.67.50.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-
+   
     cidr = {
       network = "10.67.50.0"
       mask    = 24
@@ -141,13 +141,13 @@ output "isolated_vlan" {
 
 output "management_vlan" {
   value = {
-    id       = 90
+    id       = 99
     comment  = "Management VLAN"
     priority = 0
     gateway  = "10.67.99.1"
     domain   = "mgmt.home"
 
-    pools       = ["10.67.99.2-10.67.99.256"]
+    pools       = ["10.67.99.100-10.67.99.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
 
     cidr = {
@@ -157,4 +157,8 @@ output "management_vlan" {
 
     static_leases = {}
   }
+}
+
+output "routeros_config" {
+  value = local.routeros_config
 }
