@@ -1,0 +1,32 @@
+[tools]
+terraform = "latest"
+python = "3.10"
+
+[tasks.tfinit]
+description = "Run Terraform init"
+run = "terraform init"
+dir = "./terraform"
+
+[tasks.tfplan]
+description = "Run Terraform plan"
+run = "terraform plan -out=tfplan"
+depends = ["tfinit"]
+dir = "./terraform"
+
+[tasks.tfapply]
+description = "Run Terraform apply"
+run = "terraform apply tfplan"
+depends = ["tfplan"]
+dir = "./terraform"
+
+[tasks.provision]
+description = "Provision VMs"
+run = "terraform apply tfplan -auto-approve"
+depends = ["tfapply"]
+dir = "./terraform"
+
+[tasks.configure]
+description = "Configure VMs with Ansible"
+run = "ansible-playbook -i inventory/inventory.proxmox.yaml -e @../secrets/ansible-secrets.yaml playbooks/configure.yml"
+depends = ["provision"]
+dir = "./ansible"
