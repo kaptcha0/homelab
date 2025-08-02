@@ -1,0 +1,133 @@
+## Configure OMV
+- name: Prerequisites
+  hosts: omv
+  become: true
+  tasks:
+    - name: Install keyring
+      shell: |
+        apt-get install --yes gnupg
+        wget --quiet --output-document=- https://packages.openmediavault.org/public/archive.key | gpg --dearmor --yes --output "/usr/share/keyrings/openmediavault-archive-keyring.gpg"
+    - name: Add OMV repository
+      shell: |
+        cat <<EOF >> /etc/apt/sources.list.d/openmediavault.list
+        deb [signed-by=/usr/share/keyrings/openmediavault-archive-keyring.gpg] https://packages.openmediavault.org/public sandworm main
+        EOF
+    - name: Install OMV
+      apt:
+        name: openmediavault
+        state: present
+        update_cache: yes
+        dpkg_options: "--force-confdef --force-confold"
+        install_recommends: false
+        autoremove: true
+        allow_change_held_packages: true
+        allow_downgrade: true
+      environment: 
+        LANG: C.UTF-8
+        DEBIAN_FRONTEND: noninteractive
+        APT_LISTCHANGES_FRONTEND: none
+    - name: Populate and redeploy
+      shell: |
+        omv-confdbadm populate
+        omv-salt deploy run systemd-networkd
+---
+## Configure Kubernetes
+- name: Prerequisites
+  hosts: k3s_cluster
+  become: true
+  tasks:
+    - name: Disable ufw if installed
+      block:
+        - name: Disable ufw
+          community.general.ufw:
+            state: disabled
+      rescue:
+        - name: No ufw
+          debug:
+            msg: UFW is not installed
+
+- name: Install
+  hosts: k3s_cluster
+  become: true
+  vars:
+    k3s_token_file: /var/lib/rancher/k3s/server/node-token
+  tasks:
+    - name: Install k3s server
+      when: inventory_hostname in groups['k3s_servers']
+      run_once: true
+      shell: |
+        curl -sfL https://get.k3s.io | sh -
+      register: server_install
+
+    - name: Wait for node token to exist
+      when: inventory_hostname in groups['k3s_servers']
+      run_once: true
+      stat:
+        path: "{{ k3s_token_file }}"
+      register: token_check
+      retries: 10
+      delay: 5
+      until: token_check.stat.exists
+
+    - name: Read node token
+      when: inventory_hostname in groups['k3s_servers']
+      run_once: true
+      slurp:
+        src: "{{ k3s_token_file }}"
+      register: token_content
+
+    - name: Set global fact with primary server IP and token
+      run_once: true
+      set_fact:
+        k3s_facts:
+          ip: "{{ ansible_default_ipv4.address }}"
+          token: "{{ token_content.content | b64decode | trim }}"
+
+    - name: Join other server nodes
+      when:
+        - inventory_hostname in groups['k3s_servers']
+        - inventory_hostname != groups['k3s_servers'][0]
+      shell: |
+        curl -sfL https://get.k3s.io | K3S_URL=https://{{ hostvars[groups['k3s_servers'][0]]['k3s_facts'].ip }}:6443 \
+        K3S_TOKEN={{ hostvars[groups['k3s_servers'][0]]['k3s_facts'].token }} sh -
+
+    - name: Join agent nodes
+      when: inventory_hostname in groups['k3s_agents']
+      shell: |
+        curl -sfL https://get.k3s.io | K3S_URL=https://{{ hostvars[groups['k3s_servers'][0]]['k3s_facts'].ip }}:6443 \
+        K3S_TOKEN={{ hostvars[groups['k3s_servers'][0]]['k3s_facts'].token }} sh -
+
+- name: Fetch and configure kubeconfig locally
+  hosts: localhost
+  vars:
+    k3s_server_ip: "{{ hostvars[groups['k3s_servers'][0]].ansible_default_ipv4.address }}"
+    remote_kubeconfig_path: /etc/rancher/k3s/k3s.yaml
+    local_kubeconfig_path: ~/.kube/config
+
+  tasks:
+    - name: Create local .kube directory if it doesn't exist
+      file:
+        path: ~/.kube
+        state: directory
+        mode: 0700
+
+    - name: Fetch kubeconfig from K3s server
+      become: true
+      ansible.builtin.fetch:
+        src: "{{ remote_kubeconfig_path }}"
+        dest: /tmp/k3s.yaml
+        flat: yes
+      delegate_to: "{{ k3s_server_ip }}"
+
+    - name: Replace server IP in kubeconfig
+      ansible.builtin.replace:
+        path: /tmp/k3s.yaml
+        regexp: 'server: https://127\.0\.0\.1:6443'
+        replace: "server: https://{{ k3s_server_ip }}:6443"
+
+    - name: Move kubeconfig to local .kube directory
+      ansible.builtin.copy:
+        src: /tmp/k3s.yaml
+        dest: "{{ local_kubeconfig_path }}"
+        mode: 0600
+

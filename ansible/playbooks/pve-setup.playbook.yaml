@@ -1,0 +1,40 @@
+---
+- name: Configure Terraform User
+  hosts: pve
+  become: true
+  tasks:
+    - name: Create Terraform user
+      shell: pveum user add terraform@pve
+    - name: Create roles
+      shell: pveum role add Terraform -privs "Mapping.Audit Mapping.Modify Mapping.Use Permissions.Modify Pool.Allocate Pool.Audit Realm.AllocateUser Realm.Allocate SDN.Allocate SDN.Audit Sys.Audit Sys.Console Sys.Incoming Sys.Modify Sys.AccessNetwork Sys.PowerMgmt Sys.Syslog User.Modify Group.Allocate SDN.Use VM.Allocate VM.Audit VM.Backup VM.Clone VM.Config.CDROM VM.Config.CPU VM.Config.Cloudinit VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Console VM.Migrate VM.Monitor VM.PowerMgmt VM.Snapshot.Rollback VM.Snapshot Datastore.Allocate Datastore.AllocateSpace Datastore.AllocateTemplate Datastore.Audit"
+    - name: Attach roles to user
+      shell: pveum aclmod / -user terraform@pve -role Terraform
+    - name: Create API token
+      shell: pveum user token add terraform@pve provider --privsep=0
+      register: pve_api_token
+    - name: Print token
+      debug:
+        var: pve_api_token.stdout
+    - name: Print error
+      debug:
+        var: pve_api_token.stderr
+
+- name: Configure NAT on Proxmox host
+  hosts: pve
+  become: true
+  tasks:
+    - name: Enable IP forwarding
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: "1"
+        state: present
+        reload: yes
+
+    - name: Set up NAT for vmbr1
+      iptables:
+        table: nat
+        chain: POSTROUTING
+        out_interface: vmbr0
+        source: "10.10.10.0/24"
+        jump: MASQUERADE
+
