@@ -34,12 +34,5 @@ module "vms" {
 
   lan_bridge  = module.infra.lan_bridge
 
-  depends_on = [module.routeros]
-}
-
-
-module "routeros" {
-  source = "./modules/routeros"
-
-  default_comment = local.default_comment
+  depends_on = [module.infra]
 }
