@@ -1,8 +1,3 @@
-output "pm_api_token" {
-  value     = local.pm_api_token
-  sensitive = true
-}
-
 output "k3s_server_ips" {
   value = concat(local.server_ips.v4, local.server_ips.v6)
 }

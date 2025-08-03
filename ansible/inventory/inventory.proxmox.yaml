@@ -1,0 +1,37 @@
+plugin: community.general.proxmox
+url: '{{ lookup("env", "PROXMOX_API_URL") }}'
+user: '{{ lookup("env", "PROXMOX_API_USER") }}'
+token_id: '{{ lookup("env", "PROXMOX_API_TOKEN_ID") }}'
+token_secret: '{{ lookup("env", "PROXMOX_API_TOKEN_SECRET") }}'
+validate_certs: false
+want_facts: true
+want_proxmox_nodes_ansible_host: false
+
+# Use VM names instead of IDs as inventory hostnames
+hostnames:
+  - proxmox_name
+
+# Groups based on VM tags
+keyed_groups:
+  - key: proxmox_tags_parsed
+    separator: ""
+
+groups:
+  k3s_cluster: "'k3s' in (proxmox_tags_parsed | list)"
+  k3s_server: "'k3s-server' in (proxmox_tags_parsed | list)"
+  k3s_agent: "'k3s-agent' in (proxmox_tags_parsed | list)"
+
+# Set ansible_host to DHCP IP if available, fallback to VM name
+compose:
+  ansible_host: >-
+    {{
+      (
+        proxmox_agent_interfaces
+        | selectattr('name', 'equalto', 'ens18')
+        | map(attribute='ip-addresses')
+        | first
+        | first
+        | default(proxmox_name, true)
+      ) | ipaddr('address', default=proxmox_name)
+    }}
+  ansible_user: automation
