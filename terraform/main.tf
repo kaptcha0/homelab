@@ -1,27 +1,45 @@
-module "proxmox" {
-  source = "./modules/proxmox/"
-  
-  pm_user    = var.pm_user   
-  pm_api_url = var.pm_api_url
-  pm_node    = var.pm_node   
-  pm_bridge  = var.pm_bridge 
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "~> 0.81.0"
+    }
 
-  vm_template_id = var.vm_template_id
-  vm_storage     = var.vm_storage    
-  vm_bridge      = var.vm_bridge     
-  vm_user        = var.vm_user       
-  vm_timeout     = var.vm_timeout    
+    sops = {
+      source  = "carlpett/sops"
+      version = "~> 1.2.1"
+    }
+  }
+}
 
-  k3s_server_count     = var.k3s_server_count    
-  k3s_server_cores     = var.k3s_server_cores    
-  k3s_server_memory    = var.k3s_server_memory   
-  k3s_server_disk_size = var.k3s_server_disk_size
+provider "proxmox" {
+  endpoint  = data.sops_file.pm_api.data["pm_api_url"]
+  api_token = "${data.sops_file.pm_api.data["pm_api_token_id"]}=${data.sops_file.pm_api.data["pm_api_token_secret"]}"
+  insecure  = true
+}
 
-  k3s_agent_count     = var.k3s_agent_count    
-  k3s_agent_cores     = var.k3s_agent_cores    
-  k3s_agent_memory    = var.k3s_agent_memory   
-  k3s_agent_disk_size = var.k3s_agent_disk_size
+module "shared" {
+  source = "./modules/shared/"
+}
 
-  ssh_public_key = var.ssh_public_key
+module "infra" {
+  source = "./modules/infra/"
+}
+
+module "vms" {
+  source = "./modules/vms/"
+
+  omv_iso_import_id = module.infra.proxmox_downloads.debian12.id
+  k3s_disk_import_id = module.infra.proxmox_downloads.debian12.id
+
+  k3s_server_count     = 1
+  k3s_server_cores     = 2
+  k3s_server_memory    = 2048
+  k3s_server_disk_size = 8
+
+  k3s_agent_count     = 2
+  k3s_agent_cores     = 2
+  k3s_agent_memory    = 2048
+  k3s_agent_disk_size = 8
 
 }
