@@ -1,3 +1,28 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.78.2"
+    }
+    sops = {
+      source  = "carlpett/sops"
+      version = "1.2.0"
+    }
+  }
+}
+
+provider "proxmox" {
+  endpoint = var.pm_api_url
+
+  api_token = local.pm_api_token
+  insecure  = true
+
+  ssh {
+    agent    = true
+    username = var.pm_user
+  }
+}
+
 locals {
   server_ips = {
     v4 = flatten([for vm in proxmox_virtual_environment_vm.k3s_server : vm.ipv4_addresses])
@@ -9,17 +34,3 @@ locals {
   }
   pm_api_token = "${data.sops_file.pm_api.data["pm_api_token_id"]}=${data.sops_file.pm_api.data["pm_api_token_secret"]}"
 }
-
-output "pm_api_token" {
-  value     = local.pm_api_token
-  sensitive = true
-}
-
-output "k3s_server_ips" {
-  value = concat(local.server_ips.v4, local.server_ips.v6)
-}
-
-output "k3s_agent_ips" {
-  value = concat(local.agent_ips.v4, local.agent_ips.v6)
-}
-
