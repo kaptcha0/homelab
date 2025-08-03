@@ -1,5 +1,6 @@
+## Proxmox
 pm_user    = "terraform"
-pm_api_url = "https://pve.zebroid-sole.ts.net:8006/api2/json"
+pm_api_url = "https://10.67.0.167:8006/api2/json"
 pm_node    = "pve"
 pm_bridge  = "vmbr0"
 
@@ -20,3 +21,7 @@ k3s_agent_memory    = 2048
 k3s_agent_disk_size = 32
 
 ssh_public_key = "~/.ssh/id_ed25519.pub"
+
+## Mikrotik
+
+
