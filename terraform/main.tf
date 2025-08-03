@@ -25,7 +25,3 @@ module "proxmox" {
   ssh_public_key = var.ssh_public_key
 
 }
-
-module "mikrotik" {
-  source = "./modules/mikrotik/"
-}
