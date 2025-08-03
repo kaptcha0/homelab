@@ -35,11 +35,10 @@ module "vms" {
   k3s_server_count     = 1
   k3s_server_cores     = 2
   k3s_server_memory    = 2048
-  k3s_server_disk_size = 8
 
   k3s_agent_count     = 2
   k3s_agent_cores     = 2
   k3s_agent_memory    = 2048
-  k3s_agent_disk_size = 8
 
+  depends_on = [ module.infra ]
 }

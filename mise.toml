@@ -30,3 +30,8 @@ description = "Configure VMs with Ansible"
 run = "ansible-playbook -i inventory/inventory.proxmox.yaml -e @../secrets/ansible-secrets.yaml playbooks/configure.yml"
 depends = ["provision"]
 dir = "./ansible"
+
+[tasks.destroy]
+description = "Destroy all resources"
+run = "terraform destroy -auto-approve"
+dir = "./terraform"

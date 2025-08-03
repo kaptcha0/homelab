@@ -18,11 +18,6 @@ variable "k3s_server_memory" {
   type        = number
 }
 
-variable "k3s_server_disk_size" {
-  description = "Disk size per server (in GB)"
-  type        = number
-}
-
 variable "k3s_agent_count" {
   description = "How many k3s agents to deploy"
   type        = number
@@ -35,11 +30,6 @@ variable "k3s_agent_cores" {
 
 variable "k3s_agent_memory" {
   description = "Memory per agent (in MB)"
-  type        = number
-}
-
-variable "k3s_agent_disk_size" {
-  description = "Disk size per agent (in GB)"
   type        = number
 }
 
