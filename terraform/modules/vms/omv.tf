@@ -31,6 +31,12 @@ resource "proxmox_virtual_environment_vm" "omv" {
     import_from  = var.omv_iso_import_id
   }
 
+  disk {
+    interface    = "virtio0"
+    datastore_id = module.shared.proxmox_config.storage.vm_disks
+    size = 256
+  }
+
   network_device {
     bridge = module.shared.proxmox_config.bridges.lan.name
   }
