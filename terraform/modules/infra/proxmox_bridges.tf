@@ -1,13 +1,18 @@
-resource "proxmox_virtual_environment_network_linux_bridge" "bridges" {
-  for_each = module.shared.proxmox_config.bridges
-  
+resource "proxmox_virtual_environment_network_linux_bridge" "uplink" {
   node_name = module.shared.proxmox_config.primary_node
-  name = each.value.name
+  name = module.shared.proxmox_config.bridges.uplink.name
 
-  address = each.value.address
-  gateway = each.value.gateway
+  address = module.shared.proxmox_config.bridges.uplink.address
+  gateway = module.shared.proxmox_config.bridges.uplink.gateway
 
-  ports = each.value.ports
+  ports = module.shared.proxmox_config.bridges.uplink.ports
 }
 
+resource "proxmox_virtual_environment_network_linux_bridge" "lan" {
+  node_name = module.shared.proxmox_config.primary_node
+  name = module.shared.proxmox_config.bridges.lan.name
 
+  address = module.shared.proxmox_config.bridges.lan.address
+
+  ports = module.shared.proxmox_config.bridges.lan.ports
+}

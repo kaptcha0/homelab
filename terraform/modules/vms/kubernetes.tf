@@ -1,7 +1,6 @@
 resource "proxmox_virtual_environment_vm" "k3s_server" {
   count       = var.k3s_server_count
   name        = "k3s-server-${count.index}"
-  description = "managed by terraform"
   tags        = ["k3s", "k3s-server", "terraform"]
 
   node_name = module.shared.proxmox_config.primary_node
@@ -65,7 +64,6 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
 resource "proxmox_virtual_environment_vm" "k3s_agent" {
   count       = var.k3s_agent_count
   name        = "k3s-agent-${count.index}"
-  description = "managed by terraform"
   tags        = ["k3s", "k3s-agent", "terraform"]
 
   node_name = module.shared.proxmox_config.primary_node
@@ -114,4 +112,5 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
     }
   }
 
+  depends_on = [ proxmox_virtual_environment_vm.k3s_server ]
 }
