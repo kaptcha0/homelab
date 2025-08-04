@@ -15,17 +15,16 @@ resource "proxmox_virtual_environment_vm" "routeros" {
   }
 
   network_device {
-    bridge = module.shared.proxmox_config.bridges.uplink.name
+    bridge = proxmox_virtual_environment_network_linux_bridge.uplink.name
   }
 
   network_device {
-    bridge = module.shared.proxmox_config.bridges.lan.name
+    bridge = proxmox_virtual_environment_network_linux_bridge.lan.name
   }
 
-  depends_on = [
-    proxmox_virtual_environment_network_linux_bridge.uplink,
-    proxmox_virtual_environment_network_linux_bridge.lan
-  ]
+  network_device {
+    bridge = proxmox_virtual_environment_network_linux_bridge.mgmt.name
+  }
 }
 
 resource "proxmox_virtual_environment_file" "routeros" {
@@ -42,4 +41,16 @@ resource "proxmox_virtual_environment_file" "routeros" {
 resource "proxmox_virtual_environment_pool" "networking" {
   comment = "Pool for networking VMs"
   pool_id = "networking"
+}
+
+output "routeros_uplink_ips" {
+  value = proxmox_virtual_environment_vm.routeros.ipv4_addresses[0]
+}
+
+output "routeros_lan_ips" {
+  value = proxmox_virtual_environment_vm.routeros.ipv4_addresses[1]
+}
+
+output "routeros_mgmt_ips" {
+  value = proxmox_virtual_environment_vm.routeros.ipv4_addresses[2]
 }

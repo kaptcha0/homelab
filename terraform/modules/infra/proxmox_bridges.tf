@@ -16,3 +16,12 @@ resource "proxmox_virtual_environment_network_linux_bridge" "lan" {
 
   ports = module.shared.proxmox_config.bridges.lan.ports
 }
+
+resource "proxmox_virtual_environment_network_linux_bridge" "mgmt" {
+  node_name = module.shared.proxmox_config.primary_node
+  name = module.shared.proxmox_config.bridges.mgmt.name
+
+  address = module.shared.proxmox_config.bridges.mgmt.address
+
+  ports = module.shared.proxmox_config.bridges.mgmt.ports
+}

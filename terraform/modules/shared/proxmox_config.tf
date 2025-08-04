@@ -15,6 +15,12 @@ locals {
         gateway = "172.64.0.1"
         ports = []
       }
+      mgmt = {
+        name = "vmbr2"
+        address = "172.64.99.2/24"
+        gateway = "172.64.99.1"
+        ports = []
+      }
     }
 
     storage = {
