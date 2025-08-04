@@ -19,6 +19,11 @@ run = "terraform apply tfplan"
 depends = ["tfplan"]
 dir = "./terraform"
 
+[tasks.tfrefresh]
+description = "Run Terraform refresh"
+run = "terraform refresh"
+dir = "./terraform"
+
 [tasks.provision]
 description = "Provision VMs"
 run = "terraform apply tfplan -auto-approve"
@@ -33,5 +38,8 @@ dir = "./ansible"
 
 [tasks.destroy]
 description = "Destroy all resources"
-run = "terraform destroy -auto-approve"
+run = [
+  "terraform state rm module.infra.proxmox_virtual_environment_network_linux_bridge.uplink",
+  "terraform destroy"
+]
 dir = "./terraform"
