@@ -1,4 +1,3 @@
-
 resource "routeros_ip_dhcp_server" "lan_dhcp" {
   for_each = local.all_vlans
 
@@ -6,6 +5,10 @@ resource "routeros_ip_dhcp_server" "lan_dhcp" {
   name         = "dhcp${each.value.id}"
   address_pool = routeros_ip_pool.lan_pool[each.key].name
   lease_time   = "30m"
+
+  bootp_support = "none"
+
+  dhcp_option_set = routeros_ip_dhcp_server_option_set.netbootxyz_bios.name
 
   comment = var.default_comment
 }

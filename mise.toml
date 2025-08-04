@@ -1,6 +1,5 @@
 [tools]
 terraform = "latest"
-python = "3.10"
 
 [tasks.tfinit]
 description = "Run Terraform init"
@@ -40,6 +39,6 @@ dir = "./ansible"
 description = "Destroy all resources"
 run = [
   "terraform state rm module.infra.proxmox_virtual_environment_network_linux_bridge.uplink",
-  "terraform destroy"
+  "terraform destroy",
 ]
 dir = "./terraform"

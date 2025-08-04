@@ -1,9 +1,10 @@
 resource "proxmox_virtual_environment_vm" "omv" {
   name        = "omv"
   description = "OpenMediaVault VM"
-  tags       = ["storage", "terraform"]
-  node_name  = module.shared.proxmox_config.primary_node
-  pool_id    = proxmox_virtual_environment_pool.vms.pool_id
+  tags        = ["storage", "terraform"]
+  node_name   = module.shared.proxmox_config.primary_node
+  pool_id     = proxmox_virtual_environment_pool.vms.pool_id
+  reboot      = true
 
   agent {
     enabled = true

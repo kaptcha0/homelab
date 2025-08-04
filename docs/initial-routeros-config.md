@@ -9,7 +9,7 @@ See [here](../infrastructure/files/basic-install.rsc) the config file that inclu
 add name=local-root-cert common-name=local-cert key-size=prime256v1 key-usage=key-cert-sign,crl-sign trusted=yes
 sign local-root-cert
 
-add name=webfig common-name=10.67.0.1 country=US organization=KAPTCHA unit=HOME days-valid=3650 key-size=prime256v1 key-usage=key-cert-sign,crl-sign,digital-signature,key-agreement,tls-server trusted=yes
+add name=webfig common-name=172.64.0.1 country=US organization=KAPTCHA unit=HOME days-valid=3650 key-size=prime256v1 key-usage=key-cert-sign,crl-sign,digital-signature,key-agreement,tls-server trusted=yes
 sign ca=local-root-cert webfig
 
 /ip service
@@ -33,19 +33,26 @@ add bridge=lan-bridge vlan-ids=99 tagged=lan-bridge untagged=ether3
 add interface=lan-bridge name=vlan99 vlan-id=99
 
 /ip address
-add address=10.67.99.1/24 interface=vlan99
+add address=172.64.99.1/24 interface=vlan99
 ```
 
 ## DHCP
 
 ```rsc
 /ip pool
-add name=pool99  ranges=10.67.99.100-10.67.99.200
+add name=pool99  ranges=172.64.99.100-172.64.99.200
 
 /ip dhcp-server
 add name=dhcp99  interface=vlan99  address-pool=pool99  lease-time=30m
 
 /ip dhcp-server network
-add address=10.67.99.0/24  gateway=10.67.99.1
+add address=172.64.99.0/24  gateway=172.64.99.1
 
+```
+
+## Netboot.xyz config
+
+```
+/tool fetch url="https://boot.netboot.xyz/ipxe/netboot.xyz.kpxe"
+/tool fetch url="https://boot.netboot.xyz/ipxe/netboot.xyz.efi"
 ```

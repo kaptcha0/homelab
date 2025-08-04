@@ -2,6 +2,8 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   count       = var.k3s_server_count
   name        = "k3s-server-${count.index}"
   tags        = ["k3s", "k3s-server", "terraform"]
+  reboot      = true
+  started     = false
 
   node_name = module.shared.proxmox_config.primary_node
   pool_id   = proxmox_virtual_environment_pool.vms.pool_id
@@ -65,6 +67,8 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   count       = var.k3s_agent_count
   name        = "k3s-agent-${count.index}"
   tags        = ["k3s", "k3s-agent", "terraform"]
+  reboot      = true
+  started     = false
 
   node_name = module.shared.proxmox_config.primary_node
   pool_id   = proxmox_virtual_environment_pool.vms.pool_id

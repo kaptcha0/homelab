@@ -11,6 +11,8 @@ resource "routeros_ip_firewall_nat" "masquerade" {
 
 ## IPv4 Firewall rules
 
+### Input
+
 resource "routeros_ip_firewall_filter" "accept_established_related_untracked" {
   action           = "accept"
   chain            = "input"
@@ -40,16 +42,18 @@ resource "routeros_ip_firewall_filter" "capsman_accept_local_loopback" {
   chain        = "input"
   comment      = "accept to local loopback for capsman ${var.default_comment}"
   dst_address  = "127.0.0.1"
-  place_before = routeros_ip_firewall_filter.drop_all_not_lan.id
+#  place_before = routeros_ip_firewall_filter.drop_all_not_lan.id
 }
 
-resource "routeros_ip_firewall_filter" "drop_all_not_lan" {
-  action            = "drop"
-  chain             = "input"
-  comment           = "drop all not coming from LAN ${var.default_comment}"
-  in_interface_list = "!${routeros_interface_list.lan.name}"
-  place_before      = routeros_ip_firewall_filter.accept_ipsec_policy_in.id
-}
+# resource "routeros_ip_firewall_filter" "drop_all_not_lan" {
+#   action            = "drop"
+#   chain             = "input"
+#   comment           = "drop all not coming from LAN ${var.default_comment}"
+#   in_interface_list = "!${routeros_interface_list.lan.name}"
+#   place_before      = routeros_ip_firewall_filter.accept_ipsec_policy_in.id
+# }
+
+### Forward
 
 resource "routeros_ip_firewall_filter" "accept_ipsec_policy_in" {
   action       = "accept"

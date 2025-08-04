@@ -20,6 +20,11 @@ output "untagged_vlan" {
         name = "wifi_ap"
       }
 
+      "172.64.0.3" = {
+        mac  = "ea:bf:7a:11:7e:92"
+        name = "netbootxyz"
+      }
+
       "172.64.0.10" = {
         mac  = "70:66:55:FD:25:1B"
         name = "kaptcha"
