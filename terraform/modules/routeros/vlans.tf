@@ -21,7 +21,7 @@ resource "routeros_interface_bridge_vlan" "lan_bridge_tagged" {
 
   comment = "Tagged VLAN on LAN bridge ${var.default_comment}"
 
-  depends_on = [ routeros_interface_vlan.vlans ]
+  depends_on = [routeros_interface_vlan.vlans]
 }
 
 resource "routeros_interface_vlan" "vlans" {

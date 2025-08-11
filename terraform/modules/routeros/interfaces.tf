@@ -7,15 +7,15 @@ resource "routeros_interface_bridge" "lan_bridge" {
 
 resource "routeros_interface_bridge_port" "bridge_ports" {
   for_each = {
-    "ether2"       = { comment = var.default_comment, pvid = local.vlans.autotagged[1].id  }
-    "ether3"       = { comment = var.default_comment, pvid = local.vlans.autotagged[99].id }
+    "ether2" = { comment = var.default_comment, pvid = local.vlans.autotagged[1].id }
+    "ether3" = { comment = var.default_comment, pvid = local.vlans.autotagged[99].id }
   }
   bridge    = routeros_interface_bridge.lan_bridge.name
   interface = each.key
   comment   = each.value.comment
   pvid      = each.value.pvid
 
-  depends_on = [ routeros_interface_vlan.vlans ]
+  depends_on = [routeros_interface_vlan.vlans]
 }
 
 resource "routeros_interface_list" "lan" {
@@ -32,7 +32,7 @@ resource "routeros_interface_list_member" "wan" {
 }
 
 resource "routeros_interface_list_member" "lan_bridge" {
-  for_each = routeros_interface_bridge_port.bridge_ports
+  for_each  = routeros_interface_bridge_port.bridge_ports
   interface = each.value.interface
   list      = routeros_interface_list.lan.name
 }

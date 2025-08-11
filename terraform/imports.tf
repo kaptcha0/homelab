@@ -11,12 +11,12 @@ import {
 
 import {
   to = module.routeros.routeros_system_certificate.webfig
-  id = "*2"
+  id = "*E"
 }
 
 import {
   for_each = {
-    ether3       = { id = "*0" }
+    ether3 = { id = "*0" }
   }
   to = module.routeros.routeros_interface_bridge_port.bridge_ports[each.key]
   id = each.value.id
@@ -32,7 +32,7 @@ import {
 
 import {
   for_each = {
-    99 = { id = "*3" }
+    99 = { id = "*2" }
   }
   to = module.routeros.routeros_interface_bridge_vlan.lan_bridge_autotagged_vlans[each.key]
   id = each.value.id

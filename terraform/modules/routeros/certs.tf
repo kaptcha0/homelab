@@ -15,7 +15,7 @@ resource "routeros_system_certificate" "local-root-ca-cert" {
 
 resource "routeros_system_certificate" "webfig" {
   name        = "webfig"
-  common_name = "10.67.0.1"
+  common_name = "172.64.0.1"
 
   country      = "US"
   organization = "KAPTCHA"

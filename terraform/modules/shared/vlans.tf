@@ -8,7 +8,7 @@ output "untagged_vlan" {
 
     pools       = ["172.64.0.100-172.64.0.200"]
     dns_servers = ["172.64.0.1"]
-    
+
     cidr = {
       network = "172.64.0.0"
       mask    = 24
@@ -26,7 +26,7 @@ output "untagged_vlan" {
       }
 
       "172.64.0.10" = {
-        mac  = "70:66:55:FD:25:1B"
+        mac  = "64:5d:86:64:1a:ea"
         name = "kaptcha"
       }
 
@@ -53,7 +53,7 @@ output "services_vlan" {
 
     pools       = ["172.64.10.100-172.64.10.200"]
     dns_servers = ["172.64.10.1"]
-    
+
     cidr = {
       network = "172.64.10.0"
       mask    = 24
@@ -73,7 +73,7 @@ output "storage_vlan" {
 
     pools       = ["172.64.20.100-172.64.20.200"]
     dns_servers = ["172.64.20.1"]
-    
+
     cidr = {
       network = "172.64.20.0"
       mask    = 24
@@ -94,7 +94,7 @@ output "dmz_vlan" {
 
     pools       = ["172.64.30.100-172.64.30.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-    
+
     cidr = {
       network = "172.64.30.0"
       mask    = 24
@@ -114,7 +114,7 @@ output "remote_vlan" {
 
     pools       = ["172.64.40.100-172.64.40.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-   
+
     cidr = {
       network = "172.64.40.0"
       mask    = 24
@@ -134,7 +134,7 @@ output "isolated_vlan" {
 
     pools       = ["172.64.50.100-172.64.50.200"]
     dns_servers = ["1.1.1.1", "8.8.8.8"]
-   
+
     cidr = {
       network = "172.64.50.0"
       mask    = 24

@@ -1,44 +1,35 @@
-[tools]
-terraform = "latest"
-
 [tasks.tfinit]
-description = "Run Terraform init"
-run = "terraform init"
+description = "Run tofu init"
+run = "tofu init"
 dir = "./terraform"
 
 [tasks.tfplan]
-description = "Run Terraform plan"
-run = "terraform plan -out=tfplan"
+description = "Run tofu plan"
+run = "tofu plan -out=tfplan"
 depends = ["tfinit"]
 dir = "./terraform"
 
 [tasks.tfapply]
-description = "Run Terraform apply"
-run = "terraform apply tfplan"
+description = "Run tofu apply"
+run = "tofu apply tfplan"
 depends = ["tfplan"]
 dir = "./terraform"
 
 [tasks.tfrefresh]
-description = "Run Terraform refresh"
-run = "terraform refresh"
+description = "Run tofu refresh"
+run = "tofu refresh"
 dir = "./terraform"
 
 [tasks.provision]
 description = "Provision VMs"
-run = "terraform apply tfplan -auto-approve"
-depends = ["tfapply"]
+run = "tofu apply -auto-approve tfplan"
+depends = ["tfplan"]
 dir = "./terraform"
-
-[tasks.configure]
-description = "Configure VMs with Ansible"
-run = "ansible-playbook -i inventory/inventory.proxmox.yaml -e @../secrets/ansible-secrets.yaml playbooks/configure.yml"
-depends = ["provision"]
-dir = "./ansible"
 
 [tasks.destroy]
 description = "Destroy all resources"
 run = [
-  "terraform state rm module.infra.proxmox_virtual_environment_network_linux_bridge.uplink",
-  "terraform destroy",
+  "tofu state rm module.infra.proxmox_virtual_environment_network_linux_bridge.uplink",
+  "tofu destroy",
 ]
 dir = "./terraform"

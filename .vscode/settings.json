@@ -1,6 +1,0 @@
-{
-	"yaml.schemas": {
-		"https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json": "file:///home/kaptcha/Documents/projects/homelab/ansible/inventory/inventory.proxmox.yaml"
-	},
-	"python.defaultInterpreterPath": "/home/kaptcha/.local/share/mise/installs/python/3.10.18/bin/python"
-}

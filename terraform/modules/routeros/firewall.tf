@@ -38,11 +38,11 @@ resource "routeros_ip_firewall_filter" "accept_icmp" {
 }
 
 resource "routeros_ip_firewall_filter" "capsman_accept_local_loopback" {
-  action       = "accept"
-  chain        = "input"
-  comment      = "accept to local loopback for capsman ${var.default_comment}"
-  dst_address  = "127.0.0.1"
-#  place_before = routeros_ip_firewall_filter.drop_all_not_lan.id
+  action      = "accept"
+  chain       = "input"
+  comment     = "accept to local loopback for capsman ${var.default_comment}"
+  dst_address = "127.0.0.1"
+  #  place_before = routeros_ip_firewall_filter.drop_all_not_lan.id
 }
 
 # resource "routeros_ip_firewall_filter" "drop_all_not_lan" {
@@ -93,14 +93,14 @@ resource "routeros_ip_firewall_filter" "drop_invalid_forward" {
   chain            = "forward"
   comment          = "drop invalid ${var.default_comment}"
   connection_state = "invalid"
-  place_before     = routeros_ip_firewall_filter.drop_all_wan_not_dstnat.id
+  # place_before     = routeros_ip_firewall_filter.drop_all_wan_not_dstnat.id
 }
 
-resource "routeros_ip_firewall_filter" "drop_all_wan_not_dstnat" {
-  action               = "drop"
-  chain                = "forward"
-  comment              = "drop all from WAN not DSTNATed ${var.default_comment}"
-  connection_nat_state = "!dstnat"
-  connection_state     = "new"
-  in_interface_list    = routeros_interface_list.wan.name
-}
+# resource "routeros_ip_firewall_filter" "drop_all_wan_not_dstnat" {
+#   action               = "drop"
+#   chain                = "forward"
+#   comment              = "drop all from WAN not DSTNATed ${var.default_comment}"
+#   connection_nat_state = "!dstnat"
+#   connection_state     = "new"
+#   in_interface_list    = routeros_interface_list.wan.name
+# }
