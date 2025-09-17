@@ -29,6 +29,7 @@
             sops
             winbox4
             guestfs-tools
+            jq
           ];
 
           shellHook = ''
