@@ -8,28 +8,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # comin = {
-    #   url = "github:nlewo/comin";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       nixpkgs,
       disko,
-      # comin,
+      comin,
       ...
-    }@inputs:
+    }:
     {
       # Use this for all other targets
       # nixos-anywhere --flake .#generic --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
       nixosConfigurations.generic = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
         modules = [
           disko.nixosModules.disko
-          # comin.nixosModules.comin
+          comin.nixosModules.comin
           ./configuration.nix
           ./hardware-configuration.nix
         ];

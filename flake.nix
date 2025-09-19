@@ -1,18 +1,32 @@
 {
-  description = "A very basic flake";
+  description = "Nix flake for configuring my homelab";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+
+    # used to install nixos on client machines
+    nixos-install = {
+      # or relative path:
+      url = "./terraform/modules/nixos-install";
+    };
   };
 
   outputs =
     {
       nixpkgs,
       flake-utils,
+      nixos-install,
       ...
     }:
-    flake-utils.lib.eachDefaultSystem (
+    {
+      # Forward or expose nixosConfigurations from subflake if desired:
+      nixosConfigurations = {
+        # Alias or expose subflake configuration here:
+        generic = nixos-install.nixosConfigurations.generic;
+      };
+    }
+    // flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs {
@@ -39,6 +53,7 @@
             fi
           '';
         };
+
       }
     );
 }

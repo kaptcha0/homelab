@@ -35,3 +35,7 @@ module "nixos-install" {
 
   depends_on = [ module.vms ]
 }
+
+output "ips" {
+  value = module.vms.ip_addresses.all_ips
+}

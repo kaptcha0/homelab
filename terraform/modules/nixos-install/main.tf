@@ -8,44 +8,25 @@ module "shared" {
   source = "../shared/"
 }
 
-module "system-build" {
+module "deploy" {
   for_each = var.hosts
 
-  source            = "github.com/nix-community/nixos-anywhere//terraform/nix-build"
-  # with flakes
-  attribute         = "${path.cwd}/${path.module}#nixosConfigurations.generic.config.system.build.toplevel"
-  # attribute         = "./${path.module}#generic.config.system.build.toplevel"
+  source                 = "github.com/nix-community/nixos-anywhere//terraform/all-in-one"
+  nixos_system_attr      = "${path.cwd}/${path.module}#nixosConfigurations.generic.config.system.build.toplevel"
+  nixos_partitioner_attr = "${path.cwd}/${path.module}#nixosConfigurations.generic.config.system.build.diskoScript"
+  target_host            = each.value[0]
+  # when instance id changes, it will trigger a reinstall
+  instance_id            = each.value[0]
+  # useful if something goes wrong
+  debug_logging          = true
+  # build the closure on the remote machine instead of locally
+  # build_on_remote        = true
+
   special_args = {
-    hostname = each.key
-    user = module.shared.proxmox_config.vm_defaults.username
+    terraform = {
+      # hostname = each.key
+      hostname = "k3s-server-0"
+      user = module.shared.proxmox_config.vm_defaults.username
+    }
   }
-  debug_logging = true
-  # without flakes
-  # file can use (pkgs.nixos []) function from nixpkgs
-  #file              = "${path.module}/../.."
-  #attribute         = "config.system.build.toplevel"
 }
-
-module "disko" {
-  for_each = var.hosts
-
-  source         = "github.com/nix-community/nixos-anywhere//terraform/nix-build"
-  # with flakes
-  attribute         = "${path.cwd}/${path.module}#nixosConfigurations.generic.config.system.build.toplevel"
-  # attribute      = "./terraform/${path.module}#nixosConfigurations.generic.config.system.build.diskoScript"
-  # without flakes
-  # file can use (pkgs.nixos []) function from nixpkgs
-  #file           = "${path.module}/../.."
-  #attribute      = "config.system.build.diskoScript"
-}
-
-module "install" {
-  for_each = var.hosts
-
-  source            = "github.com/nix-community/nixos-anywhere//terraform/install"
-  nixos_system      = module.system-build[each.key].result.out
-  nixos_partitioner = module.disko[each.key].result.out
-  target_host       = each.value[0]
-  target_user       = module.shared.proxmox_config.vm_defaults.username
-}
-
