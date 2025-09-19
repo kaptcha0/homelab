@@ -82,6 +82,8 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   node_name = module.shared.proxmox_config.primary_node
   pool_id   = proxmox_virtual_environment_pool.vms.pool_id
 
+  depends_on = [ proxmox_virtual_environment_vm.k3s_server ]
+
   timeout_clone       = module.shared.proxmox_config.vm_defaults.timeout
   timeout_create      = module.shared.proxmox_config.vm_defaults.timeout
   timeout_migrate     = module.shared.proxmox_config.vm_defaults.timeout
@@ -134,6 +136,4 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
       }
     }
   }
-
-  depends_on = [proxmox_virtual_environment_vm.k3s_server]
 }

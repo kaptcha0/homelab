@@ -4,7 +4,7 @@ resource "routeros_ip_dhcp_server" "lan_dhcp" {
   interface    = routeros_interface_vlan.vlans[each.key].name
   name         = "dhcp${each.value.id}"
   address_pool = routeros_ip_pool.lan_pool[each.key].name
-  lease_time   = "30m"
+  lease_time   = "15m"
 
   bootp_support = "none"
 
