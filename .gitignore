@@ -4,3 +4,4 @@
 .terraform
 ./flake.lock
 ./flake.nix
+.direnv
