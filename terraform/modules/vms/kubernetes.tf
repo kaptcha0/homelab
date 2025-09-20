@@ -1,7 +1,18 @@
+resource "proxmox_virtual_environment_file" "modded-debian12" {
+  node_name    = module.shared.proxmox_config.primary_node
+  content_type = "import"
+  datastore_id = module.shared.proxmox_config.storage.downloads
+
+  source_file {
+    path      = "${path.root}/files/debian-12-genericcloud-amd64-modded.qcow2"
+    file_name = "debian-12-genericcloud-amd64-modded.qcow2"
+  }
+}
+
 resource "proxmox_virtual_environment_vm" "k3s_server" {
-  count       = var.k3s_server_count
-  name        = "k3s-server-${count.index}"
-  tags        = ["k3s", "k3s-server", "terraform"]
+  count   = var.k3s_server_count
+  name    = "k3s-server-${count.index}"
+  tags    = ["k3s", "k3s-server", "terraform"]
 
   node_name = module.shared.proxmox_config.primary_node
   pool_id   = proxmox_virtual_environment_pool.vms.pool_id
@@ -14,6 +25,8 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   timeout_shutdown_vm = module.shared.proxmox_config.vm_defaults.timeout
   timeout_start_vm    = module.shared.proxmox_config.vm_defaults.timeout
   timeout_stop_vm     = module.shared.proxmox_config.vm_defaults.timeout
+
+  serial_device {}
 
   agent {
     enabled = true
@@ -39,7 +52,7 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   disk {
     interface    = "virtio0"
     datastore_id = module.shared.proxmox_config.storage.vm_disks
-    import_from  = var.k3s_disk_import_id
+    import_from  = proxmox_virtual_environment_file.modded-debian12.id
   }
 
   network_device {
@@ -62,12 +75,24 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
 }
 
 resource "proxmox_virtual_environment_vm" "k3s_agent" {
-  count       = var.k3s_agent_count
-  name        = "k3s-agent-${count.index}"
-  tags        = ["k3s", "k3s-agent", "terraform"]
+  count   = var.k3s_agent_count
+  name    = "k3s-agent-${count.index}"
+  tags    = ["k3s", "k3s-agent", "terraform"]
 
   node_name = module.shared.proxmox_config.primary_node
   pool_id   = proxmox_virtual_environment_pool.vms.pool_id
+
+  depends_on = [ proxmox_virtual_environment_vm.k3s_server ]
+
+  timeout_clone       = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_create      = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_migrate     = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_reboot      = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_shutdown_vm = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_start_vm    = module.shared.proxmox_config.vm_defaults.timeout
+  timeout_stop_vm     = module.shared.proxmox_config.vm_defaults.timeout
+
+  serial_device {}
 
   agent {
     enabled = true
@@ -92,7 +117,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   disk {
     interface    = "virtio0"
     datastore_id = module.shared.proxmox_config.storage.vm_disks
-    import_from  = var.k3s_disk_import_id
+    import_from  = proxmox_virtual_environment_file.modded-debian12.id
   }
 
   network_device {
@@ -111,6 +136,4 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
       }
     }
   }
-
-  depends_on = [ proxmox_virtual_environment_vm.k3s_server ]
 }

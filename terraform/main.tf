@@ -9,36 +9,23 @@ terraform {
       source  = "carlpett/sops"
       version = "~> 1.2.1"
     }
+
+    routeros = {
+      source  = "terraform-routeros/routeros"
+      version = "~> 1.86.0"
+    }
   }
 }
 
 provider "proxmox" {
-  endpoint  = data.sops_file.pm_api.data["pm_api_url"]
-  api_token = "${data.sops_file.pm_api.data["pm_api_token_id"]}=${data.sops_file.pm_api.data["pm_api_token_secret"]}"
+  endpoint  = data.sops_file.secrets.data["pm_api_url"]
+  api_token = "${data.sops_file.secrets.data["pm_api_token_id"]}=${data.sops_file.secrets.data["pm_api_token_secret"]}"
   insecure  = true
 }
 
-module "shared" {
-  source = "./modules/shared/"
-}
-
-module "infra" {
-  source = "./modules/infra/"
-}
-
-module "vms" {
-  source = "./modules/vms/"
-
-  omv_iso_import_id = module.infra.proxmox_downloads.debian12.id
-  k3s_disk_import_id = module.infra.proxmox_downloads.debian12.id
-
-  k3s_server_count     = 1
-  k3s_server_cores     = 2
-  k3s_server_memory    = 2048
-
-  k3s_agent_count     = 2
-  k3s_agent_cores     = 2
-  k3s_agent_memory    = 2048
-
-  depends_on = [ module.infra ]
+provider "routeros" {
+  hosturl  = "https://${module.infra.routeros_uplink_ips[0]}"
+  username = data.sops_file.secrets.data["routeros_api_username"]
+  password = data.sops_file.secrets.data["routeros_api_password"]
+  insecure = true
 }

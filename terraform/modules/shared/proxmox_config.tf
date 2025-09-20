@@ -13,7 +13,13 @@ locals {
         name = "vmbr1"
         address = "172.64.0.2/24"
         gateway = "172.64.0.1"
-        ports = []
+        ports = ["enx00051b2a4e43"]
+      }
+      mgmt = {
+        name = "vmbr2"
+        address = "172.64.99.2/24"
+        gateway = "172.64.99.1"
+        ports = ["wlp3s0"]
       }
     }
 

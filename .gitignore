@@ -2,3 +2,5 @@
 .sops/
 
 .terraform
+./flake.lock
+./flake.nix

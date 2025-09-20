@@ -32,8 +32,3 @@ variable "k3s_agent_memory" {
   description = "Memory per agent (in MB)"
   type        = number
 }
-
-variable "omv_iso_import_id" {
-  description = "The ID of the disk to import for OMV"
-  type        = string
-}
