@@ -9,6 +9,17 @@ resource "proxmox_virtual_environment_file" "modded-debian12" {
   }
 }
 
+resource "proxmox_virtual_environment_file" "nixos" {
+  node_name    = module.shared.proxmox_config.primary_node
+  content_type = "import"
+  datastore_id = module.shared.proxmox_config.storage.downloads
+
+  source_file {
+    path      = "${path.root}/files/nixos.qcow2"
+    file_name = "nixos.qcow2"
+  }
+}
+
 resource "proxmox_virtual_environment_vm" "k3s_server" {
   count   = var.k3s_server_count
   name    = "k3s-server-${count.index}"
@@ -52,7 +63,7 @@ resource "proxmox_virtual_environment_vm" "k3s_server" {
   disk {
     interface    = "virtio0"
     datastore_id = module.shared.proxmox_config.storage.vm_disks
-    import_from  = proxmox_virtual_environment_file.modded-debian12.id
+    import_from  = proxmox_virtual_environment_file.nixos.id
   }
 
   network_device {
@@ -117,7 +128,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   disk {
     interface    = "virtio0"
     datastore_id = module.shared.proxmox_config.storage.vm_disks
-    import_from  = proxmox_virtual_environment_file.modded-debian12.id
+    import_from  = proxmox_virtual_environment_file.nixos.id
   }
 
   network_device {

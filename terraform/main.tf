@@ -23,8 +23,12 @@ provider "proxmox" {
   insecure  = true
 }
 
+variable "routeros_ip" {
+  type = string
+}
+
 provider "routeros" {
-  hosturl  = "https://${module.infra.routeros_uplink_ips[0]}"
+  hosturl  = "https://${var.routeros_ip}"
   username = data.sops_file.secrets.data["routeros_api_username"]
   password = data.sops_file.secrets.data["routeros_api_password"]
   insecure = true

@@ -1,0 +1,3 @@
+{ ... }: {
+  variable.routeros_ip = {};
+}

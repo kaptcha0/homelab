@@ -28,10 +28,10 @@ module "vms" {
   depends_on = [module.infra, module.routeros]
 }
 
-module "nixos_install" {
-  source      = "./modules/nixos-install"
-  hosts = module.vms.ip_addresses.all_ips
-}
+# module "nixos_install" {
+#   source      = "./modules/nixos-install"
+#   hosts = module.vms.ip_addresses.all_ips
+# }
 
 output "ips" {
   value = module.vms.ip_addresses.all_ips
