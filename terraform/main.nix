@@ -21,13 +21,13 @@
 
   provider = {
     proxmox = {
-      endpoint = lib.tfRef "data.sops_file.secrets.data[\"pm_api_url\"]";
-      api_token = (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_id\"]") + "=" + (lib.tfref "data.sops_file.secrets.data[\"pm_api_token_secret\"]");
+      endpoint = lib.tfRef "var.proxmox_api_url";
+      api_token = (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_id\"]") + "=" + (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_secret\"]");
       insecure = true;
     };
 
     routeros = {
-      hosturl  = "https://\${var.routeros_ip}";
+      hosturl  = lib.tfRef "var.routeros_api_url";
       username = lib.tfRef "data.sops_file.secrets.data[\"routeros_api_username\"]";
       password = lib.tfRef "data.sops_file.secrets.data[\"routeros_api_password\"]";
       insecure = true;
