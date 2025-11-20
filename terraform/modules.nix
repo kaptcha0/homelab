@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, ... }:
 {
   module = {
     shared.source = "./modules/shared/";
@@ -7,8 +7,8 @@
     routeros = {
       source = "./modules/routeros/";
       default_comment = "(managed by terraform)";
-      depends_on = with config.module; [
-        infra
+      depends_on = [
+        "module.infra"
       ];
     };
 
@@ -25,9 +25,9 @@
       k3s_agent_cores = 2;
       k3s_agent_memory = 2048;
 
-      depends_on = with config.module; [
-        infra
-        routeros
+      depends_on = [
+        "module.infra"
+        "module.routeros"
       ];
     };
   };

@@ -20,6 +20,7 @@
               ./main.nix
               ./variables.nix
               ./secrets.nix
+              ./modules.nix
             ];
           };
         in
