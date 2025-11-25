@@ -19,9 +19,9 @@
         description = "the default username for the vm";
       };
 
-      ssh_public_key = lib.mkOption {
-        type = lib.types.path;
-        description = "the path to the ssh public key";
+      ssh_public_keys = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "the ssh public keys";
       };
     };
 
@@ -146,9 +146,7 @@
 
               user_account = {
                 username = k3s.config.defaults.username;
-                keys = [
-                  ''file("${k3s.config.defaults.ssh_public_key}")''
-                ];
+                keys = k3s.config.defaults.ssh_public_keys;
               };
             };
         };
@@ -156,7 +154,7 @@
     with config.vms;
     lib.mkIf k3s.enable {
       resource."proxmox_virtual_environment_vm" = {
-        k3s_sever = createK3sVm {
+        k3s_server = createK3sVm {
           name = "k3s-server";
           startup_order = 2;
           tags = [ "k3s-server" ];
