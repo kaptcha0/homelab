@@ -21,6 +21,8 @@
               ./variables.nix
               ./secrets.nix
               ./modules.nix
+
+              ./modules/vms
             ];
           };
         in
