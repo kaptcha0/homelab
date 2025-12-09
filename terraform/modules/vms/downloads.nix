@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   config = lib.mkIf config.vms.k3s.enable {
-    resource."proxmox_virtual_environment_download_file".latest_ubuntu_22_jammy_qcow2_img = {
+    resource."proxmox_virtual_environment_download_file".ubuntu-jammy = {
       inherit (config.vms.k3s.config.proxmox) node_name;
 
       datastore_id = "local";

@@ -136,7 +136,7 @@
             disk = {
               interface = "virtio0";
               datastore_id = k3s.config.proxmox.datastore_id;
-              import_from = lib.tfRef "proxmox_virtual_environment_download_file.latest_ubuntu_22_jammy_qcow2_img.id";
+              import_from = lib.tfRef "proxmox_virtual_environment_download_file.ubuntu-jammy.id";
             };
 
             network_device.bridge = k3s.config.defaults.lan_name;
