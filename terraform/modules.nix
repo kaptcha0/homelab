@@ -37,18 +37,4 @@ in
       };
     };
   };
-
-  module = {
-    shared.source = "./modules/shared/";
-    infra.source = "./modules/infra/";
-
-    routeros = {
-      source = "./modules/routeros/";
-      default_comment = "(managed by terraform)";
-      depends_on = [
-        "module.infra"
-      ];
-    };
-
-  };
 }
