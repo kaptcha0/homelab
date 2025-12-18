@@ -5,3 +5,7 @@
 ./flake.lock
 ./flake.nix
 .direnv
+
+*.tfstate*
+tfplan
+config.tf.json

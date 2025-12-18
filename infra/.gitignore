@@ -1,5 +1,0 @@
-.terraform/
-*.tfstate*
-tfplan
-config.tf.json
-
