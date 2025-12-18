@@ -16,18 +16,24 @@
       terranix,
       ...
     }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        ./packages.nix
-        ./apps.nix
-        ./devshell.nix
-      ];
+    flake-parts.lib.mkFlake { inherit inputs; }
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-    };
+      {
+        imports = [
+          ./packages.nix
+          ./apps.nix
+          ./devshell.nix
+        ];
+
+        perSystem = { pkgs, ... }: {
+          terranix.tf.package = pkgs.opentofu;
+        };
+
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ];
+      };
 }

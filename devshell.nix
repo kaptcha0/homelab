@@ -1,15 +1,12 @@
 { ... }:
 {
   perSystem =
-    { pkgs, ... }:
-    let
-      tf = pkgs.opentofu;
-    in
+    { pkgs, config, ... }:
     {
 
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
-          tf
+          config.terranix.tf.package
           terragrunt
           sops
           jq

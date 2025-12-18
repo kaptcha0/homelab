@@ -1,9 +1,9 @@
-{ ... }:
+{ lib, ... }:
 {
   perSystem =
-    { pkgs, self', ... }:
+    { pkgs, config, self', ... }:
     let
-      tf = pkgs.opentofu;
+      tf = lib.getExe config.terranix.tf.package;
     in
     {
 
@@ -15,8 +15,8 @@
             pkgs.writers.writeBash "apply" ''
               if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
               cp ${self'.packages.tfConfig} config.tf.json \
-                && ${tf}/bin/tofu init \
-                && ${tf}/bin/tofu apply
+                && ${tf} init \
+                && ${tf} apply
             ''
           );
         };
@@ -28,8 +28,8 @@
             pkgs.writers.writeBash "plan" ''
               if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
               cp ${self'.packages.tfConfig} config.tf.json \
-                && ${tf}/bin/tofu init \
-                && ${tf}/bin/tofu plan
+                && ${tf} init \
+                && ${tf} plan
             ''
           );
         };
@@ -41,8 +41,8 @@
             pkgs.writers.writeBash "destroy" ''
               if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
               cp ${self'.packages.tfConfig} config.tf.json \
-                && ${tf}/bin/tofu init \
-                && ${tf}/bin/tofu destroy
+                && ${tf} init \
+                && ${tf} destroy
             ''
           );
         };

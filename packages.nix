@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   perSystem =
     { system, ... }:
@@ -11,6 +11,13 @@
       };
     in
     {
-      packages.tfConfig = terraformConfiguration;
+      options = {
+        terranix.tf.package = lib.mkOption {
+          type = lib.types.package;
+          description = "the terraform package to install";
+        };
+      };
+
+      config.packages.tfConfig = terraformConfiguration;
     };
 }
