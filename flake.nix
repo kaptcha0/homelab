@@ -3,57 +3,37 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # used to install nixos on client machines
-    nixos-install = {
-      # or relative path:
-      url = "./terraform/modules/nixos-install";
-    };
+    terranix.url = "github:terranix/terranix";
+    terranix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     {
+      flake-parts,
       nixpkgs,
-      flake-utils,
-      nixos-install,
+      terranix,
       ...
-    }:
-    {
-      # Forward or expose nixosConfigurations from subflake if desired:
-      nixosConfigurations = {
-        # Alias or expose subflake configuration here:
-        generic = nixos-install.nixosConfigurations.generic;
-      };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; }
+
       {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            mise
-            opentofu
-            terragrunt
-            sops
-            winbox4
-            guestfs-tools
-            jq
-          ];
+        imports = [
+          ./packages.nix
+          ./apps.nix
+          ./devshell.nix
+        ];
 
-          shellHook = ''
-            if [ -z "$NU_ALREADY_ENTERED" ]; then
-              export NU_ALREADY_ENTERED=1
-              exec nu
-            fi
-          '';
+        perSystem = { pkgs, ... }: {
+          terranix.tf.package = pkgs.opentofu;
         };
 
-      }
-    );
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ];
+      };
 }
