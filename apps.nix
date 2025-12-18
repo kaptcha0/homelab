@@ -8,6 +8,8 @@
     {
 
       apps = {
+        default = self'.apps.apply;
+
         apply = {
           type = "app";
           meta.description = "run tf init and apply";

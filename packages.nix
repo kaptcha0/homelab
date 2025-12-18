@@ -1,7 +1,13 @@
 { inputs, lib, ... }:
 {
   perSystem =
-    { system, ... }:
+    {
+      system,
+      pkgs,
+      config,
+      self',
+      ...
+    }:
     let
       terraformConfiguration = inputs.terranix.lib.terranixConfiguration {
         inherit system;
@@ -18,6 +24,8 @@
         };
       };
 
-      config.packages.tfConfig = terraformConfiguration;
+      config = {
+        packages.tfConfig = terraformConfiguration;
+      };
     };
 }

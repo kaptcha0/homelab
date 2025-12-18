@@ -11,8 +11,6 @@
           sops
           jq
         ];
-
-        shellHook = '''';
       };
     };
 }

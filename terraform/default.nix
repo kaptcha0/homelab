@@ -6,5 +6,6 @@
     ./variables.nix
     ./secrets.nix
     ./modules/vms
+    ./modules/infra
   ];
 }
