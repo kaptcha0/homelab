@@ -1,1 +1,1 @@
-proxmox_api_url = "https://10.67.0.2:8006/api2/json"
+proxmox_api_url = "https://pve.nyumbani.home:8006/api2/json"

@@ -20,6 +20,11 @@ let
   };
 in
 {
+  nixos-anywhere = {
+    enable = true;
+    install-user = defaults.username;
+  };
+
   infra = {
     config = {
       inherit defaults proxmox;
@@ -37,6 +42,7 @@ in
       };
     };
   };
+
   vms = {
     k3s = {
       enable = true;

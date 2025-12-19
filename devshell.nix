@@ -9,6 +9,7 @@
           config.terranix.tf.package
           terragrunt
           sops
+          age
           jq
         ];
       };

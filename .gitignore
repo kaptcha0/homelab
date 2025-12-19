@@ -9,3 +9,4 @@
 *.tfstate*
 tfplan
 config.tf.json
+state.tf.json

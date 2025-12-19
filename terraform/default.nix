@@ -7,5 +7,6 @@
     ./secrets.nix
     ./modules/vms
     ./modules/infra
+    ./modules/nixos-anywhere
   ];
 }

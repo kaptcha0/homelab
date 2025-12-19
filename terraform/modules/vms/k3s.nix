@@ -97,12 +97,12 @@ in
           name,
           startup_order,
           tags,
+          starting_index,
           vm_config,
         }:
         {
           inherit (cfg.config.proxmox) node_name;
           inherit (cfg.config.defaults) vga;
-
 
           name = "${name}-\${count.index}";
           count = vm_config.count;
@@ -154,7 +154,18 @@ in
           network_device.bridge = cfg.config.defaults.lan_name;
 
           initialization = {
-            ip_config.ipv4.address = "dhcp";
+            ip_config.ipv4 = {
+              gateway = "10.67.0.1";
+              address = "10.67.0.${lib.tfRef "${toString starting_index} + count.index"}/24";
+            };
+
+            dns = {
+              domain = "nyumbani.home";
+              servers = [
+                "10.67.0.1"
+                "1.1.1.1"
+              ];
+            };
 
             user_account = {
               username = cfg.config.defaults.username;
@@ -169,6 +180,7 @@ in
           name = "k3s-server";
           startup_order = 2;
           tags = [ "k3s-server" ];
+          starting_index = 10;
           vm_config = cfg.k3s.config.server;
         };
 
@@ -176,6 +188,7 @@ in
           name = "k3s-agent";
           startup_order = 3;
           tags = [ "k3s-agent" ];
+          starting_index = 50;
           vm_config = cfg.k3s.config.agent;
         };
       };
