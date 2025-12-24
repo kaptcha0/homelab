@@ -38,12 +38,13 @@
 
         destroy = {
           type = "app";
-          meta.description = "destroy provisioned resources";
+          meta.description = "destroy provisioned resources except for truenas";
           program = toString (
             pkgs.writers.writeBash "destroy" ''
               if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
               cp ${self'.packages.tfConfig} config.tf.json \
                 && ${tf} init \
+                && ${tf} state rm proxmox_virtual_environment_vm.truenas
                 && ${tf} destroy
             ''
           );

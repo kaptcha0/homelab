@@ -149,6 +149,7 @@ in
             interface = "virtio0";
             datastore_id = cfg.config.proxmox.datastore_id;
             import_from = lib.tfRef "proxmox_virtual_environment_download_file.fedora-43.id";
+            size = 16;
           };
 
           network_device.bridge = cfg.config.defaults.lan_name;
