@@ -6,6 +6,7 @@
 ./flake.nix
 .direnv
 
+age.agekey
 *.tfstate*
 tfplan
 config.tf.json
