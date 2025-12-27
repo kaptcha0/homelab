@@ -7,7 +7,7 @@ creation_rules:
     key_groups:
       - age:
           - *terraform
-  - path_regex: ^cluster/homelab/secrets/.*\.secrets\.yaml$
+  - path_regex: ^cluster/homelab/.*\.secrets\.yaml$
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age:

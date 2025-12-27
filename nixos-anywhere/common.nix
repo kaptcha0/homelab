@@ -29,10 +29,19 @@ in
 
   services.openssh.enable = true;
 
-  environment.systemPackages = map lib.lowPrio [
-    pkgs.curl
-    pkgs.gitMinimal
+  environment.systemPackages = with pkgs; map lib.lowPrio [
+    curl
+    gitMinimal
+    nfs-utils
   ];
+
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.2025-12.home.nyumbani:${terraform.hostname}";
+  };
+
+  boot.kernelModules = [ "nfs" ];
+  boot.supportedFilesystems = [ "nfs" ];
 
   users.users.root.openssh.authorizedKeys.keys =
     (lib.strings.splitString "\n" publicKeys) ++ (args.extraPublicKeys or [ ]); # this is used for unit-testing this module and can be removed if not needed

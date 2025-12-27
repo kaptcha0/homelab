@@ -1,0 +1,25 @@
+csiDriver:
+  name: "home.nyumbani.iscsi"
+
+storageClasses:
+  - name: freenas-iscsi-csi
+    defaultClass: false
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: ext4
+    mountOptions: []
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+volumeSnapshotClasses: []
+
+driver:
+  existingConfigSecret: democratic-csi-iscsi-driver-config
+  config:
+    driver: freenas-api-iscsi
