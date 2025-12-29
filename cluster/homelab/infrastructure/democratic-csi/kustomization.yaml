@@ -10,9 +10,13 @@ secretGenerator:
   - name: democratic-csi-nfs-driver-config
     files:
       - nfs-driver-config.yaml=nfs/nfs-driver-config.secrets.yaml
+    options:
+      disableNameSuffixHash: true
   - name: democratic-csi-iscsi-driver-config
     files:
       - iscsi-driver-config.yaml=iscsi/iscsi-driver-config.secrets.yaml
+    options:
+      disableNameSuffixHash: true
 configMapGenerator:
   - name: democratic-csi-nfs-config
     files:

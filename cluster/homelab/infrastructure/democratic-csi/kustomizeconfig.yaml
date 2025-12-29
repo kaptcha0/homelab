@@ -4,8 +4,6 @@ nameReference:
     fieldSpecs:
       - path: spec/valuesFrom/name
         kind: HelmRelease
-      - path: data/values.yaml/driver/existingConfigSecret
-        kind: ConfigMap
   - kind: ConfigMap
     version: v1
     fieldSpecs:
