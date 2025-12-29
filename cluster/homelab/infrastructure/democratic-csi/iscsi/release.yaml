@@ -17,5 +17,6 @@ spec:
   valuesFrom:
     - kind: Secret
       name: democratic-csi-iscsi-driver-config
+      valuesKey: driver-config-file.yaml
     - kind: ConfigMap
       name: democratic-csi-iscsi-config

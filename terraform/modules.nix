@@ -55,7 +55,7 @@ in
         };
 
         agent = {
-          count = 1;
+          count = 2;
           cores = 2;
           memory = 2048;
         };
