@@ -21,16 +21,16 @@ spec:
   eventSources:
     - kind: GitRepository
       name: "*"
-      namespace: infrastructure
+      namespace: flux-system
     - kind: Kustomization
       name: "*"
-      namespace: infrastructure
+      namespace: flux-system
     - kind: HelmChart
       name: "*"
-      namespace: infrastructure
+      namespace: flux-system
     - kind: HelmRelease
       name: "*"
-      namespace: infrastructure
+      namespace: flux-system
     - kind: ImageUpdateAutomation
       name: "*"
-      namespace: infrastructure
+      namespace: flux-system
