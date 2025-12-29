@@ -5,6 +5,7 @@ metadata:
   namespace: democratic-csi
 spec:
   interval: 10m
+  timeout: 20m # increased significaltly because of limited resources
   chart:
     spec:
       chart: democratic-csi
