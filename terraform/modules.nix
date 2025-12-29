@@ -51,13 +51,13 @@ in
         server = {
           count = 1;
           cores = 2;
-          memory = 2048;
+          memory = 4 * 1024;
         };
 
         agent = {
           count = 2;
           cores = 2;
-          memory = 2048;
+          memory = 4 * 1024;
         };
       };
     };
