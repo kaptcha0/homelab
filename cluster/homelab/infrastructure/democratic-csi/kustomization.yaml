@@ -16,9 +16,9 @@ secretGenerator:
 configMapGenerator:
   - name: democratic-csi-nfs-config
     files:
-      - nfs-config.yaml=nfs/nfs-config.yaml
+      - values.yaml=nfs/nfs-config.yaml
   - name: democratic-csi-iscsi-config
     files:
-      - iscsi-config.yaml=iscsi/iscsi-config.yaml
+      - values.yaml=iscsi/iscsi-config.yaml
 configurations:
   - kustomizeconfig.yaml
