@@ -1,33 +1,25 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: democratic-csi-iscsi-config
-  namespace: democratic-csi
-  labels:
-    reconcile.fluxcd.io/watch: Enabled
-data:
-  csiDriver:
-    name: "home.nyumbani.iscsi"
+csiDriver:
+  name: "home.nyumbani.iscsi"
 
-  storageClasses:
-    - name: freenas-iscsi-csi
-      defaultClass: false
-      reclaimPolicy: Delete
-      volumeBindingMode: Immediate
-      allowVolumeExpansion: true
-      parameters:
-        fsType: ext4
-      mountOptions: []
-      secrets:
-        provisioner-secret:
-        controller-publish-secret:
-        node-stage-secret:
-        node-publish-secret:
-        controller-expand-secret:
+storageClasses:
+  - name: freenas-iscsi-csi
+    defaultClass: false
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: ext4
+    mountOptions: []
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
 
-  volumeSnapshotClasses: []
+volumeSnapshotClasses: []
 
-  driver:
-    existingConfigSecret: democratic-csi-iscsi-driver-config
-    config:
-      driver: freenas-api-iscsi
+driver:
+  existingConfigSecret: democratic-csi-iscsi-driver-config
+  config:
+    driver: freenas-api-iscsi
