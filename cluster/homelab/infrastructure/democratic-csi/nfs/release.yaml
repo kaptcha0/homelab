@@ -17,6 +17,6 @@ spec:
   valuesFrom:
     - kind: Secret
       name: democratic-csi-nfs-driver-config
-      valuesKey: driver-config-file.yaml
+      valuesKey: nfs-driver-config.yaml
     - kind: ConfigMap
       name: democratic-csi-nfs-config
