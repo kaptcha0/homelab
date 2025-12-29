@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./cluster/homelab/infrastructure # Path from repo root
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # THIS IS KEY: It enables decryption for everything in this folder
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
