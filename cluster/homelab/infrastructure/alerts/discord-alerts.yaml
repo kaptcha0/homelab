@@ -2,7 +2,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Provider
 metadata:
   name: discord
-  namespace: flux-system
+  namespace: alerts
 spec:
   type: discord
   secretRef:
@@ -12,7 +12,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
   name: discord-info-alert
-  namespace: flux-system
+  namespace: alerts
 spec:
   eventMetadata:
     cluster: "homelab"
@@ -20,12 +20,12 @@ spec:
     name: discord
   eventSources:
     - kind: GitRepository
-      name: '*'
+      name: "*"
     - kind: Kustomization
-      name: '*'
+      name: "*"
     - kind: HelmChart
-      name: '*'
+      name: "*"
     - kind: HelmRelease
-      name: '*'
+      name: "*"
     - kind: ImageUpdateAutomation
-      name: '*'
+      name: "*"

@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: democratic-csi-iscsi-config
   namespace: democratic-csi
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
 data:
   values.yaml:
     csiDriver:
