@@ -5,12 +5,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./cluster/homelab/infrastructure # Path from repo root
+  path: ./cluster/homelab/infrastructure
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  # THIS IS KEY: It enables decryption for everything in this folder
   decryption:
     provider: sops
     secretRef:
