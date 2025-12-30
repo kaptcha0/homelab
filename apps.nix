@@ -4,6 +4,7 @@
     { pkgs, config, self', ... }:
     let
       tf = lib.getExe config.terranix.tf.package;
+      flux = pkgs.fluxcd;
     in
     {
 

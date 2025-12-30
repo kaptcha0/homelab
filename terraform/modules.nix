@@ -33,7 +33,7 @@ in
     truenas = {
       enable = true;
       config = {
-        cores = 4;
+        cores = 2;
         memory = 8 * 1024;
 
         disks.boot.size = 32;
@@ -50,13 +50,13 @@ in
       config = {
         server = {
           count = 1;
-          cores = 2;
+          cores = 4;
           memory = 4 * 1024;
         };
 
         agent = {
-          count = 2;
-          cores = 2;
+          count = 1;
+          cores = 4;
           memory = 4 * 1024;
         };
       };

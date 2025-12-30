@@ -4,12 +4,12 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 10m0s
-  path: ./cluster/homelab/infrastructure
+  interval: 30m0s
   prune: true
   sourceRef:
-    kind: GitRepository
-    name: flux-system
+    kind: ExternalArtifact
+    name: infrastructure
+  path: ./
   decryption:
     provider: sops
     secretRef:
