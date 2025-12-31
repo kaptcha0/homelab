@@ -35,3 +35,13 @@ spec:
     - kind: ImageUpdateAutomation
       name: "*"
       namespace: flux-system
+
+    - kind: Kustomization
+      name: "*"
+      namespace: kube-system
+    - kind: HelmChart
+      name: "*"
+      namespace: kube-system
+    - kind: HelmRelease
+      name: "*"
+      namespace: kube-system

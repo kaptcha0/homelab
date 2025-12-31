@@ -14,6 +14,9 @@ let
   };
   publicKeys = lib.strings.removeSuffix "\n" (builtins.readFile publicKeyFile);
   ipv4 = lib.strings.splitString "/" terraform.ipv4;
+  k3sEnvFile = pkgs.writeText "k3s.env" ''
+    GOMEMLIMIT=800MiB
+  '';
 in
 {
   imports = [
@@ -27,13 +30,26 @@ in
     efiInstallAsRemovable = true;
   };
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+      priority = 1024;
+    }
+  ];
+
+  zramSwap.enable = true;
+  zramSwap.priority = 2048;
+
   services.openssh.enable = true;
 
-  environment.systemPackages = with pkgs; map lib.lowPrio [
-    curl
-    gitMinimal
-    nfs-utils
-  ];
+  environment.systemPackages =
+    with pkgs;
+    map lib.lowPrio [
+      curl
+      gitMinimal
+      nfs-utils
+    ];
 
   services.openiscsi = {
     enable = true;
@@ -50,13 +66,17 @@ in
 
   sops.defaultSopsFile = ./nixos.secrets.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/keys.txt";
+  sops.age.keyFile = "/var/lib/secrets/keys.txt";
 
   sops.secrets.server_token = { };
 
   services.k3s = {
     enable = true;
     tokenFile = config.sops.secrets.server_token.path;
+    environmentFile = toString k3sEnvFile;
+    extraKubeletConfig = {
+      failSwapOn = false;
+    };
   };
 
   networking = {

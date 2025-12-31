@@ -1,26 +1,35 @@
-csiDriver:
-  name: "home.nyumbani.nfs"
-  fsGroupPolicy: File
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nfs-config
+  namespace: democratic-csi
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
+data:
+  values.yaml:
+    csiDriver:
+      name: "home.nyumbani.nfs"
+      fsGroupPolicy: File
 
-storageClasses:
-  - name: freenas-nfs-csi
-    defaultClass: false
-    reclaimPolicy: Delete
-    volumeBindingMode: Immediate
-    allowVolumeExpansion: true
-    parameters:
-      fsType: nfs
-    mountOptions:
-      - noatime
-      - nfsvers=4
-    secrets:
-      provisioner-secret:
-      controller-publish-secret:
-      node-stage-secret:
-      node-publish-secret:
-      controller-expand-secret:
+    storageClasses:
+      - name: freenas-nfs-csi
+        defaultClass: false
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        parameters:
+          fsType: nfs
+        mountOptions:
+          - noatime
+          - nfsvers=4
+        secrets:
+          provisioner-secret:
+          controller-publish-secret:
+          node-stage-secret:
+          node-publish-secret:
+          controller-expand-secret:
 
-driver:
-  existingConfigSecret: democratic-csi-nfs-driver-config
-  config:
-    driver: freenas-api-nfs
+    driver:
+      existingConfigSecret: nfs-config-secret
+      config:
+        driver: freenas-api-nfs

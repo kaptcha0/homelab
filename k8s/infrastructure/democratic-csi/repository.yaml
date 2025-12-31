@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: democratic-csi-repo
+  name: democratic-csi
   namespace: democratic-csi
 spec:
   interval: 10m

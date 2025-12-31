@@ -1,23 +1,22 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: democratic-csi-iscsi
+  name: iscsi-driver
   namespace: democratic-csi
 spec:
   interval: 10m
-  timeout: 20m # increased significaltly because of limited resources
   chart:
     spec:
       chart: democratic-csi
-      version: "^0.15.0"
+      version: "0.15.x"
       sourceRef:
         kind: HelmRepository
-        name: democratic-csi-repo
+        name: democratic-csi
         namespace: democratic-csi
       interval: 10m
   valuesFrom:
     - kind: Secret
-      name: democratic-csi-iscsi-driver-config
-      valuesKey: iscsi-driver-config.yaml
+      name: iscsi-config-secret
+      valuesKey: driver-config-file.yaml
     - kind: ConfigMap
-      name: democratic-csi-iscsi-config
+      name: iscsi-config

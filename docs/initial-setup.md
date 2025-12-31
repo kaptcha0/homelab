@@ -27,12 +27,13 @@ clusters:
 
 ## k8s setup
 
-### calico
+### cilium
 
-Set up calico
+Set up cilium
 
 ```sh
-kubectl apply -k ./k8s/infrastructure/calico/
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium --version 1.18.5 --namespace kube-system --set operator.replicas=1
 ```
 
 ### flux

@@ -25,6 +25,12 @@ in
           type = lib.types.ints.positive;
           description = "memory per k3s server node (MB)";
         };
+
+        storage = lib.mkOption {
+          default = 16;
+          type = lib.types.ints.positive;
+          description = "storage per k3s server node (GB)";
+        };
       };
 
       config.agent = {
@@ -44,6 +50,12 @@ in
           default = 512;
           type = lib.types.ints.positive;
           description = "memory per k3s agent node (MB)";
+        };
+
+        storage = lib.mkOption {
+          default = 16;
+          type = lib.types.ints.positive;
+          description = "storage per k3s agent node (GB)";
         };
       };
     };
@@ -149,7 +161,7 @@ in
             interface = "virtio0";
             datastore_id = cfg.config.proxmox.datastore_id;
             import_from = lib.tfRef "proxmox_virtual_environment_download_file.fedora-43.id";
-            size = 16;
+            size = vm_config.storage;
           };
 
           network_device.bridge = cfg.config.defaults.lan_name;

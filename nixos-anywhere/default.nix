@@ -26,7 +26,6 @@ in
         sops-nix.nixosModules.sops
         disko.nixosModules.disko
         ./hosts/k3s-server/master.nix
-        # ./hosts/k3s-server/hardware-configuration.nix
         ./common.nix
       ];
     };
@@ -45,7 +44,6 @@ in
         sops-nix.nixosModules.sops
         disko.nixosModules.disko
         ./hosts/k3s-server/normal.nix
-        # ./hosts/k3s-server/hardware-configuration.nix
         ./common.nix
       ];
     };
@@ -65,7 +63,6 @@ in
         sops-nix.nixosModules.sops
         disko.nixosModules.disko
         ./hosts/k3s-agent/configuration.nix
-        # ./hosts/k3s-agent/hardware-configuration.nix
         ./common.nix
       ];
     };

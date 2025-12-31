@@ -11,7 +11,7 @@ let
   cfg = config.nixos-anywhere;
   install_user = cfg.install-user;
 
-  build_on_remote = true;
+  build_on_remote = false;
 in
 {
   options = {
