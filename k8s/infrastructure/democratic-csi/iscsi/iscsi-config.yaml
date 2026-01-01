@@ -6,7 +6,7 @@ metadata:
   labels:
     reconcile.fluxcd.io/watch: Enabled
 data:
-  values.yaml:
+  values.yaml: |-
     csiDriver:
       name: "home.nyumbani.iscsi"
 

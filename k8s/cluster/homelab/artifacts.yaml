@@ -10,7 +10,6 @@ spec:
       name: flux-system
   artifacts:
     - name: infrastructure
-      originRevision: "@monorepo"
       copy:
         - from: "@monorepo/k8s/infrastructure/**"
           to: "@artifact/"

@@ -48,5 +48,5 @@ cat $AGE_KEY_FILE | kubectl create secret generic sops-age -n flux-system --from
 Bootstrap FluxCD
 
 ```sh
-flux bootstrap github --token-auth --owner=$GITHUB_USER --repository=homelab --branch=main --path=k8s/cluster/homelab --personal
+flux bootstrap github --token-auth --owner=$GITHUB_USER --repository=homelab --branch=main --path=k8s/cluster/homelab --personal -components-extra=source-watcher
 ```
