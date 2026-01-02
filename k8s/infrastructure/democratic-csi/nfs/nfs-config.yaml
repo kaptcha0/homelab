@@ -32,3 +32,8 @@ data:
       existingConfigSecret: nfs-config-secret
       config:
         driver: freenas-api-nfs
+
+    controller:
+      driver:
+        image:
+          tag: next

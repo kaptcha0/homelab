@@ -31,3 +31,8 @@ data:
       existingConfigSecret: iscsi-config-secret
       config:
         driver: freenas-api-iscsi
+
+    controller:
+      driver:
+        image:
+          tag: next
