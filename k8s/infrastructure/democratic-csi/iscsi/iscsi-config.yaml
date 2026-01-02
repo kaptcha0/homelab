@@ -36,3 +36,8 @@ data:
       driver:
         image:
           tag: next
+
+    node:
+      driver:
+        image:
+          tag: next
