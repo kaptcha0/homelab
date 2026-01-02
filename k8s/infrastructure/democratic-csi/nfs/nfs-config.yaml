@@ -40,5 +40,4 @@ data:
 
     node:
       driver:
-        image:
-          tag: next
+        localtimeHostPath: null
