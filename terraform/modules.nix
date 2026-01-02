@@ -51,7 +51,7 @@ in
         server = {
           count = 1;
           cores = 4;
-          memory = 2 * 1024;
+          memory = 4 * 1024;
           storage = 32;
         };
 
