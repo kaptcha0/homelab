@@ -13,3 +13,7 @@ spec:
       copy:
         - from: "@monorepo/k8s/infrastructure/**"
           to: "@artifact/"
+    - name: apps
+      copy:
+        - from: "@monorepo/k8s/apps/**"
+          to: "@artifact/"

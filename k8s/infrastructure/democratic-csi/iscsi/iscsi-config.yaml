@@ -40,3 +40,6 @@ data:
     node:
       driver:
         localtimeHostPath: null
+        extraEnv:
+          - name: ISCSIADM_HOST_PATH
+            value: /run/current-system/sw/iscsiadm

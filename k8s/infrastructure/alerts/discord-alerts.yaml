@@ -16,7 +16,7 @@ spec:
     cluster: "homelab"
   providerRef:
     name: discord
-  eventSeverity: error
+  eventSeverity: info
   eventSources:
     - kind: GitRepository
       name: "*"
