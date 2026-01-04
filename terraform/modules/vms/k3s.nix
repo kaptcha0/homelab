@@ -8,6 +8,8 @@ in
       enable = lib.mkEnableOption "enable k3s vms on proxmox";
 
       config.server = {
+        enable = lib.mkEnableOption "enable k3s server";
+
         count = lib.mkOption {
           default = 1;
           type = lib.types.ints.positive;
@@ -34,6 +36,8 @@ in
       };
 
       config.agent = {
+        enable = lib.mkEnableOption "enable k3s server";
+
         count = lib.mkOption {
           default = 1;
           type = lib.types.ints.positive;
@@ -189,21 +193,21 @@ in
     in
     lib.mkIf cfg.k3s.enable {
       resource."proxmox_virtual_environment_vm" = {
-        k3s_server = createK3sVm {
+        k3s_server = lib.mkIf cfg.k3s.config.server.enable (createK3sVm {
           name = "k3s-server";
           startup_order = 2;
           tags = [ "k3s-server" ];
           starting_index = 10;
           vm_config = cfg.k3s.config.server;
-        };
+        });
 
-        k3s_agent = createK3sVm {
+        k3s_agent = lib.mkIf cfg.k3s.config.agent.enable (createK3sVm {
           name = "k3s-agent";
           startup_order = 3;
           tags = [ "k3s-agent" ];
           starting_index = 50;
           vm_config = cfg.k3s.config.agent;
-        };
+        });
       };
     };
 }

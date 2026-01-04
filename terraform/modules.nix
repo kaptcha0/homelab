@@ -22,6 +22,10 @@ in
 {
   nixos-anywhere = {
     enable = true;
+    hosts = {
+      k3s-servers.enable = true;
+      k3s-agents.enable = false;
+    };
     install-user = defaults.username;
   };
 
@@ -49,6 +53,7 @@ in
 
       config = {
         server = {
+          enable = true;
           count = 1;
           cores = 4;
           memory = 4 * 1024;
@@ -56,6 +61,7 @@ in
         };
 
         agent = {
+          enable = false;
           count = 1;
           cores = 4;
           memory = 2 * 1024;

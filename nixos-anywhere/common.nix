@@ -87,7 +87,25 @@ in
     nameservers = terraform.dns_servers;
     enableIPv6 = false;
 
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+      allowPing = true;
+
+      allowedUDPPorts = [
+        8472 # cilium VXLAN overlay
+        51871 # cilium Wireguard tunnel endpoint
+      ];
+      
+      allowedTCPPorts = [
+        22 # ssh
+        80 # traefik
+        443 # traefik
+
+        4240 # cilium health checks
+        10250 # k3s kublet metrics
+      ];
+
+    };
 
     interfaces.ens18.ipv4.addresses = [
       {

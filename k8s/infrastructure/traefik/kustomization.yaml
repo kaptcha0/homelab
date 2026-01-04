@@ -1,5 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: kube-system
+namespace: traefik
 resources:
   - helmchartconfig.yaml
+  - namespace.yaml
+  - release.yaml
+  - repository.yaml
+  - certificate.yaml
+configMapGenerator:
+  - name: traefik-values
+    files:
+      - values.yaml

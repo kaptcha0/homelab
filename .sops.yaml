@@ -7,7 +7,7 @@ creation_rules:
     key_groups:
       - age:
           - *terraform
-  - path_regex: ^k8s/.*\.secrets\.yaml$
+  - path_regex: ^k8s/.*\.secret\.yaml$
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age:

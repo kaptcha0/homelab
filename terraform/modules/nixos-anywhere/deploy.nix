@@ -18,6 +18,11 @@ in
     nixos-anywhere = {
       enable = lib.mkEnableOption "enable nixos-anywhere";
 
+      hosts = {
+        k3s-servers.enable = lib.mkEnableOption "enable k3s server";
+        k3s-agents.enable = lib.mkEnableOption "enable k3s agent";
+      };
+
       install-user = lib.mkOption {
         type = lib.types.str;
         description = "the username to connect with";
@@ -25,8 +30,8 @@ in
     };
   };
 
-  config.module = {
-    deploy-master = lib.mkIf cfg.enable {
+  config.module = lib.mkIf cfg.enable {
+    deploy-master = lib.mkIf cfg.hosts.k3s-servers.enable {
       inherit extra_files_script install_user build_on_remote;
       source = "github.com/nix-community/nixos-anywhere//terraform/all-in-one";
 
@@ -48,7 +53,7 @@ in
       };
     };
 
-    deploy-servers = {
+    deploy-servers = lib.mkIf cfg.hosts.k3s-servers.enable {
       inherit extra_files_script install_user build_on_remote;
 
       for_each = lib.tfRef "{ for vm in ${servers} : vm.name => vm }";
@@ -77,7 +82,7 @@ in
       ];
     };
 
-    deploy-agents = {
+    deploy-agents = lib.mkIf cfg.hosts.k3s-agents.enable {
       inherit extra_files_script install_user build_on_remote;
 
       for_each = lib.tfRef "{ for vm in ${all_agents} : vm.name => vm }";

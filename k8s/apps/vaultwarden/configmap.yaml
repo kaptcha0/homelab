@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: vaultwarden
 data:
-  DOMAIN: "https://bitwarden.k8s.nyumbani.home"
+  DOMAIN: "https://vaultwarden.k8s.nyumbani.home"
   ROCKET_PORT: "8000"

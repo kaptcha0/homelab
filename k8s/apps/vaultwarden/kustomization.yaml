@@ -10,4 +10,4 @@ resources:
   - service.yaml
   - configmap.yaml
   - pvc.yaml
-  - ingress.yaml
+  - http-route.yaml
