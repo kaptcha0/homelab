@@ -42,4 +42,4 @@ data:
         localtimeHostPath: null
         extraEnv:
           - name: ISCSIADM_HOST_PATH
-            value: /run/current-system/sw/iscsiadm
+            value: /run/current-system/sw/bin/iscsiadm
