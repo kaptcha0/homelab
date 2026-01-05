@@ -6,7 +6,5 @@ labels:
 resources:
   - namespace.yaml
   - alerts/
-  - cilium/
   - democratic-csi/
   - traefik/
-  - cert-manager/

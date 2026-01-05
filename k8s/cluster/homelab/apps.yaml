@@ -7,7 +7,7 @@ spec:
   interval: 30m0s
   prune: true
   dependsOn:
-    - name: infrastructure
+    - name: infrastructure-configs
   sourceRef:
     kind: ExternalArtifact
     name: apps
