@@ -56,7 +56,12 @@ in
     name = "iqn.2025-12.home.nyumbani:${terraform.hostname}";
   };
 
-  boot.kernelModules = [ "nfs" ];
+  boot.kernelModules = [
+    "nfs"
+    "br_netfilter"
+    "ip_conntrack"
+    "overlay" # May be needed for containerd
+  ];
   boot.supportedFilesystems = [ "nfs" ];
 
   users.users.root.openssh.authorizedKeys.keys =
@@ -95,7 +100,7 @@ in
         8472 # cilium VXLAN overlay
         51871 # cilium Wireguard tunnel endpoint
       ];
-      
+
       allowedTCPPorts = [
         22 # ssh
         80 # traefik
@@ -103,6 +108,17 @@ in
 
         4240 # cilium health checks
         10250 # k3s kublet metrics
+      ];
+
+      extraCommands = ''
+        iptables -A INPUT -s 10.42.0.0/16 -j ACCEPT
+        iptables -A INPUT -s 10.43.0.0/16 -j ACCEPT
+      '';
+
+      trustedInterfaces = [
+        "cilium_host"
+        "cilium_net"
+        "cilium_vxlan"
       ];
 
     };

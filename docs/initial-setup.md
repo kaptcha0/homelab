@@ -33,7 +33,7 @@ Set up cilium
 
 ```sh
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.18.5 --namespace kube-system --set operator.replicas=1
+helm install cilium cilium/cilium --version 1.18.5 --namespace kube-system --set operator.replicas=1 --set ipam.mode=kubernetes
 ```
 
 ### flux
@@ -48,5 +48,5 @@ cat $AGE_KEY_FILE | kubectl create secret generic sops-age -n flux-system --from
 Bootstrap FluxCD
 
 ```sh
-flux bootstrap github --token-auth --owner=$GITHUB_USER --repository=homelab --branch=main --path=k8s/cluster/homelab --personal -components-extra=source-watcher
+flux bootstrap github --token-auth --owner=$GITHUB_USER --repository=homelab --branch=main --path=k8s/cluster/homelab --personal --components-extra=source-watcher
 ```
