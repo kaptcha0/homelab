@@ -9,4 +9,4 @@ spec:
     - "*.k8s.nyumbani.home"
   issuerRef:
     name: ca-issuer
-    kind: ClusterIssuer
+    kind: Issuer
