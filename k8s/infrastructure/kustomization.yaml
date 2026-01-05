@@ -5,7 +5,8 @@ labels:
       app.kubernetes.io/component: infrastructure
 resources:
   - namespace.yaml
-  - alerts
-  - cilium
-  - democratic-csi
-  - traefik
+  - alerts/
+  - cilium/
+  - democratic-csi/
+  - traefik/
+  - cert-manager/
