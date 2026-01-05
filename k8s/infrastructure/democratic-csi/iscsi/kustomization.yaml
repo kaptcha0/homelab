@@ -4,6 +4,6 @@ labels:
   - pairs:
       app.kubernetes.io/instance: nfs-driver
 resources:
-  - iscsi-config-secret.secrets.yaml
+  - iscsi-config-secret.secret.yaml
   - iscsi-config.yaml
   - release.yaml

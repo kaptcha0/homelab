@@ -5,5 +5,5 @@ resources:
   - namespace.yaml
   - release.yaml
   - repository.yaml
-  - ca.secret.yaml
+  - ca-secret.secret.yaml
   - ca-issuer.yaml
