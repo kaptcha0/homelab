@@ -6,6 +6,8 @@ resources:
   - release.yaml
   - repository.yaml
   - certificate.yaml
+  - ca-secret.secret.yaml
+  - ca-issuer.yaml
 configMapGenerator:
   - name: traefik-values
     files:
