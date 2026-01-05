@@ -24,7 +24,7 @@ in
     enable = true;
     hosts = {
       k3s-servers.enable = true;
-      k3s-agents.enable = true;
+      k3s-agents.enable = false;
     };
     install-user = defaults.username;
   };
@@ -56,12 +56,12 @@ in
           enable = true;
           count = 1;
           cores = 4;
-          memory = 2 * 1024;
+          memory = 4 * 1024;
           storage = 32;
         };
 
         agent = {
-          enable = true;
+          enable = false;
           count = 1;
           cores = 4;
           memory = 2 * 1024;

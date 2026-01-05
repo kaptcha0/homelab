@@ -6,5 +6,5 @@ labels:
       app.kubernetes.io/name: alerts
       app.kubernetes.io/part-of: monitoring
 resources:
-  - discord-webook.secrets.yaml
+  - discord-webook.secret.yaml
   - discord-alerts.yaml

@@ -93,7 +93,7 @@ in
     enableIPv6 = false;
 
     firewall = {
-      enable = true;
+      enable = false;
       allowPing = true;
 
       allowedUDPPorts = [
