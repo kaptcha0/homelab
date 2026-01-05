@@ -5,6 +5,7 @@ metadata:
 spec:
   parentRefs:
     - name: traefik-gateway
+      namespace: traefik
   hostnames:
     - "vaultwarden.k8s.nyumbani.home"
   rules:
