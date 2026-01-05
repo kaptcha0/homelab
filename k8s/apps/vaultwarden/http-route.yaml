@@ -14,11 +14,11 @@ spec:
             value: /
       backendRefs:
         - name: vaultwarden
-          port: http
+          port: 80
     - matches:
         - path:
             type: Exact
             value: /notifications/hub
       backendRefs:
         - name: vaultwarden
-          port: websocket
+          port: 3012
