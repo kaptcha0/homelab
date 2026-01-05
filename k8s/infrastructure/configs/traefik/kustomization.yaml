@@ -8,6 +8,8 @@ resources:
   - certificate.yaml
   - ca-secret.secret.yaml
   - ca-issuer.yaml
+configurations:
+  - kustomizeconfig.yaml
 configMapGenerator:
   - name: traefik-values
     files:
