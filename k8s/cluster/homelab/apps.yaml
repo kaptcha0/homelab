@@ -6,6 +6,8 @@ metadata:
 spec:
   interval: 30m0s
   prune: true
+  dependsOn:
+    - name: infrastructure
   sourceRef:
     kind: ExternalArtifact
     name: apps
