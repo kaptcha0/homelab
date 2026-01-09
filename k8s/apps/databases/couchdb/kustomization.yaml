@@ -8,5 +8,5 @@ resources:
   - statefulset.yaml
   - pvc.yaml
   - couchdb.secret.yaml
-  - httproute.yaml
+  - http-route.yaml
   - service.yaml
