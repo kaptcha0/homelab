@@ -4,3 +4,4 @@ namespace: apps
 resources:
   - namespace.yaml
   - vaultwarden/
+  - databases/
