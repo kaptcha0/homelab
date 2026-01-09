@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: cilium
 spec:
-  interval: 10m
+  interval: 1h
   chart:
     spec:
       chart: cilium
@@ -11,7 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cilium
-      interval: 10m
+      interval: 1h
   valuesFrom:
     - kind: ConfigMap
       name: cilium-config

@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: cilium
 spec:
-  interval: 10m
+  interval: 1h
   url: https://helm.cilium.io/

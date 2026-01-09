@@ -4,7 +4,7 @@ metadata:
   name: infrastructure-base
   namespace: flux-system
 spec:
-  interval: 30m0s
+  interval: 15m
   prune: true
   wait: true
   sourceRef:
@@ -22,7 +22,7 @@ metadata:
   name: infrastructure-configs
   namespace: flux-system
 spec:
-  interval: 30m0s
+  interval: 15m
   prune: true
   wait: true
   dependsOn:
