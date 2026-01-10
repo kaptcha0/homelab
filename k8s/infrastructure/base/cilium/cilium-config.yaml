@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cilium-values
+  name: cilium-config
 data:
   values.yaml: |-
     operator:
