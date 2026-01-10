@@ -14,4 +14,4 @@ spec:
       interval: 1h
   valuesFrom:
     - kind: ConfigMap
-      name: cilium-config
+      name: cilium-values

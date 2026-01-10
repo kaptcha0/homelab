@@ -1,0 +1,19 @@
+nextcloud:
+  host: nextcloud.k8s.nyumbani.home
+  ingress:
+    enabled: true
+    className: traefik
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-creds
+    usernameKey: username
+    passwordKey: password
+service:
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+persistence:
+  enabled: true
+  storageClass: freenas-nfs-csi
+  size: 128
+  nextCloudData:
+    enabled: true

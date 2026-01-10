@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/traefik/traefik-helm-chart/refs/heads/master/traefik/values.schema.json
 # Configure Network Ports and EntryPoints
 # EntryPoints are the network listeners for incoming traffic.
 ports:
@@ -31,13 +32,13 @@ ingressRoute:
 
 # We will route with Gateway API instead.
 ingressClass:
-  enabled: false
+  enabled: true
 
 # Enable Gateway API Provider & Disables the KubernetesIngress provider
 # Providers tell Traefik where to find routing configuration.
 providers:
   kubernetesIngress:
-    enabled: false
+    enabled: true
   kubernetesGateway:
     enabled: true
 

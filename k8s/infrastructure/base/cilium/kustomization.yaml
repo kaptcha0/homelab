@@ -8,4 +8,4 @@ labels:
 resources:
   - repository.yaml
   - release.yaml
-  - values.yaml
+  - cilium-values.yaml
