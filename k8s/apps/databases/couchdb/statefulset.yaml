@@ -6,11 +6,11 @@ spec:
   serviceName: couchdb
   selector:
     matchLabels:
-      app.kubernetes.io/app: couchdb
+      app.kubernetes.io/name: couchdb
   template:
     metadata:
       labels:
-        app.kubernetes.io/app: couchdb
+        app.kubernetes.io/name: couchdb
     spec:
       containers:
         - name: couchdb
