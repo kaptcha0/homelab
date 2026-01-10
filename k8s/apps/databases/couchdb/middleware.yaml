@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: couchdb-cors
+spec:
+  headers:
+    addVaryHeader: true
+    accessControlAllowCredentials: true
+    accessControlMaxAge: 3600
+    accessControlAllowOriginList:
+      - "app://obsidian.md"
+    accessControlAllowHeaders:
+      - accept
+      - authorization
+      - content-type
+      - origin
+      - referer
+    accessControlAllowMethods:
+      - GET
+      - PUT
+      - POST
+      - HEAD
+      - DELETE

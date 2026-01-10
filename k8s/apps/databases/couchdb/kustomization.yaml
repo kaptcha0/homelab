@@ -9,4 +9,5 @@ resources:
   - pvc.yaml
   - couchdb.secret.yaml
   - http-route.yaml
+  - middleware.yaml
   - service.yaml

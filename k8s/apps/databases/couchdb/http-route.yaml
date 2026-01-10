@@ -17,21 +17,8 @@ spec:
         - name: couchdb
           port: 5984
       filters:
-        - type: CORS
-          cors:
-            maxAge: 3600
-            allowCredentials: true
-            allowOrigins:
-              - app://obsidian.md
-            allowHeaders:
-              - accept
-              - authorization
-              - content-type
-              - origin
-              - referer
-            allowMethods:
-              - GET
-              - PUT
-              - POST
-              - HEAD
-              - DELETE
+        - type: ExtensionRef
+          extensionRef:
+            group: traefik.io
+            kind: Middleware
+            name: couchdb-cors
