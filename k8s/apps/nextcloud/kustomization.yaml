@@ -11,6 +11,6 @@ resources:
   - release.yaml
   - nextcloud-creds.secret.yaml
 configMapGenerator:
-  - name: ocis-values
+  - name: nextcloud-values
     files:
       - values.yaml
