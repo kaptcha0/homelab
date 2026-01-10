@@ -17,7 +17,6 @@ spec:
           image: couchdb
           ports:
             - containerPort: 5984
-              hostPort: 5984
           envFrom:
             - secretRef:
                 name: couchdb-secret
