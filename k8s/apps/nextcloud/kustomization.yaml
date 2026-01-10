@@ -4,6 +4,8 @@ labels:
   - pairs:
       app.kubernetes.io/name: nextcloud
       app.kubernetes.io/part-of: nextcloud
+configurations:
+  - kustomizeconfig.yaml
 resources:
   - repository.yaml
   - release.yaml
