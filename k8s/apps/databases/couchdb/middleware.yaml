@@ -9,6 +9,8 @@ spec:
     accessControlMaxAge: 3600
     accessControlAllowOriginList:
       - "app://obsidian.md"
+      - "capacitor://localhost"
+      - "http://localhost"
     accessControlAllowHeaders:
       - accept
       - authorization
