@@ -22,3 +22,6 @@ persistence:
   size: 128Gi
   nextCloudData:
     enabled: true
+phpClientHttpsFix:
+  enabled: true
+  protocol: https
