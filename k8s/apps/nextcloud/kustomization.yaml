@@ -10,6 +10,7 @@ resources:
   - repository.yaml
   - release.yaml
   - nextcloud-creds.secret.yaml
+  - http-route.yaml
 configMapGenerator:
   - name: nextcloud-values
     files:

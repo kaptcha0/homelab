@@ -1,8 +1,5 @@
 nextcloud:
   host: nextcloud.k8s.nyumbani.home
-  ingress:
-    enabled: true
-    className: traefik
   existingSecret:
     enabled: true
     secretName: nextcloud-creds
