@@ -14,6 +14,6 @@ service:
 persistence:
   enabled: true
   storageClass: freenas-nfs-csi
-  size: 128
+  size: 128Gi
   nextCloudData:
     enabled: true
