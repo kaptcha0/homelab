@@ -8,6 +8,14 @@ nextcloud:
     secretName: nextcloud-creds
     usernameKey: username
     passwordKey: password
+  podSecurityContext:
+    fsGroupChangePolicy: OnRootMismatch
+livenessProbe:
+  initialDelaySeconds: 300
+  periodSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 300
+  periodSeconds: 30
 service:
   annotations:
     traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
