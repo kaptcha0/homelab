@@ -11,11 +11,11 @@ nextcloud:
   podSecurityContext:
     fsGroupChangePolicy: OnRootMismatch
 livenessProbe:
-  initialDelaySeconds: 300
-  periodSeconds: 30
+  initialDelaySeconds: 3600
+  periodSeconds: 3600
 readinessProbe:
-  initialDelaySeconds: 300
-  periodSeconds: 30
+  initialDelaySeconds: 3600
+  periodSeconds: 3600
 service:
   annotations:
     traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
