@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filebrowser
+spec:
+  replicas: 1
+  serviceName: filebrowser-internal
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: filebrowser
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: filebrowser
+    spec:
+      containers:
+        - name: filebrowser
+          image: filebrowser/filebrowser:latest
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - mountPath: /srv
+              name: filebrowser-storage
+              subPath: srv
+            - mountPath: /database
+              name: filebrowser-storage
+              subPath: database
+            - mountPath: /config
+              name: filebrowser-storage
+              subPath: config
+      volumes:
+        - name: filebrowser-storage
+          persistentVolumeClaim:
+            claimName: filebrowser-pvc

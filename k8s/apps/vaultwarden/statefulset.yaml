@@ -3,7 +3,8 @@ kind: StatefulSet
 metadata:
   name: vaultwarden
 spec:
-  replicas: 2
+  replicas: 1
+  serviceName: vaultwarden-internal
   selector:
     matchLabels:
       app.kubernetes.io/name: vaultwarden

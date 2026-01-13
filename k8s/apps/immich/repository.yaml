@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/all.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
-  name: nextcloud
+  name: immich
 spec:
   interval: 1h
-  url: https://nextcloud.github.io/helm/
+  url: oci://ghcr.io/immich-app/immich-charts/immich

@@ -87,8 +87,8 @@ in
   networking = {
     hostName = terraform.hostname;
     useDHCP = false;
-    # domain = terraform.domain;
-    # search = [ terraform.domain "local" ];
+    domain = terraform.domain;
+    search = [ terraform.domain "local" ];
     nameservers = terraform.dns_servers;
     enableIPv6 = false;
 

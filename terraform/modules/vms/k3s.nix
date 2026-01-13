@@ -179,7 +179,7 @@ in
             dns = {
               domain = "nyumbani.home";
               servers = [
-                "10.67.0.1"
+                "10.67.0.4"
                 "1.1.1.1"
               ];
             };
