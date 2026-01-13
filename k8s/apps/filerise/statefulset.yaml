@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: filerise
-          image: machines/filerise
+          image: error311/filerise-docker
           envFrom:
             - configMapRef:
                 name: filerise
