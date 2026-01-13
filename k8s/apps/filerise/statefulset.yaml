@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filerise
+spec:
+  replicas: 1
+  serviceName: filerise-internal
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: filerise
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: filerise
+    spec:
+      containers:
+        - name: filerise
+          image: machines/filerise
+          envFrom:
+            - configMapRef:
+                name: filerise
+            - secretRef:
+                name: filerize
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - mountPath: /var/ww/uploads
+              name: filerise-storage
+              subPath: uploads
+            - mountPath: /var/ww/users
+              name: filerise-storage
+              subPath: users
+            - mountPath: /var/ww/metadata
+              name: filerise-storage
+              subPath: metadata
+      volumes:
+        - name: filerise-storage
+          persistentVolumeClaim:
+            claimName: filerise-pvc

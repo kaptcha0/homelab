@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filerise
+data:
+  TIMEZONE: America/New_York
+  TOTAL_UPLOAD_SIZE: 10G
+  SECURE: "true"
+  CHOWN_ON_START: "true"

@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: filebrowser-pvc
+  name: filerise-pvc
 spec:
   storageClassName: freenas-nfs-csi
   accessModes:
-    - ReadWriteOncePod
+    - ReadWriteOnce
   resources:
     requests:
       storage: 100Gi
