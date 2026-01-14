@@ -25,13 +25,13 @@ spec:
             - containerPort: 80
               name: http
           volumeMounts:
-            - mountPath: /var/ww/uploads
+            - mountPath: /var/www/uploads
               name: filerise-storage
               subPath: uploads
-            - mountPath: /var/ww/users
+            - mountPath: /var/www/users
               name: filerise-storage
               subPath: users
-            - mountPath: /var/ww/metadata
+            - mountPath: /var/www/metadata
               name: filerise-storage
               subPath: metadata
       volumes:
