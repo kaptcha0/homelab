@@ -57,7 +57,7 @@ in
           count = 1;
           cores = 4;
           memory = 4 * 1024;
-          storage = 32;
+          storage = 64;
         };
 
         agent = {

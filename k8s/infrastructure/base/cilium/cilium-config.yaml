@@ -6,10 +6,5 @@ data:
   values.yaml: |-
     operator:
       replicas: 1
-    hubble:
-      relay:
-        enabled: true
-      ui:
-        enabled: true
     ipam:
       mode: kubernetes
