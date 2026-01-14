@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filestash
+spec:
+  replicas: 1
+  serviceName: filestash-internal
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: filestash
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: filestash
+    spec:
+      containers:
+        - name: filestash
+          image: machines/filestash:latest
+          envFrom:
+            - configMapRef:
+                name: filestash
+          ports:
+            - containerPort: 8334
+              name: http
+          volumeMounts:
+            - mountPath: /app/data/state
+              name: filestash-storage
+              subPath: state
+            - mountPath: /mnt/data
+              name: filestash-storage
+              subPath: data
+      volumes:
+        - name: filestash-storage
+          persistentVolumeClaim:
+            claimName: filestash-pvc

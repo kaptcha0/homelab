@@ -4,5 +4,5 @@ namespace: apps
 resources:
   - namespace.yaml
   - vaultwarden/
-  - filerise/
+  - filestash/
   # - immich/

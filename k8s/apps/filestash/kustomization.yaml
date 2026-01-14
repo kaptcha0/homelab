@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 labels:
   - pairs:
-      app.kubernetes.io/name: filerise
+      app.kubernetes.io/name: filestash
       app.kubernetes.io/component: server
       app.kubernetes.io/part-of: storage
 resources:
@@ -11,4 +11,3 @@ resources:
   - pvc.yaml
   - http-route.yaml
   - configmap.yaml
-  - filerise.secret.yaml
