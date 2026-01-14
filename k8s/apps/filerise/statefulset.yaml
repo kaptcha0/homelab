@@ -20,7 +20,7 @@ spec:
             - configMapRef:
                 name: filerise
             - secretRef:
-                name: filerize
+                name: filerise
           ports:
             - containerPort: 80
               name: http
