@@ -7,3 +7,5 @@ data:
   TOTAL_UPLOAD_SIZE: 10G
   SECURE: "true"
   CHOWN_ON_START: "true"
+  SHARE_URL: https://files.k8s.nyumbani.home/
+  FR_PUBLISHED_URL: http://files.k8s.nyumbani.home/
