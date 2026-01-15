@@ -29,7 +29,7 @@
           ./packages.nix
           ./apps.nix
           ./devshell.nix
-          ./nixos-anywhere
+          ./nixos
         ];
 
         perSystem =

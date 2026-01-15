@@ -49,7 +49,11 @@ in
       curl
       gitMinimal
       nfs-utils
+      helix
+      btop
     ];
+
+  environment.sessionVariables.EDITOR = pkgs.helix;
 
   services.openiscsi = {
     enable = true;
@@ -81,6 +85,7 @@ in
     environmentFile = toString k3sEnvFile;
     extraKubeletConfig = {
       failSwapOn = false;
+      memorySwap.swapBehavior = "LimitedSwap";
     };
   };
 
@@ -88,7 +93,10 @@ in
     hostName = terraform.hostname;
     useDHCP = false;
     domain = terraform.domain;
-    search = [ terraform.domain "local" ];
+    search = [
+      terraform.domain
+      "local"
+    ];
     nameservers = terraform.dns_servers;
     enableIPv6 = false;
 
