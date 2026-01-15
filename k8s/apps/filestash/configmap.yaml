@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: filestash
-data:
-  APPLICATION_URL: https://files.k8s.nyumbani.home/
