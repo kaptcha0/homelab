@@ -25,21 +25,40 @@ in
     ./disk-config.nix
   ];
 
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
+  boot = {
+    supportedFilesystems = [ "nfs" ];
+    loader.grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+    };
+    kernel.sysctl = {
+      "vm.swappiness" = 60;
+      "vm.page-cluster" = 0;
+      "vm.vfs_cache_pressure" = 50;
+    };
+    kernelModules = [
+      "nfs"
+      "br_netfilter"
+      "ip_conntrack"
+      "overlay" # May be needed for containerd
+      "virtio_balloon"
+    ];
   };
 
   swapDevices = [
     {
       device = "/var/lib/swapfile";
       size = 8 * 1024;
-      priority = 1024;
+      priority = 100;
     }
   ];
 
-  zramSwap.enable = true;
-  zramSwap.priority = 2048;
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 60;
+    priority = 200;
+  };
 
   services.openssh.enable = true;
 
@@ -59,14 +78,6 @@ in
     enable = true;
     name = "iqn.2025-12.home.nyumbani:${terraform.hostname}";
   };
-
-  boot.kernelModules = [
-    "nfs"
-    "br_netfilter"
-    "ip_conntrack"
-    "overlay" # May be needed for containerd
-  ];
-  boot.supportedFilesystems = [ "nfs" ];
 
   users.users.root.openssh.authorizedKeys.keys =
     (lib.strings.splitString "\n" publicKeys) ++ (args.extraPublicKeys or [ ]); # this is used for unit-testing this module and can be removed if not needed
