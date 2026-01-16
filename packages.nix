@@ -6,10 +6,20 @@
       ...
     }:
     let
+      lxc-template = inputs.nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        format = "proxmox-lxc";
+        modules = [
+          ./nix/base.nix
+        ];
+      };
       terraformConfiguration = inputs.terranix.lib.terranixConfiguration {
         inherit system;
         modules = [
           ./terraform
+          {
+            terranix.nixos-template = "${lxc-template}/tarball/${lxc-template.fileName}.tar.xz";
+          }
         ];
       };
     in
@@ -23,13 +33,7 @@
 
       config = {
         packages.tfConfig = terraformConfiguration;
-        packages.lxc-template = inputs.nixos-generators.nixosGenerate {
-          system = "x86_64-linux";
-          format = "proxmox-lxc";
-          modules = [
-            ./nix/base.nix
-          ];
-        };
+        packages.lxc-template = lxc-template;
       };
     };
 }

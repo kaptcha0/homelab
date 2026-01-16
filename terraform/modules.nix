@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   publicKeyFile = builtins.fetchurl {
     url = "https://github.com/kaptcha0.keys";
@@ -42,6 +42,7 @@ in
     enable = true;
     config = {
       inherit defaults proxmox;
+      nixos-template = config.terranix.nixos-template;
     };
   };
 }

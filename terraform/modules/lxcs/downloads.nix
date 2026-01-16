@@ -3,11 +3,16 @@ let
   cfg = config.lxcs;
 in
 {
-  resource."proxmox_virtual_environment_download_file".nixos-lxc-template = lib.mkIf cfg.enable {
+  options.lxcs.config.nixos-template = lib.mkOption {
+    type = lib.types.str;
+    description = "the path to the nixos lxc template";
+  };
+  config.resource."proxmox_virtual_environment_file".nixos-lxc-template = lib.mkIf cfg.enable {
     inherit (cfg.config.proxmox) node_name;
 
     datastore_id = "local";
     content_type = "vztmpl";
-    url = "https://hydra.nixos.org/build/319296903/download/1/nixos-image-lxc-proxmox-25.11pre-git-x86_64-linux.tar.xz";
+
+    source_file.path = cfg.config.nixos-template;
   };
 }

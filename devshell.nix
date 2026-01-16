@@ -9,12 +9,6 @@
           config.terranix.tf.package
           sops
           age
-          jq
-
-          kubectl
-          fluxcd
-          cilium-cli
-          helmfile
         ];
       };
     };
