@@ -20,15 +20,6 @@ let
   };
 in
 {
-  nixos-anywhere = {
-    enable = true;
-    hosts = {
-      k3s-servers.enable = true;
-      k3s-agents.enable = false;
-    };
-    install-user = defaults.username;
-  };
-
   infra = {
     config = {
       inherit defaults proxmox;
@@ -47,29 +38,8 @@ in
     };
   };
 
-  vms = {
-    k3s = {
-      enable = true;
-
-      config = {
-        server = {
-          enable = true;
-          count = 1;
-          cores = 4;
-          memory = 4 * 1024;
-          storage = 64;
-        };
-
-        agent = {
-          enable = false;
-          count = 1;
-          cores = 4;
-          memory = 2 * 1024;
-          storage = 32;
-        };
-      };
-    };
-
+  lxcs = {
+    enable = true;
     config = {
       inherit defaults proxmox;
     };

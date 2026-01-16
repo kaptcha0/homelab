@@ -1,5 +1,0 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.3.0/charts/library/common/values.schema.json
-immich:
-  persistence:
-    library:
-      existingClaim: immich-pvc

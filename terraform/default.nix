@@ -5,8 +5,7 @@
     ./modules.nix
     ./variables.nix
     ./secrets.nix
-    ./modules/vms
+    ./modules/lxcs
     ./modules/infra
-    ./modules/nixos-anywhere
   ];
 }
