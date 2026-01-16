@@ -13,13 +13,14 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     {
       flake-parts,
-      nixpkgs,
-      terranix,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; }
@@ -29,7 +30,6 @@
           ./packages.nix
           ./apps.nix
           ./devshell.nix
-          # ./nixos
         ];
 
         perSystem =

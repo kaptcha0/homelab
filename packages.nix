@@ -3,9 +3,6 @@
   perSystem =
     {
       system,
-      pkgs,
-      config,
-      self',
       ...
     }:
     let
@@ -26,6 +23,13 @@
 
       config = {
         packages.tfConfig = terraformConfiguration;
+        packages.lxc-template = inputs.nixos-generators.nixosGenerate {
+          system = "x86_64-linux";
+          format = "proxmox-lxc";
+          modules = [
+            ./nix/base.nix
+          ];
+        };
       };
     };
 }
