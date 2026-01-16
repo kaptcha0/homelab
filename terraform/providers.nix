@@ -3,12 +3,12 @@
   terraform.required_providers = {
     proxmox = {
       source = "bpg/proxmox";
-      version = "~> 0.81.0";
+      version = "~> 0.93.0";
     };
 
     sops = {
       source = "carlpett/sops";
-      version = "~> 1.2.1";
+      version = "~> 1.3.0";
     };
   };
 

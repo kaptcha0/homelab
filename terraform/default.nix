@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   imports = [
-    ./main.nix
+    ./providers.nix
     ./modules.nix
     ./variables.nix
     ./secrets.nix

@@ -41,7 +41,12 @@
 
         datastore_id = lib.mkOption {
           type = lib.types.str;
-          description = "the datastore to put the vm disks on";
+          description = "the datastore to put the container disks on";
+        };
+
+        shared_storage = lib.mkOption {
+          type = lib.types.str;
+          description = "the datastore to put extra container images on";
         };
       };
     };
