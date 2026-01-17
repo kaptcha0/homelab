@@ -1,8 +1,12 @@
 { ... }:
+let
+  dataDir = "/mnt/data";
+in
 {
   services.sftpgo = {
+    inherit dataDir;
     enable = true;
-    dataDir = "/mnt/data";
+
     settings = {
       httpd.bindings = [
         {
@@ -18,4 +22,8 @@
       ];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d ${dataDir} 0700 sftpgo sftpgo -"
+  ];
 }
