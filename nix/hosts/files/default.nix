@@ -26,4 +26,11 @@ in
   systemd.tmpfiles.rules = [
     "d ${dataDir} 0700 sftpgo sftpgo -"
   ];
+
+
+  networking.nftables = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 8080 8081 ];
+  };
 }

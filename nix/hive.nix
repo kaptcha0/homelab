@@ -22,6 +22,7 @@ let
         services.comin = {
           enable = true;
           hostname = name;
+          exporter.openFirewall = true;
           remotes = [
             {
               name = "origin";
