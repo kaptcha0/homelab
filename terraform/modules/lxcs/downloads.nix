@@ -7,6 +7,7 @@ in
     type = lib.types.str;
     description = "the path to the nixos lxc template";
   };
+
   config.resource."proxmox_virtual_environment_file".nixos-lxc-template = lib.mkIf cfg.enable {
     inherit (cfg.config.proxmox) node_name;
 

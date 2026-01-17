@@ -40,12 +40,17 @@ in
 
   lxcs = {
     enable = true;
+
     config = {
       inherit defaults;
       nixos-template = config.terranix.nixos-template;
       proxmox = proxmox // {
-        shared_storage = lib.tfRef "proxmox_virtual_environment_storage_nfs.shared_storage";
+        shared_storage = lib.tfRef "proxmox_virtual_environment_storage_nfs.shared_storage.id";
       };
+    };
+
+    cts = {
+      file-storage.enable = true;
     };
   };
 }
