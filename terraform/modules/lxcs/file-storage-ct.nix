@@ -45,8 +45,8 @@ in
         cpu.cores = 1;
 
         memory = {
-          dedicated = 256;
-          swap = 256;
+          dedicated = 2 * 1024;
+          swap = 1024;
         };
       };
 }
