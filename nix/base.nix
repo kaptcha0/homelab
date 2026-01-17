@@ -11,7 +11,7 @@ in
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
-  
+
   boot.isContainer = true;
   systemd.suppressedSystemUnits = [
     "dev-mqueue.mount"
@@ -20,7 +20,17 @@ in
   ];
 
   security.sudo.wheelNeedsPassword = false;
-  nix.settings.trusted-users = [ "nixos" ];
+
+  nix = {
+    settings.trusted-users = [ "nixos" ];
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
+
   users.users.nixos = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
