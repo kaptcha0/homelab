@@ -1,6 +1,6 @@
 { inputs, ... }:
-{
-  flake.colmenaHive = inputs.colmena.lib.makeHive {
+let
+  hive = inputs.colmena.lib.makeHive {
     meta.nixpkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
       specialArgs = {
@@ -48,4 +48,7 @@
         ];
       };
   };
+  in {
+    flake.colmenaHive = hive;
+    flake.nixosConfigurations = hive.nodes;
 }
