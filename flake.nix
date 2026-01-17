@@ -8,8 +8,10 @@
     terranix.url = "github:terranix/terranix";
     terranix.inputs.nixpkgs.follows = "nixpkgs";
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    comin.url = "github:nlewo/comin";
+    comin.inputs.nixpkgs.follows = "nixpkgs";
+
+    colmena.url = "github:zhaofengli/colmena";
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,11 +32,19 @@
           ./packages.nix
           ./apps.nix
           ./devshell.nix
+          ./nix
         ];
 
         perSystem =
-          { pkgs, ... }:
+          { pkgs, system, ... }:
           {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.colmena.overlays.default
+              ];
+            };
+
             terranix.tf.package = pkgs.opentofu;
             formatter = pkgs.nixfmt;
           };

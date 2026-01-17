@@ -7,7 +7,7 @@
     }:
     let
       lxc-template = inputs.nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
+        inherit system;
         format = "proxmox-lxc";
         modules = [
           ./nix/base.nix

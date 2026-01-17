@@ -9,6 +9,7 @@
           config.terranix.tf.package
           sops
           age
+          colmena
         ];
       };
     };
