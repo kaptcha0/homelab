@@ -18,9 +18,6 @@
 
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-
-    filestash.url = "github:dermetfan/filestash.nix";
-    filestash.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

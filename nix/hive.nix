@@ -3,6 +3,7 @@ let
   hive = inputs.colmena.lib.makeHive {
     meta.nixpkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
+      config.allowUnfree = true;
       specialArgs = {
         inherit inputs;
       };
@@ -44,7 +45,6 @@ let
 
         imports = [
           ./hosts/files
-          inputs.filestash.nixosModules.filestash
         ];
       };
   };
