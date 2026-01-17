@@ -19,6 +19,7 @@ let
 
         deployment.targetUser = "nixos";
 
+        networking.nftables.enable = true;
         services.comin = {
           enable = true;
           hostname = name;
@@ -49,7 +50,8 @@ let
         ];
       };
   };
-  in {
-    flake.colmenaHive = hive;
-    flake.nixosConfigurations = hive.nodes;
+in
+{
+  flake.colmenaHive = hive;
+  flake.nixosConfigurations = hive.nodes;
 }
