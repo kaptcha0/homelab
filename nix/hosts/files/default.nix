@@ -16,7 +16,7 @@ in
       ];
       webdavd.bindings = [
         {
-          port = 8080;
+          port = 8081;
           address = "0.0.0.0";
         }
       ];
