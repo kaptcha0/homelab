@@ -20,7 +20,7 @@ let
 
         deployment.targetUser = "nixos";
 
-        networking.nftables.enable = true;
+
         services.comin = {
           enable = true;
           hostname = name;
@@ -33,6 +33,8 @@ let
             }
           ];
         };
+
+        sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       };
 
     files =

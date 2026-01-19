@@ -46,5 +46,7 @@ in
     settings.PermitRootLogin = "no";
   };
 
+  networking.nftables.enable = true;
+
   system.stateVersion = "25.11";
 }
