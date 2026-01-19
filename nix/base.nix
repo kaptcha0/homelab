@@ -12,7 +12,7 @@ in
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
 
-  environment.systemPackages = with pkgs; [ vim helix ssh-ssh-to-age ];
+  environment.systemPackages = with pkgs; [ vim helix ssh-to-age ];
 
   boot.isContainer = true;
   systemd.suppressedSystemUnits = [
