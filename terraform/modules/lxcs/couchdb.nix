@@ -10,6 +10,15 @@ in
       {
         inherit (cfg.config.proxmox) node_name;
 
+        timeout_create = cfg.config.defaults.timeout;
+        timeout_clone = cfg.config.defaults.timeout;
+        timeout_delete = cfg.config.defaults.timeout;
+        timeout_update = cfg.config.defaults.timeout;
+
+        depends_on = [
+          "proxmox_virtual_environment_vm.truenas"
+        ];
+
         unprivileged = true;
         features = {
           nesting = true;

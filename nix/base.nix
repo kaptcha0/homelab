@@ -1,3 +1,4 @@
+# note: editing this file causes a regeneration of the nix container image, which can case the deletion of the containers
 { modulesPath, lib, pkgs, ... }:
 let
   publicKeyFile = builtins.fetchurl {

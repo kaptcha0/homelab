@@ -8,6 +8,8 @@ in
     server = lib.tfRef "proxmox_virtual_environment_vm.truenas.ipv4_addresses[1][0]";
     export = "/mnt/general/proxmox-storage";
 
+    options = "soft,retrans=6,timeo=600";
+
     content = [
       "images"
       "rootdir"

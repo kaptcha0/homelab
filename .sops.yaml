@@ -1,8 +1,8 @@
 keys:
   - &master age1xfwuvqdup6uasvn8xp855nvnr57454ywuqnyv8c4cx7l6e84yuxqgq3srv
   - &hosts
-    - &files age1a7t9sszcjumknwy5gerqham4wyymfzadjqwsrgg52p4snmn2aglqyyqzcs
-    - &couchdb age17c9yzwcur0jnywnv5nczsanvh0jr08nnlumdkxdq7mqxtunqvsrql45uxh
+    - &files age1azwgxwtssrqq4284dpvcyj7jpeprfezw9wuumtm79w0rr438xstsrr65qf
+    - &couchdb age1qgerwn52h9dgnmk7ugxrd5nx90q6agls3xn5nelcgv7uc84ezcms8m6zqv
 creation_rules:
   - path_regex: ^terraform/terraform\.secrets\.yaml$
     key_groups:
