@@ -67,6 +67,22 @@ let
           ./hosts/couchdb
         ];
       };
+
+    netbird =
+      { ... }:
+      {
+        deployment = {
+          targetHost = "netbird.nyumbani.home";
+          tags = [
+            "networking"
+            "remote-access"
+          ];
+        };
+
+        imports = [
+          ./hosts/netbird
+        ];
+      };
   };
 in
 {

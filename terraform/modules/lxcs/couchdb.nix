@@ -6,7 +6,7 @@ in
   options.lxcs.cts.couchdb.enable = lib.mkEnableOption "enable couchdb container";
 
   config.resource."proxmox_virtual_environment_container".couchdb =
-    lib.mkIf cfg.cts.file-storage.enable
+    lib.mkIf cfg.cts.couchdb.enable
       {
         inherit (cfg.config.proxmox) node_name;
 
@@ -18,6 +18,10 @@ in
         depends_on = [
           "proxmox_virtual_environment_vm.truenas"
         ];
+
+    tags = [
+      "database"
+    ];
 
         unprivileged = true;
         features = {

@@ -4,6 +4,7 @@
     ./downloads.nix
     ./files.nix
     ./couchdb.nix
+    ./netbird.nix
   ];
   options.lxcs = {
     enable = lib.mkEnableOption "enable lxcs";

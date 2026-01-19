@@ -19,6 +19,11 @@ in
           "proxmox_virtual_environment_vm.truenas"
         ];
 
+    tags = [
+      "file-storage"
+      "public"
+    ];
+
         unprivileged = true;
         features = {
           nesting = true;

@@ -15,10 +15,10 @@
   provider = {
     proxmox = {
       endpoint = lib.tfRef "var.proxmox_api_url";
-      api_token =
-        (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_id\"]")
-        + "="
-        + (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_secret\"]");
+
+      username = lib.tfRef "data.sops_file.secrets.data[\"pm_username\"]";
+      password = lib.tfRef "data.sops_file.secrets.data[\"pm_password\"]";
+
       insecure = true;
 
       ssh = {
