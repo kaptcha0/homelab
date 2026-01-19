@@ -8,9 +8,14 @@
 
   services.couchdb = {
     enable = true;
-    databaseDir = "/mnt/data";
+    databaseDir = "/mnt/data/couchdb";
     bindAddress = "0.0.0.0";
     port = 5984;
+
+    extraConfig = ''
+      [couchdb]
+      single_node=true
+    '';
 
     extraConfigFiles = [
       config.sops.secrets.admins-config.path
