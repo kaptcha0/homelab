@@ -2,7 +2,8 @@
 {
   imports = [
     ./downloads.nix
-    ./file-storage-ct.nix
+    ./files.nix
+    ./couchdb.nix
   ];
   options.lxcs = {
     enable = lib.mkEnableOption "enable lxcs";

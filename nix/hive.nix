@@ -15,6 +15,7 @@ let
         imports = [
           ./base.nix
           inputs.comin.nixosModules.comin
+          inputs.sops-nix.nixosModules.sops
         ];
 
         deployment.targetUser = "nixos";
@@ -47,6 +48,21 @@ let
 
         imports = [
           ./hosts/files
+        ];
+      };
+
+    couchdb =
+      { ... }:
+      {
+        deployment = {
+          targetHost = "couchdb.nyumbani.home";
+          tags = [
+            "database"
+          ];
+        };
+
+        imports = [
+          ./hosts/couchdb
         ];
       };
   };

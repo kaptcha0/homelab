@@ -1,18 +1,9 @@
 keys:
-  - &terraform age1xfwuvqdup6uasvn8xp855nvnr57454ywuqnyv8c4cx7l6e84yuxqgq3srv
-  - &k8s age12lrc9t2pdfxkfr08wre8w4nu7d623hf56lwrdpd3we4yaxs665zsdrxmm7
-  - &nixos age1hdjpg24ala7wk5ey4t57w6sylkfjzrwy9wc4mh9j97wqe6cwx5ys6raalk
+  - &master age1xfwuvqdup6uasvn8xp855nvnr57454ywuqnyv8c4cx7l6e84yuxqgq3srv
+  - &hosts
+    - &couchdb age17c9yzwcur0jnywnv5nczsanvh0jr08nnlumdkxdq7mqxtunqvsrql45uxh
 creation_rules:
   - path_regex: ^terraform/terraform\.secrets\.yaml$
     key_groups:
       - age:
-          - *terraform
-  - path_regex: ^k8s/.*\.secret\.yaml$
-    encrypted_regex: "^(data|stringData)$"
-    key_groups:
-      - age:
-          - *k8s
-  - path_regex: ^nixos-anywhere/nixos\.secrets\.yaml$
-    key_groups:
-      - age:
-          - *nixos
+          - *master
