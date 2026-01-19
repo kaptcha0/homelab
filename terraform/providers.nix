@@ -20,6 +20,11 @@
         + "="
         + (lib.tfRef "data.sops_file.secrets.data[\"pm_api_token_secret\"]");
       insecure = true;
+
+      ssh = {
+        agent = true;
+        username = "root";
+      };
     };
   };
 }

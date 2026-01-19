@@ -80,17 +80,6 @@ in
   };
 
   config = lib.mkIf cfg.truenas.enable {
-    # assertions = [
-    #   {
-    #     assertion = cfg.truenas.config.cores >= 2;
-    #     message = "truenas recommends at least 2 cores";
-    #   }
-    #   {
-    #     assertion = cfg.truenas.config.memory >= (8 * 1024);
-    #     message = "truenas recommends at least 8 GB of memory";
-    #   }
-    # ];
-    #
     resource."random_string".disk1_serial = {
       length = 20;
       special = false;
@@ -124,6 +113,8 @@ in
         timeout_create = cfg.config.defaults.timeout;
         timeout_migrate = cfg.config.defaults.timeout;
         timeout_reboot = cfg.config.defaults.timeout;
+
+        hook_script_file_id = lib.tfRef "proxmox_virtual_environment_file.truenas_hook.id";
 
         startup = {
           order = 1;
