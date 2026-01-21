@@ -24,7 +24,7 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d ${dataDir} 0700 sftpgo sftpgo -"
+    "d ${dataDir} 0770 sftpgo sftpgo -"
   ];
 
   networking.firewall = {

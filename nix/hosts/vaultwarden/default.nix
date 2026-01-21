@@ -4,7 +4,6 @@
 
   services.vaultwarden = {
     enable = true;
-    backupDir = "/mnt/data/vaultwarden-backup";
     config = {
       rocketAddress = "0.0.0.0";
       rocketPort = 8000;
@@ -16,4 +15,11 @@
 
     environmentFile = config.sops.secrets.env.path;
   };
+
+  systemd.tmpfiles.rules = [
+    "d /mnt/data/vaultwarden-data 770 vaultwarden vaultwarden -"
+    "d /mnt/data/vaultwarden-attachments 770 vaultwarden vaultwarden -"
+  ];
+
+  networking.firewall.allowedTCPPorts = [ config.services.vaultwarden.config.rocketPort ];
 }

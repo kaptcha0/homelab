@@ -54,6 +54,7 @@ in
       couchdb.enable = true;
       netbird.enable = true;
       vaultwarden.enable = true;
+      traefik.enable = true;
     };
   };
 }

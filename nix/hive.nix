@@ -96,7 +96,23 @@ let
         };
 
         imports = [
-          ./hosts/netbird
+          ./hosts/vaultwarden
+        ];
+      };
+
+    traefik =
+      { ... }:
+      {
+        deployment = {
+          targetHost = "traefik.nyumbani.home";
+          tags = [
+            "public"
+            "proxy"
+          ];
+        };
+
+        imports = [
+          ./hosts/traefik
         ];
       };
   };
