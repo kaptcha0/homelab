@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 {
   sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.setup-key = {
-  };
+  sops.secrets.setup-key = {};
 
   services.netbird = {
     enable = true;

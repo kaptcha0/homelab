@@ -83,6 +83,22 @@ let
           ./hosts/netbird
         ];
       };
+
+    vaultwarden =
+      { ... }:
+      {
+        deployment = {
+          targetHost = "vaultwarden.nyumbani.home";
+          tags = [
+            "public"
+            "storage"
+          ];
+        };
+
+        imports = [
+          ./hosts/netbird
+        ];
+      };
   };
 in
 {

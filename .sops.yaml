@@ -4,23 +4,29 @@ keys:
     - &files age1azwgxwtssrqq4284dpvcyj7jpeprfezw9wuumtm79w0rr438xstsrr65qf
     - &couchdb age1qgerwn52h9dgnmk7ugxrd5nx90q6agls3xn5nelcgv7uc84ezcms8m6zqv
     - &netbird age1wtmx6vdggfqdsskjn03t56xnm74fdfr0d0e9r7ywtft45ht5750q22st8w
+    - &vaultwarden age1njgh0z2wfphcgvlfat3l2pdxa9gpplm6yvr9lv8anfemxwyt0fyssm3kum
 creation_rules:
   - path_regex: ^terraform/terraform\.secrets\.yaml$
     key_groups:
       - age:
           - *master
-  - path_regex: nix/hosts/files/secrets\.(yaml|ini)
+  - path_regex: nix/hosts/files/secrets\.(yaml|ini|env)
     key_groups:
       - age:
           - *files
           - *master
-  - path_regex: nix/hosts/couchdb/secrets\.(yaml|ini)
+  - path_regex: nix/hosts/couchdb/secrets\.(yaml|ini|env)
     key_groups:
       - age:
           - *couchdb
           - *master
-  - path_regex: nix/hosts/netbird/secrets\.(yaml|ini)
+  - path_regex: nix/hosts/netbird/secrets\.(yaml|ini|env)
     key_groups:
       - age:
           - *netbird
+          - *master
+  - path_regex: nix/hosts/vaultwarden/secrets\.(yaml|ini|env)
+    key_groups:
+      - age:
+          - *vaultwarden
           - *master
