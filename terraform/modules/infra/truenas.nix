@@ -118,8 +118,8 @@ in
 
         startup = {
           order = 1;
-          up_delay = 60;
-          down_delay = 60;
+          up_delay = 5 * 60;
+          down_delay = 2 * 60;
         };
 
         cpu = {

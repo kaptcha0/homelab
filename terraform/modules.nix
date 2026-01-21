@@ -53,6 +53,7 @@ in
       file-storage.enable = true;
       couchdb.enable = true;
       netbird.enable = true;
+      vaultwarden.enable = true;
     };
   };
 }

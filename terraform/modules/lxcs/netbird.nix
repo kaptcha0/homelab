@@ -22,6 +22,8 @@ in
       "remote-access"
     ];
 
+    startup.order = 1;
+
     unprivileged = true;
     features = {
       nesting = true;

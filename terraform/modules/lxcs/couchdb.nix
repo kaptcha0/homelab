@@ -5,61 +5,61 @@ in
 {
   options.lxcs.cts.couchdb.enable = lib.mkEnableOption "enable couchdb container";
 
-  config.resource."proxmox_virtual_environment_container".couchdb =
-    lib.mkIf cfg.cts.couchdb.enable
-      {
-        inherit (cfg.config.proxmox) node_name;
+  config.resource."proxmox_virtual_environment_container".couchdb = lib.mkIf cfg.cts.couchdb.enable {
+    inherit (cfg.config.proxmox) node_name;
 
-        timeout_create = cfg.config.defaults.timeout;
-        timeout_clone = cfg.config.defaults.timeout;
-        timeout_delete = cfg.config.defaults.timeout;
-        timeout_update = cfg.config.defaults.timeout;
+    timeout_create = cfg.config.defaults.timeout;
+    timeout_clone = cfg.config.defaults.timeout;
+    timeout_delete = cfg.config.defaults.timeout;
+    timeout_update = cfg.config.defaults.timeout;
 
-        depends_on = [
-          "proxmox_virtual_environment_vm.truenas"
-        ];
+    depends_on = [
+      "proxmox_virtual_environment_vm.truenas"
+    ];
 
     tags = [
       "database"
     ];
 
-        unprivileged = true;
-        features = {
-          nesting = true;
-        };
+    startup.order = 3;
 
-        initialization = {
-          hostname = "couchdb";
-          ip_config.ipv4.address = "dhcp";
-        };
+    unprivileged = true;
+    features = {
+      nesting = true;
+    };
 
-        network_interface.name = "veth0";
+    initialization = {
+      hostname = "couchdb";
+      ip_config.ipv4.address = "dhcp";
+    };
 
-        operating_system = {
-          template_file_id = lib.tfRef "proxmox_virtual_environment_file.nixos-lxc-template.id";
-          type = "nixos";
-        };
+    network_interface.name = "veth0";
 
-        disk = [
-          {
-            inherit (cfg.config.proxmox) datastore_id;
-            size = 16;
-          }
-        ];
+    operating_system = {
+      template_file_id = lib.tfRef "proxmox_virtual_environment_file.nixos-lxc-template.id";
+      type = "nixos";
+    };
 
-        mount_point = [
-          {
-            volume = cfg.config.proxmox.shared_storage;
-            size = "100G";
-            path = "/mnt/data";
-          }
-        ];
+    disk = [
+      {
+        inherit (cfg.config.proxmox) datastore_id;
+        size = 16;
+      }
+    ];
 
-        cpu.cores = 2;
+    mount_point = [
+      {
+        volume = cfg.config.proxmox.shared_storage;
+        size = "100G";
+        path = "/mnt/data";
+      }
+    ];
 
-        memory = {
-          dedicated = 2 * 1024;
-          swap = 2 * 1024;
-        };
-      };
+    cpu.cores = 2;
+
+    memory = {
+      dedicated = 2 * 1024;
+      swap = 2 * 1024;
+    };
+  };
 }

@@ -3,10 +3,10 @@ let
   cfg = config.lxcs;
 in
 {
-  options.lxcs.cts.file-storage.enable = lib.mkEnableOption "enable filestorage container";
+  options.lxcs.cts.vaultwarden.enable = lib.mkEnableOption "enable vaultwarden container";
 
-  config.resource."proxmox_virtual_environment_container".file-storage =
-    lib.mkIf cfg.cts.file-storage.enable
+  config.resource."proxmox_virtual_environment_container".vaultwarden =
+    lib.mkIf cfg.cts.vaultwarden.enable
       {
         inherit (cfg.config.proxmox) node_name;
 
@@ -20,8 +20,8 @@ in
         ];
 
         tags = [
-          "file-storage"
           "public"
+          "storage"
         ];
 
         startup.order = 3;
@@ -32,7 +32,7 @@ in
         };
 
         initialization = {
-          hostname = "files";
+          hostname = "vaultwarden";
           ip_config.ipv4.address = "dhcp";
         };
 
@@ -53,7 +53,7 @@ in
         mount_point = [
           {
             volume = cfg.config.proxmox.shared_storage;
-            size = "200G";
+            size = "64G";
             path = "/mnt/data";
           }
         ];
@@ -61,8 +61,8 @@ in
         cpu.cores = 1;
 
         memory = {
-          dedicated = 2 * 1024;
-          swap = 1024;
+          dedicated = 1 * 1024;
+          swap = 1 * 1024;
         };
       };
 }
