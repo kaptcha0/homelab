@@ -1,8 +1,28 @@
 { ... }:
 let
   dataDir = "/mnt/data";
+  builders = import ./../../modules/builders.nix;
 in
-{
+(builders.consul {
+  name = "sftpgo";
+  port = 8080;
+  domain = "files.home.kaptcha.cc";
+})
+// (builders.consul {
+  name = "webdav";
+  port = 8081;
+  domain = "webdav.home.kaptcha.cc";
+})
+// {
+  services.consul = {
+    enable = true;
+    extraConfig = {
+      server = false;
+      datacenter = "homelab";
+      retry_join = [ "traefik.service.consul" ];
+    };
+  };
+
   services.sftpgo = {
     inherit dataDir;
     enable = true;
@@ -29,6 +49,9 @@ in
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8080 8081 ];
+    allowedTCPPorts = [
+      8080
+      8081
+    ];
   };
 }

@@ -1,9 +1,26 @@
 { config, ... }:
-{
+let
+  builders = import ./../../modules/builders.nix;
+in
+(builders.consul {
+  name = "couchdb";
+  port = config.services.couchdb.port;
+  domain = "couchdb.home.kaptcha.cc";
+})
+// {
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.admins-config = {
     owner = config.services.couchdb.user;
     mode = "0440"; # rr-
+  };
+
+  services.consul = {
+    enable = true;
+    extraConfig = {
+      server = false;
+      datacenter = "homelab";
+      retry_join = [ "traefik.service.consul" ];
+    };
   };
 
   services.couchdb = {

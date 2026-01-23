@@ -4,7 +4,6 @@
     { pkgs, config, self', ... }:
     let
       tf = lib.getExe config.terranix.tf.package;
-      flux = pkgs.fluxcd;
     in
     {
 
@@ -12,6 +11,19 @@
         default = self'.apps.apply;
 
         apply = {
+          type = "app";
+          meta.description = "apply (ignoring nixos image)";
+          program = toString (
+            pkgs.writers.writeBash "apply" ''
+              if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
+              cp ${self'.packages.tfConfig} config.tf.json \
+                && ${tf} init \
+                && ${tf} apply -exclude=proxmox_virtual_environment_file.nixos-lxc-template
+            ''
+          );
+        };
+
+        provision = {
           type = "app";
           meta.description = "provision";
           program = toString (

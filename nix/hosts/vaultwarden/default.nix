@@ -1,13 +1,32 @@
-{ config, ... }: {
+{ config, ... }:
+let
+  port = 8000;
+  domain = "vaultwarden.home.kaptcha.cc";
+  builders = import ./../../modules/builders.nix;
+in
+(builders.consul {
+  inherit port domain;
+  name = "vaultwarden";
+})
+// {
   sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.env = {};
+  sops.secrets.env = { };
+
+  services.consul = {
+    enable = true;
+    extraConfig = {
+      server = false;
+      datacenter = "homelab";
+      retry_join = [ "traefik.service.consul" ];
+    };
+  };
 
   services.vaultwarden = {
     enable = true;
     config = {
       rocketAddress = "0.0.0.0";
-      rocketPort = 8000;
-      domain = "https://vaultwarden.lab.nyumbani.home";
+      rocketPort = port;
+      domain = "https://${domain}";
 
       dataFolder = "/mnt/data/vaultwarden-data";
       attachmentsFolder = "/mnt/data/vaultwarden-attachments";
