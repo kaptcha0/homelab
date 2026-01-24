@@ -20,10 +20,10 @@
 
           tags = [
             "traefik.enable=true"
-            "traefik.http.routers.vaultwarden.rule=Host(`${domain}`) ${rules}"
-            "traefik.http.routers.vaultwarden.entrypoints=web"
-            "traefik.http.routers.vaultwarden.entrypoints=websecure"
-            "traefik.http.routers.vaultwarden.tls.certresolver=cloudflare"
+            "traefik.http.routers.${name}.rule=Host(`${domain}`) ${rules}"
+            "traefik.http.routers.${name}.entrypoints=web"
+            "traefik.http.routers.${name}.entrypoints=websecure"
+            "traefik.http.routers.${name}.tls.certresolver=cloudflare"
           ]
           ++ tags;
         };
