@@ -12,15 +12,6 @@ in
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.env = { };
 
-  services.consul = {
-    enable = true;
-    extraConfig = {
-      server = false;
-      datacenter = "homelab";
-      retry_join = [ "traefik.service.consul" ];
-    };
-  };
-
   services.vaultwarden = {
     enable = true;
     config = {

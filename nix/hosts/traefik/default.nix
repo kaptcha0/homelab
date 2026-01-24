@@ -35,13 +35,14 @@
     ];
   };
 
-  networking.firewall.allowedUDPPorts = [ 8300 8301 8302 ];
+  networking.firewall.allowedUDPPorts = [ 8300 8301 8302 8600 ];
   networking.firewall.allowedTCPPorts = [
     # consul
-    8500
     8300
     8301
     8302
+    8500
+    8600
 
     # traefik
     80

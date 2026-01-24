@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 let
   hive = inputs.colmena.lib.makeHive {
     meta.nixpkgs = import inputs.nixpkgs {
@@ -20,7 +20,6 @@ let
 
         deployment.targetUser = "nixos";
 
-
         services.comin = {
           enable = true;
           hostname = name;
@@ -34,7 +33,22 @@ let
           ];
         };
 
-        sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+        services.consul = lib.mkDefault {
+          enable = true;
+          extraConfig = {
+            server = false;
+            datacenter = "homelab";
+            retry_join = [ "traefik.service.consul" ];
+          };
+        };
+
+        services.resolved.enable = true;
+        services.resolved.settings.Resolve = {
+          DNS = [ "10.67.0.5" ];
+          Domains = [ "~consul" ];
+        };
+
+        sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       };
 
     files =

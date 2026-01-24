@@ -14,15 +14,6 @@ in
     mode = "0440"; # rr-
   };
 
-  services.consul = {
-    enable = true;
-    extraConfig = {
-      server = false;
-      datacenter = "homelab";
-      retry_join = [ "traefik.service.consul" ];
-    };
-  };
-
   services.couchdb = {
     enable = true;
     databaseDir = "/mnt/data/couchdb";
