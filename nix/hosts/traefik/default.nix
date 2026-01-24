@@ -21,9 +21,40 @@
 
   services.traefik = {
     enable = true;
-    staticConfigOptions = (fromTOML (builtins.readFile ./traefik.toml)) // {
-      certificatesResolvers.cloudflare.acme.storage =
-        config.services.traefik.dataDir + "/certs/cloudflare-acme.json";
+    staticConfigOptions = {
+      global.sendAnonymousUsage = false;
+      log.level = "DEBUG";
+
+      api = {
+        dashboard = true;
+        insecure = true;
+      };
+
+      entrypoints = {
+        websecure.address = ":443";
+
+        web = {
+          address = ":80";
+          http.redirections.entryPoint = {
+            to = "websecure";
+            scheme = "https";
+            permanent = true;
+          };
+        };
+      };
+
+      certificatesResolvers.cloudflare.acme = {
+        email = "info@kaptcha.cc";
+        caServer = "https://acme-v02.api.letsencrypt.org/directory";
+        keyType = "EC256";
+        storage = config.services.traefik.dataDir + "/certs/cloudflare-acme.json";
+
+        dnsChallenge.provider = "cloudflare";
+        dnsChallenge.resolvers = [
+          "1.1.1.1:53"
+          "8.8.8.8:53"
+        ];
+      };
 
       providers.consulCatalog = {
         endpoint.address = "127.0.0.1:8500";
@@ -35,7 +66,12 @@
     ];
   };
 
-  networking.firewall.allowedUDPPorts = [ 8300 8301 8302 8600 ];
+  networking.firewall.allowedUDPPorts = [
+    8300
+    8301
+    8302
+    8600
+  ];
   networking.firewall.allowedTCPPorts = [
     # consul
     8300
