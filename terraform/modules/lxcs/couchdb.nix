@@ -28,6 +28,12 @@ in
       nesting = true;
     };
 
+    lifecycle = {
+      ignore_changes = [
+        "operating_system[0].template_file_id"
+      ];
+    };
+
     initialization = {
       hostname = "couchdb";
       ip_config.ipv4.address = "dhcp";

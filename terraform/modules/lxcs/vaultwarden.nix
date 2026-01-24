@@ -31,6 +31,12 @@ in
           nesting = true;
         };
 
+        lifecycle = {
+          ignore_changes = [
+            "operating_system[0].template_file_id"
+          ];
+        };
+
         initialization = {
           hostname = "vaultwarden";
           ip_config.ipv4.address = "dhcp";
@@ -58,7 +64,7 @@ in
           }
         ];
 
-        cpu.cores = 1;
+        cpu.cores = 2;
 
         memory = {
           dedicated = 1 * 1024;

@@ -1,11 +1,11 @@
 keys:
   - &master age1xfwuvqdup6uasvn8xp855nvnr57454ywuqnyv8c4cx7l6e84yuxqgq3srv
   - &hosts
-    - &files age1azwgxwtssrqq4284dpvcyj7jpeprfezw9wuumtm79w0rr438xstsrr65qf
-    - &couchdb age1qgerwn52h9dgnmk7ugxrd5nx90q6agls3xn5nelcgv7uc84ezcms8m6zqv
-    - &netbird age1wtmx6vdggfqdsskjn03t56xnm74fdfr0d0e9r7ywtft45ht5750q22st8w
-    - &vaultwarden age1njgh0z2wfphcgvlfat3l2pdxa9gpplm6yvr9lv8anfemxwyt0fyssm3kum
-    - &traefik age1usfdmdtlaem6x5pc6zkvn0h6tnlylpe6wxedg95k4svz5vjsyy8syjuhhp
+    - &files age1g9efde233zyc3k2char96t35tq5tlja20zz545e5qdd4q6uf5cwq08sx9v
+    - &couchdb age1g5em45j3uz877nlxxgsfh4yq9a3awxjdlkw9uwm3ssavq03gt96s8m44hk
+    - &netbird age1s2gyhm30mu93e4kj6wtf06hw0m3w4hq0my8vkcwdk266zw3ysdvsae3jej
+    - &vaultwarden age1ymr86pte3dveffae50fy069zk9mr8khc92y8v5kmn8qqxtvfc3qqapzdss
+    - &traefik age15t03480ytxzadgwlan2hms049qtjyvt6uyyhv0s2a2lu45ltpu5sdfxg4x
 creation_rules:
   - path_regex: ^terraform/terraform\.secrets\.yaml$
     key_groups:
