@@ -31,7 +31,7 @@ in
       domain = "files.home.kaptcha.cc";
       checks = [
         {
-          http = "http://127.0.0.1:${port}/healthz";
+          http = "http://127.0.0.1:${toString port}/healthz";
           interval = "10s";
         }
       ];
