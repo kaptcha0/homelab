@@ -4,13 +4,16 @@ let
   domain = "vaultwarden.home.kaptcha.cc";
   builders = import ./../../modules/builders.nix;
 in
-(builders.consul {
-  inherit port domain;
-  name = "vaultwarden";
-})
-// {
+{
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.env = { };
+
+  environment.etc = (
+    builders.consul {
+      inherit port domain;
+      name = "vaultwarden";
+    }
+  );
 
   services.vaultwarden = {
     enable = true;

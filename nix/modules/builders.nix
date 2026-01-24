@@ -14,7 +14,7 @@
       rules ? "",
     }:
     {
-      environment.etc."consul.d/${name}.json".text = builtins.toJSON {
+      "consul.d/${name}.json".text = builtins.toJSON {
         service = {
           inherit name port checks;
 

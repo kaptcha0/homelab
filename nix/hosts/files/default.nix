@@ -3,17 +3,7 @@ let
   dataDir = "/mnt/data";
   builders = import ./../../modules/builders.nix;
 in
-(builders.consul {
-  name = "sftpgo";
-  port = 8080;
-  domain = "files.home.kaptcha.cc";
-})
-// (builders.consul {
-  name = "webdav";
-  port = 8081;
-  domain = "webdav.home.kaptcha.cc";
-})
-// {
+{
   services.sftpgo = {
     inherit dataDir;
     enable = true;
@@ -33,6 +23,25 @@ in
       ];
     };
   };
+
+  environment.etc =
+    (builders.consul rec {
+      name = "sftpgo";
+      port = 8080;
+      domain = "files.home.kaptcha.cc";
+      checks = [
+        {
+          http = "http://127.0.0.1:${port}/healthz";
+          interval = "10s";
+        }
+      ];
+    })
+    // (builders.consul {
+      name = "webdav";
+      port = 8081;
+      domain = "dav.files.home.kaptcha.cc";
+      checks = [ ];
+    });
 
   systemd.tmpfiles.rules = [
     "d ${dataDir} 0770 sftpgo sftpgo -"
