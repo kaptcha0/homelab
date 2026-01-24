@@ -37,10 +37,7 @@ in
 
     initialization = {
       hostname = "traefik";
-      ip_config.ipv4 = {
-        address = "10.67.0.5/24";
-        gateway = "10.67.0.1";
-      };
+      ip_config.ipv4.address = "dhcp";
     };
 
     network_interface.name = "veth0";

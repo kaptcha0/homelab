@@ -22,7 +22,7 @@
   services.traefik = {
     enable = true;
     staticConfigOptions = (fromTOML (builtins.readFile ./traefik.toml)) // {
-      certificateResolvers.cloudflare.acme.storage =
+      certificatesResolvers.cloudflare.acme.storage =
         config.services.traefik.dataDir + "/certs/cloudflare-acme.json";
 
       providers.consulCatalog = {
