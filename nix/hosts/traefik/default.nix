@@ -47,7 +47,7 @@
         email = "info@kaptcha.cc";
         caServer = "https://acme-v02.api.letsencrypt.org/directory";
         keyType = "EC256";
-        storage = config.services.traefik.dataDir + "/certs/cloudflare-acme.json";
+        storage = config.services.traefik.dataDir + "/cloudflare-acme.json";
 
         dnsChallenge.provider = "cloudflare";
         dnsChallenge.resolvers = [
