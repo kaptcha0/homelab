@@ -38,7 +38,7 @@ let
           extraConfig = {
             server = false;
             datacenter = "homelab";
-            retry_join = [ "traefik.service.consul" ];
+            retry_join = [ "10.67.0.5" ];
           };
         };
 
