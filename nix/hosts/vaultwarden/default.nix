@@ -5,8 +5,8 @@ let
   builders = import ./../../modules/builders.nix;
 in
 {
-  sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.env = { };
+  # sops.defaultSopsFile = ./secrets.yaml;
+  # sops.secrets.env = { };
 
   environment.etc = (
     builders.consul {
@@ -23,7 +23,7 @@ in
       rocketPort = port;
     };
 
-    environmentFile = config.sops.secrets.env.path;
+    # environmentFile = config.sops.secrets.env.path;
   };
 
   networking.firewall.allowedTCPPorts = [ config.services.vaultwarden.config.rocketPort ];
