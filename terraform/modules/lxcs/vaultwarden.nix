@@ -60,7 +60,7 @@ in
           {
             volume = cfg.config.proxmox.shared_storage;
             size = "64G";
-            path = "/mnt/data";
+            path = "/var/lib/vaultwarden";
           }
         ];
 

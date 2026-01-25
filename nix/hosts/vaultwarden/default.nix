@@ -17,22 +17,18 @@ in
 
   services.vaultwarden = {
     enable = true;
+    domain = "https://${domain}";
     config = {
       rocketAddress = "0.0.0.0";
       rocketPort = port;
-      domain = "https://${domain}";
-
-      dataFolder = "/mnt/data/vaultwarden-data";
-      attachmentsFolder = "/mnt/data/vaultwarden-attachments";
     };
 
     environmentFile = config.sops.secrets.env.path;
   };
 
-  systemd.tmpfiles.rules = [
-    "d /mnt/data/vaultwarden-data 770 vaultwarden vaultwarden -"
-    "d /mnt/data/vaultwarden-attachments 770 vaultwarden vaultwarden -"
-  ];
-
   networking.firewall.allowedTCPPorts = [ config.services.vaultwarden.config.rocketPort ];
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/vaultwarden 0770 vaultwarden vaultwarden -"
+  ];
 }
