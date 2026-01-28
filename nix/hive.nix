@@ -67,21 +67,6 @@ let
         ];
       };
 
-    couchdb =
-      { ... }:
-      {
-        deployment = {
-          targetHost = "couchdb.nyumbani.home";
-          tags = [
-            "database"
-          ];
-        };
-
-        imports = [
-          ./hosts/couchdb
-        ];
-      };
-
     netbird =
       { ... }:
       {

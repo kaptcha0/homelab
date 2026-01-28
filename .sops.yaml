@@ -2,7 +2,6 @@ keys:
   - &master age1xfwuvqdup6uasvn8xp855nvnr57454ywuqnyv8c4cx7l6e84yuxqgq3srv
   - &hosts
     - &files age1g9efde233zyc3k2char96t35tq5tlja20zz545e5qdd4q6uf5cwq08sx9v
-    - &couchdb age1g5em45j3uz877nlxxgsfh4yq9a3awxjdlkw9uwm3ssavq03gt96s8m44hk
     - &netbird age1s2gyhm30mu93e4kj6wtf06hw0m3w4hq0my8vkcwdk266zw3ysdvsae3jej
     - &vaultwarden age14x3csjtv2a8cyaz232x4n60dqh9dk8kmmfvgl0dgt0tkkvj6yu9qnquhl2
     - &traefik age15t03480ytxzadgwlan2hms049qtjyvt6uyyhv0s2a2lu45ltpu5sdfxg4x
@@ -15,11 +14,6 @@ creation_rules:
     key_groups:
       - age:
           - *files
-          - *master
-  - path_regex: nix/hosts/couchdb/secrets\.(yaml|ini|env)
-    key_groups:
-      - age:
-          - *couchdb
           - *master
   - path_regex: nix/hosts/netbird/secrets\.(yaml|ini|env)
     key_groups:

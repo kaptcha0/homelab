@@ -51,7 +51,6 @@ in
 
     cts = {
       file-storage.enable = true;
-      couchdb.enable = true;
       netbird.enable = true;
       vaultwarden.enable = true;
       traefik.enable = true;

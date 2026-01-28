@@ -3,7 +3,6 @@
   imports = [
     ./downloads.nix
     ./files.nix
-    ./couchdb.nix
     ./netbird.nix
     ./vaultwarden.nix
     ./traefik.nix
