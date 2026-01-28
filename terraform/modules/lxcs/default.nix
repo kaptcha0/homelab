@@ -6,6 +6,7 @@
     ./netbird.nix
     ./vaultwarden.nix
     ./traefik.nix
+    ./lgtm.nix
   ];
   options.lxcs = {
     enable = lib.mkEnableOption "enable lxcs";

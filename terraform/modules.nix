@@ -54,6 +54,7 @@ in
       netbird.enable = true;
       vaultwarden.enable = true;
       traefik.enable = true;
+      lgtm.enable = true;
     };
   };
 }
