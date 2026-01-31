@@ -114,6 +114,21 @@ let
           ./hosts/traefik
         ];
       };
+    lgtm =
+      { ... }:
+      {
+        deployment = {
+          targetHost = "lgtm.nyumbani.home";
+          tags = [
+            "public"
+            "metrics"
+          ];
+        };
+
+        imports = [
+          ./hosts/lgtm
+        ];
+      };
   };
 in
 {
