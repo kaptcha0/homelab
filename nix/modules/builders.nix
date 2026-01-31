@@ -10,6 +10,7 @@
           interval = "10s";
         }
       ],
+      enableTraefik ? true,
       tags ? [ ],
       rules ? "",
     }:
@@ -18,14 +19,20 @@
         service = {
           inherit name port checks;
 
-          tags = [
-            "traefik.enable=true"
-            "traefik.http.routers.${name}.rule=Host(`${domain}`) ${rules}"
-            "traefik.http.routers.${name}.entrypoints=web"
-            "traefik.http.routers.${name}.entrypoints=websecure"
-            "traefik.http.routers.${name}.tls.certresolver=cloudflare"
-          ]
-          ++ tags;
+          tags =
+            if enableTraefik then
+              (
+                [
+                  "traefik.enable=true"
+                  "traefik.http.routers.${name}.rule=Host(`${domain}`) ${rules}"
+                  "traefik.http.routers.${name}.entrypoints=web"
+                  "traefik.http.routers.${name}.entrypoints=websecure"
+                  "traefik.http.routers.${name}.tls.certresolver=cloudflare"
+                ]
+                ++ tags
+              )
+            else
+              [ ];
         };
       };
 

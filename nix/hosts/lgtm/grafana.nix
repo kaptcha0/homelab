@@ -29,5 +29,22 @@ in
         http_port = port;
       };
     };
+
+    provision.datasources.settings = {
+      apiVersion = 1;
+
+      datasources = [
+        {
+          name = "Prometheus";
+          type = "prometheus";
+          orgId = 1;
+          url = "http://127.0.0.1:9090";
+          basicAuth = false;
+          isDefault = true;
+          version = 1;
+          editable = false;
+        }
+      ];
+    };
   };
 }

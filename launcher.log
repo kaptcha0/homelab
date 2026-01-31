@@ -1,0 +1,130 @@
+[2026-01-31T14:21:17Z DEBUG pandora_launcher] DEBUG logging enabled
+[2026-01-31T14:21:17Z DEBUG backend::backend] Watching "/home/kaptcha0/.local/share/PandoraLauncher" as RootDir
+[2026-01-31T14:21:17Z INFO backend::launch_wrapper] Writing launch wrapper jar to "/home/kaptcha0/.local/share/PandoraLauncher/temp/LaunchWrapper-8146b9519cdfeece3268c6d86d43e97d3a2408a9.jar"
+[2026-01-31T14:21:17Z DEBUG backend::backend] Doing initial backend load
+[2026-01-31T14:21:17Z INFO backend::backend] Loading all instances
+[2026-01-31T14:21:17Z DEBUG backend::backend] Watching "/home/kaptcha0/.local/share/PandoraLauncher/instances" as InstancesDir
+[2026-01-31T14:21:17Z INFO backend::backend] Starting backend
+[2026-01-31T14:21:17Z DEBUG backend::metadata::manager] Loading metadata MinecraftVersionManifestMetadataItem
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Presentation support: "VK_KHR_wayland_surface"
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Presentation support: "VK_KHR_xcb_surface"
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Presentation support: "VK_KHR_xlib_surface"
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Presentation support: "VK_EXT_swapchain_colorspace"
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Enabling Vulkan Portability
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] Adapter: "Intel(R) UHD Graphics 620 (KBL GT2)"
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::init] No ray tracing extensions are supported
+[2026-01-31T14:21:18Z INFO tracing::span] perform;
+[2026-01-31T14:21:18Z INFO tracing::span] authenticate;
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::common] write_command; command=Auth(Some(External), Some([49, 48, 48, 48]))
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::common] write_commands; commands=[Auth(Some(External), Some([49, 48, 48, 48]))] extra_bytes=None
+[2026-01-31T14:21:18Z INFO tracing::span] read_command;
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::common] read_commands; n_commands=1
+[2026-01-31T14:21:18Z INFO tracing::span] send_secondary_commands;
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::common] write_commands; commands=[NegotiateUnixFD, Begin] extra_bytes=Some([108, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 109, 0, 0, 0, 1, 1, 111, 0, 21, 0, 0, 0, 47, 111, 114, 103, 47, 102, 114, 101, 101, 100, 101, 115, 107, 116, 111, 112, 47, 68, 66, 117, 115, 0, 0, 0, 2, 1, 115, 0, 20, 0, 0, 0, 111, 114, 103, 46, 102, 114, 101, 101, 100, 101, 115, 107, 116, 111, 112, 46, 68, 66, 117, 115, 0, 0, 0, 0, 3, 1, 115, 0, 5, 0, 0, 0, 72, 101, 108, 108, 111, 0, 0, 0, 6, 1, 115, 0, 20, 0, 0, 0, 111, 114, 103, 46, 102, 114, 101, 101, 100, 101, 115, 107, 116, 111, 112, 46, 68, 66, 117, 115, 0, 0, 0, 0])
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::client] receive_secondary_responses; expected_n_responses=1
+[2026-01-31T14:21:18Z INFO zbus::connection::handshake::common] read_commands; n_commands=1
+[2026-01-31T14:21:18Z INFO tracing::span] new;
+[2026-01-31T14:21:18Z INFO zbus::proxy] {}; task_name="org.freedesktop.portal.Settings proxy caching"
+[2026-01-31T14:21:18Z INFO tracing::span] socket reader;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] keep_updated;
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::surface] Using surface present mode MAILBOX
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::descriptor] Creating a descriptor pool for at most 16 sets
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::descriptor] Creating a descriptor pool for at most 16 sets
+[2026-01-31T14:21:18Z INFO gpui::platform::blade::blade_renderer] Initializing Blade pipelines for surface SurfaceInfo { format: Bgra8Unorm, alpha: PreMultiplied }
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO tracing::span] read_socket;
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d9441130 of size 1536x864x1 and format Bgra8Unorm, name 'path intermediate', handle 0
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d9386da0 of size 1536x864x1 and format Bgra8Unorm, name 'path intermediate msaa', handle 1
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::surface] Using surface present mode MAILBOX
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::surface] Retaining current format: Bgra8Unorm
+[2026-01-31T14:21:18Z INFO gpui::platform::blade::blade_renderer] Initializing Blade pipelines for surface SurfaceInfo { format: Bgra8Unorm, alpha: Ignored }
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_impl")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_device_position_transformed")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("to_tile_position")
+[2026-01-31T14:21:18Z INFO naga::back::spv::writer] Skip function Some("blend_color")
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d950f700 of size 1024x1024x1 and format R8Unorm, name 'atlas', handle 2
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating buffer 0x5653d93c7e60 of size 65536, name 'chunk-0', handle 3
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d9384a50 of size 1024x1024x1 and format Bgra8Unorm, name 'atlas', handle 4
+[2026-01-31T14:21:18Z INFO gpui::platform::linux::platform] activate is not implemented on Linux, ignoring the call
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::surface] Using surface present mode MAILBOX
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::surface] Retaining current format: Bgra8Unorm
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d9441130, handle 0
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d9386da0, handle 1
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d9386da0 of size 946x1031x1 and format Bgra8Unorm, name 'path intermediate', handle 1
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating texture 0x5653d9483e20 of size 946x1031x1 and format Bgra8Unorm, name 'path intermediate msaa', handle 0
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating buffer 0x5653d93c2ed0 of size 4096, name 'chunk-0', handle 5
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating buffer 0x5653d94834e0 of size 4096, name 'chunk-1', handle 6
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating buffer 0x5653d94230e0 of size 6496, name 'chunk-2', handle 7
+[2026-01-31T14:21:18Z INFO blade_graphics::hal::resource] Creating buffer 0x5653d9212c40 of size 4096, name 'chunk-3', handle 8
+[2026-01-31T14:21:18Z INFO gpui_component::theme::registry] Themes reloaded successfully.
+[2026-01-31T14:21:18Z INFO gpui_component::theme::registry] Reload active theme: "Default Dark"...
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d950f700, handle 2
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d9384a50, handle 4
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying buffer 0x5653d93c7e60, handle 3
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying buffer 0x5653d93c2ed0, handle 5
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying buffer 0x5653d94834e0, handle 6
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying buffer 0x5653d94230e0, handle 7
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying buffer 0x5653d9212c40, handle 8
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d9386da0, handle 1
+[2026-01-31T14:21:21Z INFO blade_graphics::hal::resource] Destroying texture 0x5653d9483e20, handle 0
