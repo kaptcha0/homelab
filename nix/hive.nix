@@ -126,7 +126,7 @@ let
         };
 
         imports = [
-          ./hosts/lgtm
+          # ./hosts/lgtm
         ];
       };
   };

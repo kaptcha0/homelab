@@ -1,10 +1,12 @@
-{ ... }:
+{ config, ... }:
 let
   builders = import ./../../modules/builders.nix;
   port = 3000;
   domain = "lgtm.home.kaptcha.cc";
 in
 {
+  sops.secrets."grafana/secret-key" = {};
+  
   environment.etc = (
     builders.consul {
       inherit port domain;
@@ -22,6 +24,8 @@ in
     enable = true;
     openFirewall = true;
     settings = {
+      security.secret_key = "$__file{${config.sops.secrets."grafana/secret-key"}}";
+      
       server = {
         inherit domain;
         protocol = "http";
