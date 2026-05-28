@@ -6,13 +6,13 @@
       ...
     }:
     let
-      lxc-template = inputs.nixos-generators.nixosGenerate {
+      lxc-template = (inputs.nixpkgs.lib.nixosSystem {
         inherit system;
-        format = "proxmox-lxc";
         modules = [
           ./nix/base.nix
+          ./nix/lxc.nix
         ];
-      };
+      }).config.system.build.images.proxmox-lxc;
       terraformConfiguration = inputs.terranix.lib.terranixConfiguration {
         inherit system;
         modules = [

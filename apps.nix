@@ -18,7 +18,7 @@
               if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
               cp ${self'.packages.tfConfig} config.tf.json \
                 && ${tf} init \
-                && ${tf} apply -exclude=proxmox_virtual_environment_file.nixos-lxc-template
+                && ${tf} apply
             ''
           );
         };

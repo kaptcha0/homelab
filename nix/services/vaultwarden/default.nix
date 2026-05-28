@@ -5,8 +5,9 @@ let
   builders = import ./../../modules/builders.nix;
 in
 {
-  sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.env = { };
+  sops.secrets.env = {
+    sopsFile = ./secrets.yaml;
+  };
 
   environment.etc = (
     builders.consul {

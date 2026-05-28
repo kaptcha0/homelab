@@ -50,11 +50,9 @@ in
     };
 
     cts = {
-      file-storage.enable = true;
       netbird.enable = true;
       vaultwarden.enable = true;
       traefik.enable = true;
-      lgtm.enable = true;
     };
   };
 }

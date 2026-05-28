@@ -5,7 +5,10 @@ let
   domain = "lgtm.home.kaptcha.cc";
 in
 {
-  sops.secrets."grafana/secret-key" = {};
+  sops.secrets."grafana/secret-key" = {
+    owner = "grafana";
+    sopsFile = ./secrets.yaml;
+  };
   
   environment.etc = (
     builders.consul {
@@ -24,7 +27,7 @@ in
     enable = true;
     openFirewall = true;
     settings = {
-      security.secret_key = "$__file{${config.sops.secrets."grafana/secret-key"}}";
+      security.secret_key = "$__file{${config.sops.secrets."grafana/secret-key".path}}";
       
       server = {
         inherit domain;

@@ -1,5 +1,5 @@
 # note: editing this file causes a regeneration of the nix container image, which can case the deletion of the containers
-{ modulesPath, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   publicKeyFile = builtins.fetchurl {
     url = "https://github.com/kaptcha0.keys";
@@ -9,18 +9,7 @@ let
   publicKeys = lib.lists.filter (line: line != "") publicKeysLines;
 in
 {
-  imports = [
-    (modulesPath + "/virtualisation/proxmox-lxc.nix")
-  ];
-
-  environment.systemPackages = with pkgs; [ vim helix ssh-to-age ];
-
-  boot.isContainer = true;
-  systemd.suppressedSystemUnits = [
-    "dev-mqueue.mount"
-    "sys-kernel-debug.mount"
-    "sys-fs-fuse-connections.mount"
-  ];
+  environment.systemPackages = with pkgs; [ vim helix ssh-to-age btop ];
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -29,7 +18,7 @@ in
 
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = "daily";
       options = "--delete-older-than 30d";
     };
   };

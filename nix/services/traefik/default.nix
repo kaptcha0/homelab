@@ -1,8 +1,8 @@
 { config, ... }:
 {
-  sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.env = {
     owner = config.users.users.traefik.name;
+    sopsFile = ./secrets.yaml;
   };
 
   services.consul = {

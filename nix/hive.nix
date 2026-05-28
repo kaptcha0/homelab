@@ -12,13 +12,15 @@ let
     defaults =
       { name, ... }:
       {
+        networking.hostName = name;
+
         imports = [
           ./base.nix
           inputs.comin.nixosModules.comin
           inputs.sops-nix.nixosModules.sops
         ];
 
-        deployment.targetUser = "nixos";
+        deployment.targetUser = lib.mkDefault "nixos";
 
         services.comin = {
           enable = true;
@@ -51,22 +53,6 @@ let
         sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       };
 
-    files =
-      { ... }:
-      {
-        deployment = {
-          targetHost = "files.nyumbani.home";
-          tags = [
-            "public"
-            "storage"
-          ];
-        };
-
-        imports = [
-          ./hosts/files
-        ];
-      };
-
     netbird =
       { ... }:
       {
@@ -79,7 +65,8 @@ let
         };
 
         imports = [
-          ./hosts/netbird
+          ./services/netbird
+          ./lxc.nix
         ];
       };
 
@@ -95,7 +82,8 @@ let
         };
 
         imports = [
-          ./hosts/vaultwarden
+          ./services/vaultwarden
+          ./lxc.nix
         ];
       };
 
@@ -111,14 +99,17 @@ let
         };
 
         imports = [
-          ./hosts/traefik
+          ./services/traefik
+          ./lxc.nix
         ];
       };
-    lgtm =
+
+    trixie =
       { ... }:
       {
         deployment = {
-          targetHost = "lgtm.nyumbani.home";
+          targetUser = "nixos";
+          targetHost = "trixie.nyumbani.home";
           tags = [
             "public"
             "metrics"
@@ -126,7 +117,8 @@ let
         };
 
         imports = [
-          # ./hosts/lgtm
+          ./services/lgtm
+          ./hosts/trixie/configuration.nix
         ];
       };
   };
