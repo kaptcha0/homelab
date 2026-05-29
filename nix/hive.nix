@@ -118,6 +118,7 @@ let
 
         imports = [
           ./services/lgtm
+          ./services/home-assistant
           ./hosts/trixie/configuration.nix
         ];
       };
