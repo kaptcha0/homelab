@@ -10,7 +10,7 @@ in
     name = "home-assistant";
     checks = [
       {
-        http = "http://127.0.0.1:${toString port}/api";
+        http = "http://127.0.0.1:${toString port}/manifest.json";
         interval = "10s";
       }
     ];
@@ -32,8 +32,10 @@ in
     ];
 
     config = {
-      default_config = {};
       http.server_port = port;
+
+      default_config = {};
+      bluetooth = {};
 
       homeassistant = {
         latitude = 38.3;
