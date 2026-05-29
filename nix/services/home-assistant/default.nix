@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
   builders = import ./../../modules/builders.nix;
   port = 8123;
@@ -16,36 +16,35 @@ in
     ];
   };
 
-  services.home-assistant = {
-    enable = true;
-    openFirewall = true;
-    configWritable = true;
-    lovelaceConfigWritable = true;
+  system.activationScripts.hass-config = {
+    text = ''
+      mkdir -p /var/lib/hass
+      if [ ! -f /var/lib/hass/configuration.yaml ]; then
+        cp ${./configuration.yaml} /var/lib/hass/configuration.yaml
+      fi
+    '';
+  };
 
-    extraComponents = [
-      "analytics"
-      "google_translate"
-      "met"
-      "radio_browser"
-      "shopping_list"
-      "isal"
-    ];
+  hardware.bluetooth.enable = true;
 
-    config = {
-      http = {
-        server_port = port;
-        trusted_proxies = [ "10.67.0.0/24" ];
-        use_x_forwarded_for = true;
-      };
-
-      default_config = { };
-      bluetooth = { };
-
-      homeassistant = {
-        latitude = 38.3;
-        longitude = -77.6;
-        unit_system = "us_customary";
-      };
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers.homeassistant = {
+      privileged = true;
+      volumes = [
+        "/var/lib/haas:/config"
+        "/run/dbus:/run/dbus:ro"
+      ];
+      environment.TZ = config.time.timeZone;
+      image = "ghcr.io/home-assistant/home-assistant:stable";
+      extraOptions = [
+        "--network=host"
+        "--cap-add=NET_ADMIN"
+        "--cap-add=NET_RAW"
+      ];
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ port ];
+  networking.firewall.allowedUDPPorts = [ port ];
 }

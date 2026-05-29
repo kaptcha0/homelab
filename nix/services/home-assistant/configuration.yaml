@@ -1,0 +1,12 @@
+default_config:
+
+http:
+  server_port: 8123
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.67.0.0/24
+
+homeassistant:
+  latitude: 38.3
+  longitude: -77.6
+  unit_system: us_customary
