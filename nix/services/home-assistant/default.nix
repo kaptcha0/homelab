@@ -43,11 +43,10 @@ in
       autoStart = true;
       privileged = true;
       environment.TZ = config.time.timeZone;
-      ports = [ "${toString port}:${toString port}" ];
       image = "ghcr.io/home-assistant/home-assistant:stable";
 
       volumes = [
-        "/var/lib/haas:/config"
+        "/var/lib/hass:/config"
         "/run/dbus:/run/dbus:ro"
       ];
 
