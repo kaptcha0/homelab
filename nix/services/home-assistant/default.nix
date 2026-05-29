@@ -27,16 +27,29 @@ in
 
   hardware.bluetooth.enable = true;
 
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+    };
+  };
+
   virtualisation.oci-containers = {
     backend = "podman";
+
     containers.homeassistant = {
+      autoStart = true;
       privileged = true;
+      environment.TZ = config.time.timeZone;
+      image = "ghcr.io/home-assistant/home-assistant:stable";
+
       volumes = [
         "/var/lib/haas:/config"
         "/run/dbus:/run/dbus:ro"
       ];
-      environment.TZ = config.time.timeZone;
-      image = "ghcr.io/home-assistant/home-assistant:stable";
+
       extraOptions = [
         "--network=host"
         "--cap-add=NET_ADMIN"
