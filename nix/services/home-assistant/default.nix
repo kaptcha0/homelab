@@ -32,14 +32,18 @@ in
     ];
 
     config = {
-      http.server_port = port;
+      http = {
+        server_port = port;
+        trusted_proxies = [ "10.67.0.0/24" ];
+        use_x_forwarded_for = true;
+      };
 
-      default_config = {};
-      bluetooth = {};
+      default_config = { };
+      bluetooth = { };
 
       homeassistant = {
         latitude = 38.3;
-        longitude =  -77.6;
+        longitude = -77.6;
         unit_system = "us_customary";
       };
     };
