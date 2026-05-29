@@ -43,6 +43,7 @@ in
       autoStart = true;
       privileged = true;
       environment.TZ = config.time.timeZone;
+      ports = [ "${port}:${port}" ];
       image = "ghcr.io/home-assistant/home-assistant:stable";
 
       volumes = [
