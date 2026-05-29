@@ -39,11 +39,11 @@ in
   virtualisation.oci-containers = {
     backend = "podman";
 
-    containers.homeassistant = {
+    containers.home-assistant = {
       autoStart = true;
       privileged = true;
       environment.TZ = config.time.timeZone;
-      ports = [ "${port}:${port}" ];
+      ports = [ "${toString port}:${toString port}" ];
       image = "ghcr.io/home-assistant/home-assistant:stable";
 
       volumes = [
