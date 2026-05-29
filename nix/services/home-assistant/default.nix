@@ -59,5 +59,5 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ port ];
-  networking.firewall.allowedUDPPorts = [ port ];
+  networking.firewall.allowedUDPPorts = [ port 1900 ];
 }
