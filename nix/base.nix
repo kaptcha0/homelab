@@ -9,7 +9,7 @@ let
   publicKeys = lib.lists.filter (line: line != "") publicKeysLines;
 in
 {
-  environment.systemPackages = with pkgs; [ vim helix ssh-to-age btop ];
+  environment.systemPackages = with pkgs; [ vim helix ssh-to-age btop inetutils ];
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -37,8 +37,9 @@ in
   };
 
   networking.nftables.enable = true;
+  networking.nameservers = ["10.67.0.4" "1.1.1.1" "8.8.8.8"];
 
   time.timeZone = "America/New_York";
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
