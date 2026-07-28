@@ -3,6 +3,7 @@
   networking.useHostResolvConf = false;
 
   networking.useNetworkd = true;
+  networking.useDHCP = true;
 
   systemd.network.networks."10-container-dhcp" = {
     matchConfig.Name = "*";
