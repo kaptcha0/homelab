@@ -6,9 +6,26 @@
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.root-password = {};
 
-  boot.loader.systemd-boot.enable = true;
+  sops.secrets."iwd/networks/Nyumbani.psk" = {
+    path = "/var/lib/iwd/Nyumbani.psk";
 
-  networking.networkmanager.enable = true;
+    owner = "iwd";
+    group = "iwd";
+    mode = "0600";
+  };
+
+  sops.secrets."iwd/networks/Nyumbani-5G.psk" = {
+    path = "/var/lib/iwd/Nyumbani-5G.psk";
+
+    owner = "iwd";
+    group = "iwd";
+    mode = "0600";
+  };
+
+  networking.wireless.iwd.enable = true;
+  networking.wireless.iwd.settings.Settings.AutoConnect = true;
+
+  boot.loader.systemd-boot.enable = true;
 
   users.users.root = {
     hashedPasswordFile = config.sops.secrets.root-password.path;

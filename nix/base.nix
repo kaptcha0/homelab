@@ -37,7 +37,16 @@ in
   };
 
   networking.nftables.enable = true;
+  networking.useNetworkd = true;
   networking.useDHCP = true;
+
+  systemd.network.networks."10-lan" = {
+    matchConfig.Name = "*";
+    networkConfig = {
+      DHCP = "yes";
+      DNSDefaultRoute = true;
+    };
+  };
 
   time.timeZone = "America/New_York";
 
