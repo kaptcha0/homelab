@@ -31,5 +31,5 @@
     HandleLidSwitchDocked = "ignore";
   };
 
-  services.consul.interface.advertise = "wlp2s0";
+  services.consul.interface.advertise = "wlan0";
 }
