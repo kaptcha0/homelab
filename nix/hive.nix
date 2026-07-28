@@ -22,7 +22,7 @@ let
 
         deployment.targetUser = lib.mkDefault "nixos";
 
-        services.comin = {
+        services.comin = lib.mkDefault {
           enable = true;
           hostname = name;
           exporter.openFirewall = true;
@@ -44,10 +44,10 @@ let
           };
         };
 
-        services.resolved.enable = true;
-        services.resolved.settings.Resolve = {
-          DNS = [ "10.67.0.5" ];
-          Domains = [ "~consul" ];
+        networking.nameservers = lib.mkDefault [ "10.67.0.5" ];
+        services.resolved = lib.mkDefault {
+          enable = true;
+          settings.Resolve.Domains = [ "~consul" ];
         };
 
         sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];

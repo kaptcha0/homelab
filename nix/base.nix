@@ -37,7 +37,7 @@ in
   };
 
   networking.nftables.enable = true;
-  networking.nameservers = ["10.67.0.4" "1.1.1.1" "8.8.8.8"];
+  networking.useDHCP = true;
 
   time.timeZone = "America/New_York";
 
