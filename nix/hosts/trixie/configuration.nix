@@ -8,17 +8,11 @@
 
   sops.secrets."iwd/networks/Nyumbani.psk" = {
     path = "/var/lib/iwd/Nyumbani.psk";
-
-    owner = "iwd";
-    group = "iwd";
     mode = "0600";
   };
 
   sops.secrets."iwd/networks/Nyumbani-5G.psk" = {
     path = "/var/lib/iwd/Nyumbani-5G.psk";
-
-    owner = "iwd";
-    group = "iwd";
     mode = "0600";
   };
 
