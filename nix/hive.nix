@@ -44,7 +44,7 @@ let
           };
         };
 
-        networking.nameservers = lib.mkDefault [ "10.67.0.5" ];
+        networking.nameservers = lib.mkDefault [ "10.67.0.5:8600" "127.0.0.1:8600" ];
         services.resolved = lib.mkDefault {
           enable = true;
           settings.Resolve.Domains = [ "~consul" ];
