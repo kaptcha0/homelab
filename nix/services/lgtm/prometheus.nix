@@ -2,12 +2,12 @@
 let
   builders = import ./../../modules/builders.nix;
   port = 9090;
-  domain = "prometheus.lgtm.home.kaptcha.cc";
 in
 {
   environment.etc = (
     builders.consul {
-      inherit port domain;
+      inherit port;
+      enableTraefik = false;
       name = "prometheus";
       checks = [
         {
@@ -29,4 +29,6 @@ in
       "--web.enable-remote-write-receiver"
     ];
   };
+
+  networking.firewall.allowedTCPPorts = [ port ];
 }

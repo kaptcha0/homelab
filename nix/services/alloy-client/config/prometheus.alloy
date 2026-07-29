@@ -1,0 +1,24 @@
+prometheus.exporter.unix "system" {
+  include_exporter_metrics = true
+  disable_collectors = ["mdadm"]
+}
+
+prometheus.remote_write "central" {
+  endpoint {
+    url = "http://prometheus.service.consul:9090/api/v1/write"
+  }
+}
+
+prometheus.scrape "system" {
+  targets    = prometheus.exporter.unix.system.targets
+  forward_to = [prometheus.relabel.add_host.receiver]
+  scrape_interval = "15s"
+}
+
+prometheus.relabel "add_host" {
+  forward_to = [prometheus.remote_write.central.receiver]
+  rule {
+    target_label = "instance"
+    replacement  = constants.hostname
+  }
+}

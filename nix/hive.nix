@@ -16,6 +16,7 @@ let
 
         imports = [
           ./base.nix
+          ./services/alloy-client
           inputs.comin.nixosModules.comin
           inputs.sops-nix.nixosModules.sops
         ];

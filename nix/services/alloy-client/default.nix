@@ -1,13 +1,13 @@
-{ ... }:
+{ config, ... }:
 let
   builders = import ./../../modules/builders.nix;
   port = 12345;
-  domain = "alloy.lgtm.home.kaptcha.cc";
 in
 {
   environment.etc = builders.consul {
-    inherit port domain;
-    name = "alloy";
+    inherit port;
+    enableTraefik = false;
+    name = "alloy-client-${config.networking.hostName}";
     checks = [
       {
         http = "http://127.0.0.1:${toString port}/-/healthy";
@@ -22,11 +22,6 @@ in
 
   services.alloy = {
     enable = true;
-    configPath = ./alloy;
-    extraFlags = [
-      "--server.http.listen-addr=0.0.0.0:${toString port}"
-    ];
+    configPath = ./config;
   };
-
-  networking.firewall.allowedTCPPorts = [ port ];
 }
