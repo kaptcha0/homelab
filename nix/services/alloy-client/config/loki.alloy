@@ -5,7 +5,7 @@ loki.source.journal "syslog" {
 }
 
 loki.relabel "add_labels" {
-  forward_to = []   # unused for forwarding — this component exists only to export .rules
+  forward_to = []
 
   rule {
     source_labels = ["__journal__systemd_unit"]
