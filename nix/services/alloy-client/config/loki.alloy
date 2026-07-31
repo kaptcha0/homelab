@@ -1,0 +1,31 @@
+loki.source.journal "syslog" {
+  max_age    = "12h"
+  forward_to = [loki.relabel.add_labels.receiver]
+
+  relabel_rules = loki.relabel.add_labels.rules
+}
+
+loki.relabel "add_labels" {
+  forward_to = [loki.write.central.receiver]
+
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "service"
+  }
+
+  rule {
+    source_labels = ["__journal_priority_keyword"]
+    target_label  = "level"
+  }
+
+  rule {
+    target_label = "host"
+    replacement  = constants.hostname
+  }
+}
+
+loki.write "central" {
+  endpoint {
+    url = "http://loki.service.consul:9091/loki/api/v1/push"
+  }
+}
