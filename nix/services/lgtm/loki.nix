@@ -11,11 +11,11 @@ in
       name = "loki";
       checks = [
         {
-          http = "http://127.0.0.1:${toString port}/-/healthy";
+          http = "http://127.0.0.1:${toString port}/metrics";
           interval = "10s";
         }
         {
-          http = "http://127.0.0.1:${toString port}/-/ready";
+          http = "http://127.0.0.1:${toString port}/ready";
           interval = "10s";
         }
       ];
