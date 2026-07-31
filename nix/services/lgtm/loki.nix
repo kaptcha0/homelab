@@ -8,7 +8,7 @@ in
     builders.consul {
       inherit port;
       enableTraefik = false;
-      name = "prometheus";
+      name = "loki";
       checks = [
         {
           http = "http://127.0.0.1:${toString port}/-/healthy";
