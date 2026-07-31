@@ -51,6 +51,16 @@ in
           version = 1;
           editable = false;
         }
+        {
+          name = "Loki";
+          type = "loki";
+          orgId = 1;
+          url = "http://127.0.0.1:9091";
+          basicAuth = false;
+          isDefault = true;
+          version = 1;
+          editable = false;
+        }
       ];
     };
   };
