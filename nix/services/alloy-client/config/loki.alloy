@@ -1,12 +1,11 @@
 loki.source.journal "syslog" {
-  max_age    = "12h"
-  forward_to = [loki.relabel.add_labels.receiver]
-
+  max_age       = "12h"
+  forward_to    = [loki.write.central.receiver]
   relabel_rules = loki.relabel.add_labels.rules
 }
 
 loki.relabel "add_labels" {
-  forward_to = [loki.write.central.receiver]
+  forward_to = []   # unused for forwarding — this component exists only to export .rules
 
   rule {
     source_labels = ["__journal__systemd_unit"]
