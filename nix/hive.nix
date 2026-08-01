@@ -17,6 +17,7 @@ let
         imports = [
           ./base.nix
           ./services/alloy-client
+          ./services/netbird
           inputs.comin.nixosModules.comin
           inputs.sops-nix.nixosModules.sops
         ];
