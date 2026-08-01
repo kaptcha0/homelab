@@ -18,9 +18,6 @@ creation_rules:
           - *netbird
           - *master
           - *trixie
-          - *vaultwarden
-          - *lgtm
-          - *traefik
   - path_regex: nix/services/vaultwarden/secrets\.(yaml|ini|env)
     key_groups:
       - age:

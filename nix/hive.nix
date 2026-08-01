@@ -17,7 +17,6 @@ let
         imports = [
           ./base.nix
           ./services/alloy-client
-          ./services/netbird
           inputs.comin.nixosModules.comin
           inputs.sops-nix.nixosModules.sops
         ];
@@ -67,7 +66,7 @@ let
         };
 
         imports = [
-          ./services/netbird
+          # ./services/netbird
           ./lxc.nix
         ];
       };
@@ -121,6 +120,7 @@ let
         imports = [
           ./services/lgtm
           ./services/home-assistant
+          ./services/netbird
           ./hosts/trixie/configuration.nix
         ];
       };
