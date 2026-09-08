@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  sops.secrets.env = {
+  sops.secrets.traefik-env = {
     owner = config.users.users.traefik.name;
     sopsFile = ./secrets.yaml;
   };
@@ -62,7 +62,7 @@
       };
     };
     environmentFiles = [
-      config.sops.secrets.env.path
+      config.sops.secrets.traefik-env.path
     ];
   };
 

@@ -3,7 +3,7 @@
 let
   publicKeyFile = builtins.fetchurl {
     url = "https://github.com/kaptcha0.keys";
-    sha256 = "0j8njsssxjj3yb4dzydbf8z2hmpfcjjb2l5warjm8c5cngbqxi14";
+    sha256 = "12dlhwdlfxs76vg41pbkvx737q0gs5fycckngqicxxc20mm5629x";
   };
   publicKeysLines = lib.strings.splitString "\n" (builtins.readFile publicKeyFile);
   publicKeys = lib.lists.filter (line: line != "") publicKeysLines;

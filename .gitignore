@@ -11,3 +11,5 @@ age.agekey
 tfplan
 config.tf.json
 state.tf.json
+
+.DS_Store

@@ -121,6 +121,9 @@ let
           ./services/lgtm
           ./services/home-assistant
           ./services/netbird
+          ./services/traefik
+          ./services/vaultwarden
+
           ./hosts/trixie/configuration.nix
         ];
       };
